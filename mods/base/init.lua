@@ -7,7 +7,11 @@ minetest.register_node("base:dirt", {
 	description = "Dirt",
 	tiles = {"base_dirt.png"},
 	groups = {crumbly=2},
-	sounds = {},
+	sounds = {
+		footstep = {name="base_footstep_dirt", gain=1.0},
+		place = {name="base_place", gain=1.0},
+		dig = {name="base_dig_crumbly", gain=0.5},
+	},
 })
 
 minetest.register_node("base:dirt_with_grass", {
@@ -15,7 +19,11 @@ minetest.register_node("base:dirt_with_grass", {
 	tiles = {"base_grass.png", "base_dirt.png", "base_dirt.png^base_grass_side.png"},
 	drop = 'base:dirt',
 	groups = {crumbly=2},
-	sounds = {},
+	sounds = {
+		footstep = {name="base_footstep_grass", gain=0.25},
+		place = {name="base_place", gain=1.0},
+		dig = {name="base_dig_crumbly", gain=0.5},
+	},
 })
 
 minetest.register_node("base:stone", {
@@ -23,14 +31,22 @@ minetest.register_node("base:stone", {
 	tiles = {"base_stone.png"},
 	drop = "base:broken_stone",
 	groups = {cracky=2,stone=1},
-	sounds = {},
+	sounds = {
+		footstep = {name="base_footstep_hard", gain=0.5},
+		place = {name="base_place_hard", gain=1.0},
+		dig = {name="base_dig_cracky", gain=0.5},
+	},
 })
 
 minetest.register_node("base:broken_stone", {
 	description = "Broken Stone",
 	tiles = {"base_broken_stone.png"},
 	groups = {cracky=4,stone=1},
-	sounds = {},
+	sounds = {
+		footstep = {name="base_footstep_hard", gain=0.5},
+		place = {name="base_place_hard", gain=1.0},
+		dig = {name="base_dig_cracky", gain=0.5},
+	},
 })
 
 minetest.register_node("base:leaves", {
@@ -38,43 +54,56 @@ minetest.register_node("base:leaves", {
 	tiles = {"base_leaves.png"},
 	drawtype = "allfaces_optional",
 	paramtype = "light",
-	drop = {
-		max_items = 1,
-		items = {
-			--{items = {'base:sapling'},rarity = 20},
-			{items = {'base:leaves'}},
-		},
-	},
 	groups = {snappy=3},
-	sounds = {},
+	sounds = {
+		footstep = {name="base_footstep_grass", gain=0.25},
+		place = {name="base_place", gain=1.0},
+		dig = {name="base_dig_crumbly", gain=0.4},
+	},
 })
 
 minetest.register_node("base:tree", {
 	description = "Tree",
 	tiles = {"base_tree_top.png", "base_tree_top.png", "base_tree.png"},
 	groups = {choppy=2},
-	sounds = {},
+	sounds = {
+		footstep = {name="base_footstep_wood", gain=0.5},
+		place = {name="base_place_hard", gain=1.0},
+		dig = {name="base_dig_choppy", gain=0.5},
+	},
 })
 
 minetest.register_node("base:sand", {
 	description = "Sand",
 	tiles = {"base_sand.png"},
 	groups = {crumbly=3},
-	sounds = {},
+	sounds = {
+		footstep = {name="base_footstep_sand", gain=0.5},
+		place = {name="base_place", gain=1.0},
+		dig = {name="base_dig_crumbly", gain=0.5},
+	},
 })
 
 minetest.register_node("base:clay", {
 	description = "Clay",
 	tiles = {"base_clay.png"},
 	groups = {crumbly=1},
-	sounds = {},
+	sounds = {
+		footstep = {name="base_footstep_dirt", gain=1.0},
+		place = {name="base_place", gain=1.0},
+		dig = {name="base_dig_crumbly", gain=0.5},
+	},
 })
 
 minetest.register_node("base:copper", {
 	description = "Copper",
 	tiles = {"base_stone.png^base_copper.png"},
 	groups = {cracky=3},
-	sounds = {},
+	sounds = {
+		footstep = {name="base_footstep_hard", gain=0.5},
+		place = {name="base_place_hard", gain=1.0},
+		dig = {name="base_dig_cracky", gain=0.5},
+	},
 })
 
 minetest.register_node("base:coal_ore", {
@@ -82,7 +111,11 @@ minetest.register_node("base:coal_ore", {
 	tiles = {"base_stone.png^base_coal_ore.png"},
 	drop = "base:coal",
 	groups = {cracky=2},
-	sounds = {},
+	sounds = {
+		footstep = {name="base_footstep_hard", gain=0.5},
+		place = {name="base_place_hard", gain=1.0},
+		dig = {name="base_dig_cracky", gain=0.5},
+	},
 })
 
 minetest.register_node("base:water_source", {
@@ -192,7 +225,9 @@ minetest.register_node("base:torch", {
 		wall_side = {-0.5, -0.3, -0.1, -0.5+0.3, 0.3, 0.1},
 	},
 	groups = {dig_immediate=3,attached_node=1},
-	sounds = {},
+	sounds = {
+		place = {name="base_place_hard", gain=1.0},
+	},
 })
 
 local furnace_inactive_formspec =
@@ -209,7 +244,11 @@ minetest.register_node("base:furnace", {
 		"base_furnace_side.png", "base_furnace_side.png", "base_furnace_front.png"},
 	paramtype2 = "facedir",
 	groups = {cracky=3},
-	sounds = {},
+	sounds = {
+		footstep = {name="base_footstep_hard", gain=0.5},
+		place = {name="base_place_hard", gain=1.0},
+		dig = {name="base_dig_cracky", gain=0.5},
+	},
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		meta:set_string("formspec", furnace_inactive_formspec)
@@ -278,7 +317,11 @@ minetest.register_node("base:furnace_active", {
 	light_source = 8,
 	drop = "base:furnace",
 	groups = {cracky=3},
-	sounds = {},
+	sounds = {
+		footstep = {name="base_footstep_hard", gain=0.5},
+		place = {name="base_place_hard", gain=1.0},
+		dig = {name="base_dig_cracky", gain=0.5},
+	},
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		meta:set_string("formspec", furnace_inactive_formspec)
