@@ -79,6 +79,18 @@ minetest.register_node("base:tree", {
 	},
 })
 
+minetest.register_node("base:wood", {
+	description = "Wood",
+	tiles = {"base_wood.png"},
+	stack_max = 20,
+	groups = {choppy=3},
+	sounds = {
+		footstep = {name="base_footstep_wood", gain=0.5},
+		place = {name="base_place_hard", gain=1.0},
+		dig = {name="base_dig_choppy", gain=0.5},
+	},
+})
+
 minetest.register_node("base:sand", {
 	description = "Sand",
 	tiles = {"base_sand.png"},
@@ -602,7 +614,7 @@ minetest.register_craftitem("base:coal", {
 
 minetest.register_craftitem("base:copper_ingot", {
 	description = "Copper Ingot",
-	inventory_image = "base_copper_ingot.png"
+	inventory_image = "base_copper_ingot.png",
 	stack_max = 20,
 })
 
@@ -633,6 +645,13 @@ minetest.register_craft({
 		{"base:clay", "base:clay", "base:clay"},
 		{"base:clay", "", "base:clay"},
 		{"base:clay", "base:clay", "base:clay"},
+	}
+})
+
+minetest.register_craft({
+	output = "base:wood 4",
+	recipe = {
+		{"base:tree"},
 	}
 })
 
