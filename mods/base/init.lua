@@ -6,6 +6,7 @@
 minetest.register_node("base:dirt", {
 	description = "Dirt",
 	tiles = {"base_dirt.png"},
+	stack_max = 20,
 	groups = {crumbly=2},
 	sounds = {
 		footstep = {name="base_footstep_dirt", gain=1.0},
@@ -18,6 +19,7 @@ minetest.register_node("base:dirt_with_grass", {
 	description = "Dirt with Grass",
 	tiles = {"base_grass.png", "base_dirt.png", "base_dirt.png^base_grass_side.png"},
 	drop = 'base:dirt',
+	stack_max = 20,
 	groups = {crumbly=2},
 	sounds = {
 		footstep = {name="base_footstep_grass", gain=0.25},
@@ -30,6 +32,7 @@ minetest.register_node("base:stone", {
 	description = "Stone",
 	tiles = {"base_stone.png"},
 	drop = "base:broken_stone",
+	stack_max = 20,
 	groups = {cracky=2,stone=1},
 	sounds = {
 		footstep = {name="base_footstep_hard", gain=0.5},
@@ -41,6 +44,7 @@ minetest.register_node("base:stone", {
 minetest.register_node("base:broken_stone", {
 	description = "Broken Stone",
 	tiles = {"base_broken_stone.png"},
+	stack_max = 20,
 	groups = {cracky=4,stone=1},
 	sounds = {
 		footstep = {name="base_footstep_hard", gain=0.5},
@@ -54,6 +58,7 @@ minetest.register_node("base:leaves", {
 	tiles = {"base_leaves.png"},
 	drawtype = "allfaces_optional",
 	paramtype = "light",
+	stack_max = 20,
 	groups = {snappy=3},
 	sounds = {
 		footstep = {name="base_footstep_grass", gain=0.25},
@@ -65,6 +70,7 @@ minetest.register_node("base:leaves", {
 minetest.register_node("base:tree", {
 	description = "Tree",
 	tiles = {"base_tree_top.png", "base_tree_top.png", "base_tree.png"},
+	stack_max = 20,
 	groups = {choppy=2},
 	sounds = {
 		footstep = {name="base_footstep_wood", gain=0.5},
@@ -76,6 +82,7 @@ minetest.register_node("base:tree", {
 minetest.register_node("base:sand", {
 	description = "Sand",
 	tiles = {"base_sand.png"},
+	stack_max = 20,
 	groups = {crumbly=3},
 	sounds = {
 		footstep = {name="base_footstep_sand", gain=0.5},
@@ -87,6 +94,7 @@ minetest.register_node("base:sand", {
 minetest.register_node("base:clay", {
 	description = "Clay",
 	tiles = {"base_clay.png"},
+	stack_max = 20,
 	groups = {crumbly=1},
 	sounds = {
 		footstep = {name="base_footstep_dirt", gain=1.0},
@@ -98,6 +106,7 @@ minetest.register_node("base:clay", {
 minetest.register_node("base:copper", {
 	description = "Copper",
 	tiles = {"base_stone.png^base_copper.png"},
+	stack_max = 20,
 	groups = {cracky=3},
 	sounds = {
 		footstep = {name="base_footstep_hard", gain=0.5},
@@ -218,6 +227,7 @@ minetest.register_node("base:torch", {
 	sunlight_propagates = true,
 	walkable = false,
 	light_source = 12,
+	stack_max = 20,
 	selection_box = {
 		type = "wallmounted",
 		wall_top = {-0.1, 0.5-0.6, -0.1, 0.1, 0.5, 0.1},
@@ -243,6 +253,7 @@ minetest.register_node("base:furnace", {
 	tiles = {"base_furnace_top.png", "base_furnace_bottom.png", "base_furnace_side.png",
 		"base_furnace_side.png", "base_furnace_side.png", "base_furnace_front.png"},
 	paramtype2 = "facedir",
+	stack_max = 20,
 	groups = {cracky=3},
 	sounds = {
 		footstep = {name="base_footstep_hard", gain=0.5},
@@ -580,16 +591,19 @@ minetest.register_tool("base:shovel_copper", {
 minetest.register_craftitem("base:stick", {
 	description = "Stick",
 	inventory_image = "base_stick.png",
+	stack_max = 20,
 })
 
 minetest.register_craftitem("base:coal", {
 	description = "Coal",
 	inventory_image = "base_coal.png",
+	stack_max = 20,
 })
 
 minetest.register_craftitem("base:copper_ingot", {
 	description = "Copper Ingot",
 	inventory_image = "base_copper_ingot.png"
+	stack_max = 20,
 })
 
 --
