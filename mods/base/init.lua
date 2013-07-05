@@ -103,6 +103,22 @@ minetest.register_node("base:sand", {
 	},
 })
 
+minetest.register_node("base:glass", {
+	description = "Sand",
+	tiles = {"base_glass.png"},
+	drawtype = "glasslike",
+	paramtype = "light",
+	drop = "",
+	stack_max = 20,
+	groups = {cracky=4},
+	sounds = {
+		footstep = {name="base_footstep_glass", gain=0.5},
+		place = {name="base_place_hard", gain=1.0},
+		dig = {name="base_dig_cracky", gain=0.5},
+		dug = {name="base_dug_glass", gain=1.0},
+	},
+})
+
 minetest.register_node("base:clay", {
 	description = "Clay",
 	tiles = {"base_clay.png"},
@@ -741,6 +757,18 @@ minetest.register_craft({
 	type = "cooking",
 	output = "base:copper_ingot",
 	recipe = "base:copper",
+})
+
+minetest.register_craft({
+	type = "cooking",
+	output = "base:stone",
+	recipe = "base:broken_stone",
+})
+
+minetest.register_craft({
+	type = "cooking",
+	output = "base:glass",
+	recipe = "base:sand",
 })
 
 --
