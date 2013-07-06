@@ -278,10 +278,10 @@ local furnace_inactive_formspec =
 
 minetest.register_node("base:furnace", {
 	description = "Furnace",
-	tiles = {"base_furnace_top.png", "base_furnace_bottom.png", "base_furnace_side.png",
+	tiles = {"base_furnace_side.png", "base_furnace_side.png", "base_furnace_side.png",
 		"base_furnace_side.png", "base_furnace_side.png", "base_furnace_front.png"},
 	paramtype2 = "facedir",
-	stack_max = 20,
+	stack_max = 1,
 	groups = {cracky=3},
 	sounds = {
 		footstep = {name="base_footstep_hard", gain=0.5},
@@ -308,6 +308,23 @@ minetest.register_node("base:furnace", {
 			return false
 		end
 		return true
+	end,
+	after_dig_node = function(pos, oldnode, oldmetadata, digger)
+		local inv = digger:get_inventory()
+		-- Search our item
+		for i,stack in ipairs(inv:get_list("main")) do
+			if stack:get_name() == "base:furnace" and stack:get_metadata() == "" then
+				local tmp = stack:to_table()
+				tmp.metadata = oldmetadata.fields.wear
+				inv:set_stack("main", i, tmp)
+			end
+		end
+	end,
+	after_place_node = function(pos, placer, itemstack)
+		local wear = tonumber(itemstack:get_metadata())
+		if wear then
+			minetest.get_meta(pos):set_string("wear", tostring(wear))
+		end
 	end,
 	allow_metadata_inventory_put = function(pos, listname, index, stack, player)
 		local meta = minetest.get_meta(pos)
@@ -348,9 +365,41 @@ minetest.register_node("base:furnace", {
 	end,
 })
 
+minetest.register_node("base:furnace_broken", {
+	description = "Broken Furnace",
+	tiles = {"base_furnace_side_broken.png", "base_furnace_side_broken.png", "base_furnace_side_broken.png",
+		"base_furnace_side_broken.png", "base_furnace_side_broken.png", "base_furnace_front_broken.png"},
+	paramtype2 = "facedir",
+	drop = "",
+	groups = {cracky=3},
+	sounds = {
+		footstep = {name="base_footstep_hard", gain=0.5},
+		place = {name="base_place_hard", gain=1.0},
+		dig = {name="base_dig_cracky", gain=0.5},
+	},
+	can_dig = function(pos,player)
+		local meta = minetest.get_meta(pos);
+		local inv = meta:get_inventory()
+		if not inv:is_empty("fuel") then
+			return false
+		elseif not inv:is_empty("dst") then
+			return false
+		elseif not inv:is_empty("src") then
+			return false
+		end
+		return true
+	end,
+	allow_metadata_inventory_put = function(pos, listname, index, stack, player)
+		return 0
+	end,
+	allow_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
+		return 0
+	end,
+})
+
 minetest.register_node("base:furnace_active", {
 	description = "Furnace",
-	tiles = {"base_furnace_top.png", "base_furnace_bottom.png", "base_furnace_side.png",
+	tiles = {"base_furnace_side.png", "base_furnace_side.png", "base_furnace_side.png",
 		"base_furnace_side.png", "base_furnace_side.png", "base_furnace_front_active.png"},
 	paramtype2 = "facedir",
 	light_source = 8,
@@ -381,6 +430,17 @@ minetest.register_node("base:furnace_active", {
 			return false
 		end
 		return true
+	end,
+	after_dig_node = function(pos, oldnode, oldmetadata, digger)
+		local inv = digger:get_inventory()
+		-- Search our item
+		for i,stack in ipairs(inv:get_list("main")) do
+			if stack:get_name() == "base:furnace" and stack:get_metadata() == "" then
+				local tmp = stack:to_table()
+				tmp.metadata = oldmetadata.fields.wear
+				inv:set_stack("main", i, tmp)
+			end
+		end
 	end,
 	allow_metadata_inventory_put = function(pos, listname, index, stack, player)
 		local meta = minetest.get_meta(pos)
@@ -470,12 +530,21 @@ minetest.register_abm({
 			meta:set_float("src_time", meta:get_float("src_time") + 1)
 			if cooked and cooked.item and meta:get_float("src_time") >= cooked.time then
 				-- check if there's room for output in "dst" list
-				if inv:room_for_item("dst",cooked.item) then
+				if inv:room_for_item("dst",cooked.item) and not cooked.item:is_empty() then
 					-- Put result in "dst" list
 					inv:add_item("dst", cooked.item)
+					local wear = tonumber(meta:get_string("wear")) or 0
+					wear = wear + 1
+					meta:set_string("wear", tostring(wear))
+					if wear >= 50 then
+						hacky_swap_node(pos, "base:furnace_broken")
+						meta:set_string("formspec", furnace_inactive_formspec)
+						meta:set_string("infotext", "Broken furnace")
+						return
+					end
 					-- take stuff from "src" list
 					inv:set_stack("src", 1, aftercooked.items[1])
-				else
+				elseif not cooked.item:is_empty() then
 					print("Could not insert '"..cooked.item:to_string().."'")
 				end
 				meta:set_string("src_time", 0)
