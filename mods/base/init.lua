@@ -845,7 +845,9 @@ minetest.register_craft({
 --
 
 minetest.register_alias("mapgen_water_source", "base:water_source")
+minetest.register_alias("mapgen_lava_source", "air")
 minetest.register_alias("mapgen_stone", "base:stone")
+minetest.register_alias("mapgen_sand", "base:sand")
 minetest.register_alias("mapgen_dirt", "base:dirt")
 minetest.register_alias("mapgen_dirt_with_grass", "base:dirt_with_grass")
 
