@@ -143,6 +143,18 @@ minetest.register_node("base:copper", {
 	},
 })
 
+minetest.register_node("base:iron", {
+	description = "Iron",
+	tiles = {"base_stone.png^base_iron.png"},
+	stack_max = 20,
+	groups = {cracky=2},
+	sounds = {
+		footstep = {name="base_footstep_hard", gain=0.5},
+		place = {name="base_place_hard", gain=1.0},
+		dig = {name="base_dig_cracky", gain=0.5},
+	},
+})
+
 minetest.register_node("base:coal_ore", {
 	description = "Coal Ore",
 	tiles = {"base_stone.png^base_coal_ore.png"},
@@ -681,6 +693,36 @@ minetest.register_tool("base:shovel_copper", {
 	},
 })
 
+minetest.register_tool("base:pick_iron", {
+	description = "Iron Pick",
+	inventory_image = "base_pick_iron.png",
+	tool_capabilities = {
+		groupcaps = {
+			cracky = {times={[2]=1.20,[3]=0.80,[4]=0.70}, uses=40},
+		},
+	},
+})
+
+minetest.register_tool("base:axe_iron", {
+	description = "Iron Axe",
+	inventory_image = "base_axe_iron.png",
+	tool_capabilities = {
+		groupcaps = {
+			choppy = {times={[2]=1.50,[3]=1.00}, uses=40},
+			snappy = {times={[3]=0.50}, uses=80},
+		},
+	},
+})
+minetest.register_tool("base:shovel_iron", {
+	description = "Iron Shovel",
+	inventory_image = "base_shovel_iron.png",
+	tool_capabilities = {
+		groupcaps = {
+			crumbly = {times={[1]=0.80,[2]=0.60,[3]=0.40}, uses=40},
+		},
+	},
+})
+
 --
 -- Craftitems
 --
@@ -700,6 +742,12 @@ minetest.register_craftitem("base:coal", {
 minetest.register_craftitem("base:copper_ingot", {
 	description = "Copper Ingot",
 	inventory_image = "base_copper_ingot.png",
+	stack_max = 20,
+})
+
+minetest.register_craftitem("base:iron_ingot", {
+	description = "Iron Ingot",
+	inventory_image = "base_iron_ingot.png",
 	stack_max = 20,
 })
 
@@ -794,6 +842,33 @@ minetest.register_craft({
 	}
 })
 
+minetest.register_craft({
+	output = "base:pick_iron",
+	recipe = {
+		{"base:iron_ingot", "base:iron_ingot", "base:iron_ingot"},
+		{"", "base:stick", ""},
+		{"", "base:stick", ""},
+	}
+})
+
+minetest.register_craft({
+	output = "base:axe_iron",
+	recipe = {
+		{"base:iron_ingot", "base:iron_ingot", ""},
+		{"base:iron_ingot", "base:stick", ""},
+		{"", "base:stick", ""},
+	}
+})
+
+minetest.register_craft({
+	output = "base:shovel_iron",
+	recipe = {
+		{"base:iron_ingot"},
+		{"base:stick"},
+		{"base:stick"},
+	}
+})
+
 --
 -- Crafts (Furnace)
 --
@@ -826,6 +901,12 @@ minetest.register_craft({
 	type = "cooking",
 	output = "base:copper_ingot",
 	recipe = "base:copper",
+})
+
+minetest.register_craft({
+	type = "cooking",
+	output = "base:iron_ingot",
+	recipe = "base:iron",
 })
 
 minetest.register_craft({
@@ -963,4 +1044,26 @@ minetest.register_ore({
 	clust_size     = 3,
 	height_max     = -25,
 	height_min     = -100,
+})
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "base:iron",
+	wherein        = "base:stone",
+	clust_scarcity = 12*12*12,
+	clust_num_ores = 3,
+	clust_size     = 3,
+	height_max     = -100,
+	height_min     = -200,
+})
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "base:iron",
+	wherein        = "base:stone",
+	clust_scarcity = 10*10*10,
+	clust_num_ores = 4,
+	clust_size     = 3,
+	height_max     = -200,
+	height_min     = -31000,
 })
