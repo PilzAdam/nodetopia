@@ -853,27 +853,15 @@ minetest.register_alias("mapgen_dirt_with_grass", "base:dirt_with_grass")
 
 minetest.register_biome({
 	name = "base_normal",
-	terrain_type = "normal",
-	
-	top_node = "base:dirt",
-	top_depth = 3,
-	filler_node = "base:stone",
-	filler_height = -15,
 	
 	height_min = 3,
 	height_max = 28,
 	heat_point = 40.0,
-	humidity_point = 50.0,
+	humidity_point = 40.0,
 })
 
 minetest.register_biome({
 	name = "base_forest",
-	terrain_type = "normal",
-	
-	top_node = "base:dirt",
-	top_depth = 3,
-	filler_node = "base:stone",
-	filler_height = -15,
 	
 	height_min = 8,
 	height_max = 28,
@@ -883,12 +871,6 @@ minetest.register_biome({
 
 minetest.register_biome({
 	name = "base_highland",
-	terrain_type = "normal",
-	
-	top_node = "base:dirt",
-	top_depth = 3,
-	filler_node = "base:stone",
-	filler_height = -15,
 	
 	height_min = 29,
 	height_max = 100,
@@ -898,32 +880,25 @@ minetest.register_biome({
 
 minetest.register_biome({
 	name           = "base_ocean_sand",
-	terrain_type   = "normal",
 	
-	top_node       = "base:sand",
-	top_depth      = 3,
-	filler_node    = "base:stone",
-	filler_height  = 0,
+	node_top       = "base:sand",
+	depth_top      = 3,
+	node_filler    = "base:stone",
+	depth_filler   = 0,
 	
 	height_min     = -31000,
 	height_max     = 2,
 	heat_point     = 40.0,
-	humidity_point = 40.0
+	humidity_point = 40.0,
 })
 
 minetest.register_biome({
 	name           = "base_ocean_dirt",
-	terrain_type   = "normal",
-	
-	top_node       = "base:dirt",
-	top_depth      = 3,
-	filler_node    = "base:stone",
-	filler_height  = 0,
 	
 	height_min     = -31000,
 	height_max     = 2,
-	heat_point     = 30.0,
-	humidity_point = 30.0
+	heat_point     = 20.0,
+	humidity_point = 60.0,
 })
 
 minetest.register_decoration({
