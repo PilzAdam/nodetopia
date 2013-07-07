@@ -143,9 +143,33 @@ minetest.register_node("base:copper", {
 	},
 })
 
+minetest.register_node("base:copper_block", {
+	description = "Copper Block",
+	tiles = {"base_copper_block.png"},
+	stack_max = 20,
+	groups = {cracky=3},
+	sounds = {
+		footstep = {name="base_footstep_hard", gain=0.5},
+		place = {name="base_place_hard", gain=1.0},
+		dig = {name="base_dig_cracky", gain=0.5},
+	},
+})
+
 minetest.register_node("base:iron", {
 	description = "Iron",
 	tiles = {"base_stone.png^base_iron.png"},
+	stack_max = 20,
+	groups = {cracky=2},
+	sounds = {
+		footstep = {name="base_footstep_hard", gain=0.5},
+		place = {name="base_place_hard", gain=1.0},
+		dig = {name="base_dig_cracky", gain=0.5},
+	},
+})
+
+minetest.register_node("base:iron_block", {
+	description = "Iron",
+	tiles = {"base_iron_block.png"},
 	stack_max = 20,
 	groups = {cracky=2},
 	sounds = {
@@ -739,18 +763,6 @@ minetest.register_craftitem("base:coal", {
 	stack_max = 20,
 })
 
-minetest.register_craftitem("base:copper_ingot", {
-	description = "Copper Ingot",
-	inventory_image = "base_copper_ingot.png",
-	stack_max = 20,
-})
-
-minetest.register_craftitem("base:iron_ingot", {
-	description = "Iron Ingot",
-	inventory_image = "base_iron_ingot.png",
-	stack_max = 20,
-})
-
 --
 -- Crafts
 --
@@ -818,7 +830,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "base:pick_copper",
 	recipe = {
-		{"base:copper_ingot", "base:copper_ingot", "base:copper_ingot"},
+		{"base:copper_block", "base:copper_block", "base:copper_block"},
 		{"", "base:stick", ""},
 		{"", "base:stick", ""},
 	}
@@ -827,8 +839,8 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "base:axe_copper",
 	recipe = {
-		{"base:copper_ingot", "base:copper_ingot", ""},
-		{"base:copper_ingot", "base:stick", ""},
+		{"base:copper_block", "base:copper_block", ""},
+		{"base:copper_block", "base:stick", ""},
 		{"", "base:stick", ""},
 	}
 })
@@ -836,7 +848,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "base:shovel_copper",
 	recipe = {
-		{"base:copper_ingot"},
+		{"base:copper_block"},
 		{"base:stick"},
 		{"base:stick"},
 	}
@@ -845,7 +857,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "base:pick_iron",
 	recipe = {
-		{"base:iron_ingot", "base:iron_ingot", "base:iron_ingot"},
+		{"base:iron_block", "base:iron_block", "base:iron_block"},
 		{"", "base:stick", ""},
 		{"", "base:stick", ""},
 	}
@@ -854,8 +866,8 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "base:axe_iron",
 	recipe = {
-		{"base:iron_ingot", "base:iron_ingot", ""},
-		{"base:iron_ingot", "base:stick", ""},
+		{"base:iron_block", "base:iron_block", ""},
+		{"base:iron_block", "base:stick", ""},
 		{"", "base:stick", ""},
 	}
 })
@@ -863,7 +875,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "base:shovel_iron",
 	recipe = {
-		{"base:iron_ingot"},
+		{"base:iron_block"},
 		{"base:stick"},
 		{"base:stick"},
 	}
@@ -905,13 +917,13 @@ minetest.register_craft({
 
 minetest.register_craft({
 	type = "cooking",
-	output = "base:copper_ingot",
+	output = "base:copper_block",
 	recipe = "base:copper",
 })
 
 minetest.register_craft({
 	type = "cooking",
-	output = "base:iron_ingot",
+	output = "base:iron_block",
 	recipe = "base:iron",
 })
 
