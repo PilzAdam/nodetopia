@@ -56,7 +56,6 @@ minetest.register_node("base:broken_stone", {
 minetest.register_node("base:leaves", {
 	description = "Leaves",
 	tiles = {"base_leaves.png"},
-	drawtype = "allfaces_optional",
 	paramtype = "light",
 	stack_max = 20,
 	groups = {snappy=3},
