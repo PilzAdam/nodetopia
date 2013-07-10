@@ -78,18 +78,6 @@ minetest.register_node("base:tree", {
 	},
 })
 
-minetest.register_node("base:wood", {
-	description = "Wood",
-	tiles = {"base_wood.png"},
-	stack_max = 20,
-	groups = {choppy=3},
-	sounds = {
-		footstep = {name="base_footstep_wood", gain=0.5},
-		place = {name="base_place_hard", gain=1.0},
-		dig = {name="base_dig_choppy", gain=0.5},
-	},
-})
-
 minetest.register_node("base:sand", {
 	description = "Sand",
 	tiles = {"base_sand.png"},
@@ -99,22 +87,6 @@ minetest.register_node("base:sand", {
 		footstep = {name="base_footstep_sand", gain=0.5},
 		place = {name="base_place", gain=1.0},
 		dig = {name="base_dig_crumbly", gain=0.5},
-	},
-})
-
-minetest.register_node("base:glass", {
-	description = "Sand",
-	tiles = {"base_glass.png"},
-	drawtype = "glasslike",
-	paramtype = "light",
-	drop = "",
-	stack_max = 20,
-	groups = {cracky=4},
-	sounds = {
-		footstep = {name="base_footstep_glass", gain=0.5},
-		place = {name="base_place_hard", gain=1.0},
-		dig = {name="base_dig_cracky", gain=0.5},
-		dug = {name="base_dug_glass", gain=1.0},
 	},
 })
 
@@ -605,7 +577,7 @@ minetest.register_abm({
 			hacky_swap_node(pos,"base:furnace_active")
 			meta:set_string("formspec",
 				"size[8,9]"..
-				"image[2,2;1,1;base_furnace_fire_bg.png^[[lowpart:"..
+				"image[2,2;1,1;base_furnace_fire_bg.png^[lowpart:"..
 				(100-percent)..":base_furnace_fire_fg.png]"..
 				"list[current_name;fuel;2,3;1,1;]"..
 				"list[current_name;src;2,1;1,1;]"..
@@ -898,12 +870,6 @@ minetest.register_craft({
 
 minetest.register_craft({
 	type = "fuel",
-	recipe = "base:wood",
-	burntime = 20,
-})
-
-minetest.register_craft({
-	type = "fuel",
 	recipe = "base:coal",
 	burntime = 40,
 })
@@ -936,12 +902,6 @@ minetest.register_craft({
 	type = "cooking",
 	output = "base:stone",
 	recipe = "base:broken_stone",
-})
-
-minetest.register_craft({
-	type = "cooking",
-	output = "base:glass",
-	recipe = "base:sand",
 })
 
 --
