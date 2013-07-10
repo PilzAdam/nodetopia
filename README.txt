@@ -5,10 +5,18 @@ Installation:
 -------------
 Place it in the $path_user/games/ and select it in the main menu.
 
-Introduction:
--------------
-This gamemode aims to have a bit more challenging gameplay than minetest_game.
-Some basics you need to know:
+Goal:
+-----
+This game aims to have a bit more challenging gameplay than minetest_game.
+
+There will be somwhat different "crafting trees", wich will lead to useful
+tools. Currently there is only one tree going from leaves and broken stone to
+iron tools. Future trees will be e.g. build on copper and lead to farming.
+
+The "voxel idea" also plays a big role, there are only a few non blocky items.
+
+Tips:
+-----
 - Sticks can be made out of 3 leaves.
 - The furnace is made out of clay.
 
