@@ -190,6 +190,18 @@ minetest.register_node("base:coal_ore", {
 	},
 })
 
+minetest.register_node("base:coal", {
+	description = "Coal",
+	tiles = {"base_coal.png"},
+	stack_max = 20,
+	groups = {cracky=4},
+	sounds = {
+		footstep = {name="base_footstep_hard", gain=0.5},
+		place = {name="base_place_hard", gain=1.0},
+		dig = {name="base_dig_cracky", gain=0.5},
+	},
+})
+
 minetest.register_node("base:water_source", {
 	description = "Water Source",
 	inventory_image = minetest.inventorycube("base_water_inventory.png"),
@@ -753,12 +765,6 @@ minetest.register_tool("base:shovel_iron", {
 minetest.register_craftitem("base:stick", {
 	description = "Stick",
 	inventory_image = "base_stick.png",
-	stack_max = 20,
-})
-
-minetest.register_craftitem("base:coal", {
-	description = "Coal",
-	inventory_image = "base_coal.png",
 	stack_max = 20,
 })
 
