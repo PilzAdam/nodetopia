@@ -350,9 +350,6 @@ minetest.register_node("base:furnace", {
 		local inv = meta:get_inventory()
 		if listname == "fuel" then
 			if minetest.get_craft_result({method="fuel",width=1,items={stack}}).time ~= 0 then
-				if inv:is_empty("src") then
-					meta:set_string("infotext","Furnace is empty")
-				end
 				return stack:get_count()
 			else
 				return 0
@@ -369,9 +366,6 @@ minetest.register_node("base:furnace", {
 		local stack = inv:get_stack(from_list, from_index)
 		if to_list == "fuel" then
 			if minetest.get_craft_result({method="fuel",width=1,items={stack}}).time ~= 0 then
-				if inv:is_empty("src") then
-					meta:set_string("infotext","Furnace is empty")
-				end
 				return count
 			else
 				return 0
@@ -466,9 +460,6 @@ minetest.register_node("base:furnace_active", {
 		local inv = meta:get_inventory()
 		if listname == "fuel" then
 			if minetest.get_craft_result({method="fuel",width=1,items={stack}}).time ~= 0 then
-				if inv:is_empty("src") then
-					meta:set_string("infotext","Furnace is empty")
-				end
 				return stack:get_count()
 			else
 				return 0
@@ -485,9 +476,6 @@ minetest.register_node("base:furnace_active", {
 		local stack = inv:get_stack(from_list, from_index)
 		if to_list == "fuel" then
 			if minetest.get_craft_result({method="fuel",width=1,items={stack}}).time ~= 0 then
-				if inv:is_empty("src") then
-					meta:set_string("infotext","Furnace is empty")
-				end
 				return count
 			else
 				return 0
@@ -573,7 +561,6 @@ minetest.register_abm({
 		if meta:get_float("fuel_time") < meta:get_float("fuel_totaltime") then
 			local percent = math.floor(meta:get_float("fuel_time") /
 					meta:get_float("fuel_totaltime") * 100)
-			meta:set_string("infotext","Furnace active: "..percent.."%")
 			hacky_swap_node(pos,"base:furnace_active")
 			meta:set_string("formspec",
 				"size[8,9]"..
@@ -601,7 +588,6 @@ minetest.register_abm({
 		end
 
 		if fuel.time <= 0 then
-			meta:set_string("infotext","Furnace out of fuel")
 			hacky_swap_node(pos,"base:furnace")
 			meta:set_string("formspec", furnace_inactive_formspec)
 			return
@@ -609,7 +595,6 @@ minetest.register_abm({
 
 		if cooked.item:is_empty() then
 			if was_active then
-				meta:set_string("infotext","Furnace is empty")
 				hacky_swap_node(pos,"base:furnace")
 				meta:set_string("formspec", furnace_inactive_formspec)
 			end
