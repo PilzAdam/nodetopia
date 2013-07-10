@@ -893,7 +893,7 @@ minetest.register_craft({
 minetest.register_craft({
 	type = "fuel",
 	recipe = "base:wood",
-	burntime = 35,
+	burntime = 20,
 })
 
 minetest.register_craft({
