@@ -9,9 +9,11 @@ Goal:
 -----
 This game aims to have a bit more challenging gameplay than minetest_game.
 
-There will be somwhat different "crafting trees", wich will lead to useful
-tools. Currently there is only one tree going from leaves and broken stone to
-iron tools. Future trees will be e.g. build on copper and lead to farming.
+You start in a world where you can dig almost nothing, and have to collect
+everything you can to craft it together to some tools, wich lead to more
+materials being availible to you.
+Currently you start with leaves and broken stone and will eventually end up with
+powerful iron tools.
 
 The "voxel idea" also plays a big role, there are only a few non blocky items.
 
