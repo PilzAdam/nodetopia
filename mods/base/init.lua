@@ -618,7 +618,7 @@ minetest.register_tool(":", {
 	wield_scale = {x=1,y=1,z=2.5},
 	tool_capabilities = {
 		groupcaps = {
-			crumbly = {times={[2]=1.50, [3]=1.00}, uses=0},
+			crumbly = {times={[3]=1.00}, uses=0},
 			snappy = {times={[3]=0.80}, uses=0},
 			cracky = {times={[4]=5.00}, uses=0},
 		},
