@@ -40,7 +40,7 @@ minetest.register_biome({
 	name           = "base_highland",
 	
 	height_min     = 41,
-	height_max     = 100,
+	height_max     = 31000,
 	heat_point     = 40.0,
 	humidity_point = 40.0,
 })
@@ -84,8 +84,8 @@ minetest.register_biome({
 minetest.register_decoration({
 	deco_type = "schematic",
 	place_on = "base:dirt_with_grass",
-	sidelen = 8,
-	fill_ratio = 0.016,
+	sidelen = 16,
+	fill_ratio = 0.005,
 	biomes = {"base_normal"},
 	schematic = minetest.get_modpath("base").."/schematics/base_tree.mts",
 	flags = "place_center_x, place_center_z",
@@ -146,7 +146,7 @@ minetest.register_ore({
 
 minetest.register_ore({
 	ore_type       = "scatter",
-	ore            = "base:coal_ore",
+	ore            = "base:coal",
 	wherein        = "base:stone",
 	clust_scarcity = 10*10*10,
 	clust_num_ores = 4,

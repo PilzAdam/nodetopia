@@ -55,6 +55,18 @@ minetest.register_node("deco:brick", {
 	},
 })
 
+minetest.register_node("deco:cactus", {
+	description = "Cactus",
+	tiles = {"deco_cactus_top.png", "deco_cactus_top.png", "deco_cactus.png"},
+	stack_max = 20,
+	groups = {choppy=3},
+	sounds = {
+		footstep = {name="base_footstep_wood", gain=0.5},
+		place = {name="base_place_hard", gain=1.0},
+		dig = {name="base_dig_choppy", gain=0.5},
+	},
+})
+
 --
 -- Crafts
 --
@@ -89,4 +101,19 @@ minetest.register_craft({
 	type = "cooking",
 	output = "deco:brick",
 	recipe = "base:clay",
+})
+
+--
+-- Mapgen
+--
+
+minetest.register_decoration({
+	deco_type  = "simple",
+	place_on   = "base:sand",
+	sidelen    = 16,
+	fill_ratio = 0.005,
+	biomes = {"base_desert"},
+	decoration = "deco:cactus",
+	height     = 3,
+	height_max = 4,
 })
