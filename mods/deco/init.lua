@@ -43,30 +43,6 @@ minetest.register_node("deco:glass", {
 	},
 })
 
-minetest.register_node("deco:wood", {
-	description = "Wood",
-	tiles = {"deco_wood.png"},
-	stack_max = 20,
-	groups = {choppy=3},
-	sounds = {
-		footstep = {name="base_footstep_wood", gain=0.5},
-		place = {name="base_place_hard", gain=1.0},
-		dig = {name="base_dig_choppy", gain=0.5},
-	},
-})
-
-minetest.register_node("deco:junglewood", {
-	description = "Junglewood",
-	tiles = {"deco_junglewood.png"},
-	stack_max = 20,
-	groups = {choppy=3},
-	sounds = {
-		footstep = {name="base_footstep_wood", gain=0.5},
-		place = {name="base_place_hard", gain=1.0},
-		dig = {name="base_dig_choppy", gain=0.5},
-	},
-})
-
 minetest.register_node("deco:brick", {
 	description = "Brick",
 	tiles = {"deco_brick.png"},
@@ -99,29 +75,9 @@ minetest.register_craft({
 	},
 })
 
-minetest.register_craft({
-	output = "deco:wood 4",
-	recipe = {
-		{"base:tree"},
-	},
-})
-
-minetest.register_craft({
-	output = "deco:junglewood 4",
-	recipe = {
-		{"base:jungletree"},
-	},
-})
-
 --
 -- Crafts (furnace)
 --
-
-minetest.register_craft({
-	type = "fuel",
-	recipe = "deco:wood",
-	burntime = 20,
-})
 
 minetest.register_craft({
 	type = "cooking",

@@ -19,7 +19,7 @@ The "voxel idea" also plays a big role, there are only a few non blocky items.
 
 Tips:
 -----
-- Sticks can be made out of 3 leaves.
+- Wood can be made out of 4 leaves, which is required to make tools.
 - The furnace is made out of clay.
 
 License of sourcecode:
