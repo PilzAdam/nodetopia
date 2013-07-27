@@ -81,33 +81,6 @@ minetest.register_biome({
 	humidity_point = 0.0,
 })
 
-minetest.register_biome({
-	name           = "base_snow",
-	
-	node_top       = "base:snow",
-	depth_top      = 2,
-	node_filler    = "base:dirt",
-	depth_filler   = 2,
-	
-	height_min     = 1,
-	height_max     = 100,
-	heat_point     = 10.0,
-	humidity_point = 40.0,
-})
-
-minetest.register_biome({
-	name           = "base_mountain_snow",
-	
-	node_top       = "base:snow",
-	depth_top      = 2,
-	node_filler    = "base:stone",
-	
-	height_min     = 101,
-	height_max     = 30000,
-	heat_point     = 0.0,
-	humidity_point = 40.0,
-})
-
 minetest.register_decoration({
 	deco_type = "schematic",
 	place_on = "base:dirt_with_grass",

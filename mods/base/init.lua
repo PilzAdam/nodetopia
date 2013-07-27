@@ -138,18 +138,6 @@ minetest.register_node("base:clay", {
 	},
 })
 
-minetest.register_node("base:snow", {
-	description = "Snow",
-	tiles = {"base_snow.png"},
-	stack_max = 20,
-	groups = {crumbly=3},
-	sounds = {
-		footstep = {name="base_footstep_snow", gain=0.5},
-		place = {name="base_place", gain=1.0},
-		dig = {name="base_dig_crumbly", gain=0.5},
-	},
-})
-
 minetest.register_node("base:copper", {
 	description = "Copper",
 	tiles = {"base_stone.png^base_copper.png"},
