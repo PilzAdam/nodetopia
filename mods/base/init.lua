@@ -139,7 +139,7 @@ minetest.register_node("base:clay", {
 })
 
 minetest.register_node("base:copper", {
-	description = "Copper",
+	description = "Copper Ore",
 	tiles = {"base_stone.png^base_copper.png"},
 	stack_max = 20,
 	groups = {cracky=3},
@@ -163,7 +163,7 @@ minetest.register_node("base:copper_block", {
 })
 
 minetest.register_node("base:iron", {
-	description = "Iron",
+	description = "Iron Ore",
 	tiles = {"base_stone.png^base_iron.png"},
 	stack_max = 20,
 	groups = {cracky=2},
@@ -187,7 +187,7 @@ minetest.register_node("base:iron_block", {
 })
 
 minetest.register_node("base:coal", {
-	description = "Coal",
+	description = "Coal Ore",
 	tiles = {"base_stone.png^base_coal_ore.png"},
 	drop = "base:coal_block",
 	groups = {cracky=2},
@@ -756,7 +756,7 @@ minetest.register_tool("base:shovel_iron", {
 --
 
 minetest.register_craft({
-	output = "base:wood",
+	output = "base:wood 2",
 	recipe = {
 		{"base:leaves", "base:leaves"},
 		{"base:leaves", "base:leaves"},
@@ -764,7 +764,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = "base:torch",
+	output = "base:torch 2",
 	recipe = {
 		{"base:coal_block"},
 		{"group:wood"},
@@ -781,14 +781,14 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = "base:wood 4",
+	output = "base:wood 2",
 	recipe = {
 		{"base:tree"},
 	}
 })
 
 minetest.register_craft({
-	output = "base:junglewood 4",
+	output = "base:junglewood 2",
 	recipe = {
 		{"base:jungletree"},
 	}
