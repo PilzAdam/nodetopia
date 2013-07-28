@@ -4,6 +4,7 @@ Pilztest game for the Minetest engine
 Installation:
 -------------
 Place it in the $path_user/games/ and select it in the main menu.
+Make sure that you select mapgen v7 when creating a new world.
 
 Goal:
 -----
