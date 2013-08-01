@@ -67,6 +67,18 @@ minetest.register_node("deco:cactus", {
 	},
 })
 
+minetest.register_node("deco:gravel", {
+	description = "Gravel",
+	tiles = {"deco_gravel.png"},
+	stack_max = 20,
+	groups = {crumbly=2},
+	sounds = {
+		footstep = {name="deco_footstep_gravel", gain=0.5},
+		place = {name="base_place", gain=1.0},
+		dig = {name="base_dig_crumbly", gain=0.5},
+	},
+})
+
 --
 -- Crafts
 --
@@ -116,4 +128,16 @@ minetest.register_decoration({
 	decoration = "deco:cactus",
 	height     = 3,
 	height_max = 4,
+})
+
+
+minetest.register_ore({
+	ore_type       = "scatter",
+	ore            = "deco:gravel",
+	wherein        = {"base:dirt", "base:dirt_with_grass"},
+	clust_scarcity = 26*26*26,
+	clust_num_ores = 200,
+	clust_size     = 10,
+	height_max     = 10000,
+	height_min     = -10000,
 })
