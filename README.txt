@@ -30,3 +30,8 @@ LGPL
 License of media:
 -----------------
 CC BY-SA 3.0
+
+Authors of media files:
+-----------------------
+See: https://github.com/minetest/minetest_game/blob/master/mods/default/README.txt
+Everything not listed there is created by PilzAdam.
