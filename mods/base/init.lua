@@ -210,6 +210,18 @@ minetest.register_node("base:coal_block", {
 	},
 })
 
+minetest.register_node("base:mese", {
+	description = "Mese",
+	tiles = {"base_mese.png"},
+	stack_max = 20,
+	groups = {cracky=1},
+	sounds = {
+		footstep = {name="base_footstep_hard", gain=0.5},
+		place = {name="base_place_hard", gain=1.0},
+		dig = {name="base_dig_cracky", gain=0.5},
+	},
+})
+
 minetest.register_node("base:water_source", {
 	description = "Water Source",
 	inventory_image = minetest.inventorycube("base_water_inventory.png"),
@@ -726,7 +738,7 @@ minetest.register_tool("base:pick_iron", {
 	inventory_image = "base_pick_iron.png",
 	tool_capabilities = {
 		groupcaps = {
-			cracky = {times={[2]=1.20,[3]=0.80,[4]=0.70}, uses=40},
+			cracky = {times={[1]=5.00,[2]=1.20,[3]=0.80,[4]=0.70}, uses=40},
 		},
 	},
 })
@@ -747,6 +759,36 @@ minetest.register_tool("base:shovel_iron", {
 	tool_capabilities = {
 		groupcaps = {
 			crumbly = {times={[1]=0.80,[2]=0.60,[3]=0.40}, uses=40},
+		},
+	},
+})
+
+minetest.register_tool("base:pick_mese", {
+	description = "Mese Pick",
+	inventory_image = "base_pick_mese.png",
+	tool_capabilities = {
+		groupcaps = {
+			cracky = {times={[1]=2.00,[2]=0.70,[3]=0.40,[4]=0.30}, uses=80},
+		},
+	},
+})
+
+minetest.register_tool("base:axe_mese", {
+	description = "Mese Axe",
+	inventory_image = "base_axe_mese.png",
+	tool_capabilities = {
+		groupcaps = {
+			choppy = {times={[2]=0.90,[3]=0.60}, uses=80},
+			snappy = {times={[3]=0.30}, uses=160},
+		},
+	},
+})
+minetest.register_tool("base:shovel_mese", {
+	description = "Mese Shovel",
+	inventory_image = "base_shovel_mese.png",
+	tool_capabilities = {
+		groupcaps = {
+			crumbly = {times={[1]=0.40,[2]=0.30,[3]=0.20}, uses=80},
 		},
 	},
 })
@@ -870,6 +912,33 @@ minetest.register_craft({
 	output = "base:shovel_iron",
 	recipe = {
 		{"base:iron_block"},
+		{"group:wood"},
+		{"group:wood"},
+	}
+})
+
+minetest.register_craft({
+	output = "base:pick_mese",
+	recipe = {
+		{"base:mese", "base:mese", "base:mese"},
+		{"", "group:wood", ""},
+		{"", "group:wood", ""},
+	}
+})
+
+minetest.register_craft({
+	output = "base:axe_mese",
+	recipe = {
+		{"base:mese", "base:mese", ""},
+		{"base:mese", "group:wood", ""},
+		{"", "group:wood", ""},
+	}
+})
+
+minetest.register_craft({
+	output = "base:shovel_mese",
+	recipe = {
+		{"base:mese"},
 		{"group:wood"},
 		{"group:wood"},
 	}
