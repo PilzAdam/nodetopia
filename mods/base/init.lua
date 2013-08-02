@@ -656,6 +656,36 @@ minetest.register_abm({
 	end,
 })
 
+minetest.register_node("base:chest", {
+	description = "Chest",
+	tiles = {"base_chest_top.png", "base_chest_top.png", "base_chest_side.png",
+		"base_chest_side.png", "base_chest_side.png", "base_chest_front.png"},
+	paramtype2 = "facedir",
+	groups = {choppy=3},
+	sounds = {
+		footstep = {name="base_footstep_wood", gain=0.5},
+		place = {name="base_place_hard", gain=1.0},
+		dig = {name="base_dig_choppy", gain=0.5},
+	},
+
+	on_construct = function(pos)
+		local meta = minetest.get_meta(pos)
+		meta:set_string("formspec",
+				"size[8,9]"..
+				"list[current_name;main;0,0;8,4;]"..
+				"list[current_player;main;0,5;8,4;]"
+		)
+		meta:set_string("infotext", "Chest")
+		local inv = meta:get_inventory()
+		inv:set_size("main", 8*4)
+	end,
+	can_dig = function(pos,player)
+		local meta = minetest.get_meta(pos);
+		local inv = meta:get_inventory()
+		return inv:is_empty("main")
+	end,
+})
+
 --
 -- Tools
 --
@@ -819,6 +849,15 @@ minetest.register_craft({
 		{"base:clay", "base:clay", "base:clay"},
 		{"base:clay", "", "base:clay"},
 		{"base:clay", "base:clay", "base:clay"},
+	}
+})
+
+minetest.register_craft({
+	output = "base:chest",
+	recipe = {
+		{"group:wood", "group:wood", "group:wood"},
+		{"group:wood", "", "group:wood"},
+		{"group:wood", "group:wood", "group:wood"},
 	}
 })
 
