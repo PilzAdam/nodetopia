@@ -262,7 +262,6 @@ minetest.register_node("base:water_source", {
 	liquid_alternative_source = "base:water_source",
 	liquid_viscosity = 1,
 	post_effect_color = {a=64, r=100, g=100, b=200},
-	groups = {water=3, liquid=3, puts_out_fire=1},
 })
 
 minetest.register_node("base:water_flowing", {
@@ -304,7 +303,93 @@ minetest.register_node("base:water_flowing", {
 	liquid_alternative_source = "base:water_source",
 	liquid_viscosity = 1,
 	post_effect_color = {a=64, r=100, g=100, b=200},
-	groups = {water=3, liquid=3, puts_out_fire=1},
+})
+
+minetest.register_node("base:lava_source", {
+	description = "Lava Source",
+	inventory_image = minetest.inventorycube("base_lava_inventory.png"),
+	drawtype = "liquid",
+	tiles = {
+		{
+			name="base_lava_source.png",
+			animation= {
+				type="vertical_frames",
+				aspect_w=16,
+				aspect_h=16,
+				length=2.0,
+			}
+		},
+	},
+	special_tiles = {
+		-- New-style water source material (mostly unused)
+		{
+			name="base_lava_source.png",
+			animation={
+				type="vertical_frames",
+				aspect_w=16,
+				aspect_h=16,
+				length=3.0,
+			},
+			backface_culling = false,
+		},
+	},
+	paramtype = "light",
+	light_source = 14,
+	damage_per_second = 4,
+	walkable = false,
+	pointable = false,
+	diggable = false,
+	buildable_to = true,
+	drop = "",
+	liquidtype = "source",
+	liquid_alternative_flowing = "base:lava_flowing",
+	liquid_alternative_source = "base:lava_source",
+	liquid_viscosity = 7,
+	liquid_renewable = false,
+	post_effect_color = {a=192, r=255, g=64, b=0},
+})
+
+minetest.register_node("base:lava_flowing", {
+	description = "Water Flowing",
+	inventory_image = minetest.inventorycube("base_lava_inventory.png"),
+	drawtype = "flowingliquid",
+	tiles = {"base_lava_inventory.png"},
+	special_tiles = {
+		{
+			image="base_lava_flowing.png",
+			backface_culling=false,
+			animation={
+				type="vertical_frames",
+				aspect_w=16,
+				aspect_h=16,
+				length=3.3,
+			},
+		},
+		{
+			image="base_lava_flowing.png",
+			backface_culling=true,
+			animation={
+				type="vertical_frames",
+				aspect_w=16,
+				aspect_h=16,
+				length=3.3,
+			},
+		},
+	},
+	paramtype = "light",
+	light_source = 12,
+	damage_per_second = 4,
+	walkable = false,
+	pointable = false,
+	diggable = false,
+	buildable_to = true,
+	drop = "",
+	liquidtype = "flowing",
+	liquid_alternative_flowing = "base:lava_flowing",
+	liquid_alternative_source = "base:lava_source",
+	liquid_viscosity = 7,
+	liquid_renewable = false,
+	post_effect_color = {a=192, r=255, g=64, b=0},
 })
 
 minetest.register_node("base:torch", {
