@@ -256,12 +256,13 @@ minetest.register_node("base:water_source", {
 	pointable = false,
 	diggable = false,
 	buildable_to = true,
-	drop = "",
+	stack_max = 20,
 	liquidtype = "source",
 	liquid_alternative_flowing = "base:water_flowing",
 	liquid_alternative_source = "base:water_source",
 	liquid_viscosity = 1,
 	post_effect_color = {a=64, r=100, g=100, b=200},
+	groups = {liquid=3},
 })
 
 minetest.register_node("base:water_flowing", {
@@ -303,6 +304,7 @@ minetest.register_node("base:water_flowing", {
 	liquid_alternative_source = "base:water_source",
 	liquid_viscosity = 1,
 	post_effect_color = {a=64, r=100, g=100, b=200},
+	groups = {liquid=3},
 })
 
 minetest.register_node("base:lava_source", {
@@ -340,13 +342,14 @@ minetest.register_node("base:lava_source", {
 	pointable = false,
 	diggable = false,
 	buildable_to = true,
-	drop = "",
+	stack_max = 20,
 	liquidtype = "source",
 	liquid_alternative_flowing = "base:lava_flowing",
 	liquid_alternative_source = "base:lava_source",
 	liquid_viscosity = 7,
 	liquid_renewable = false,
 	post_effect_color = {a=192, r=255, g=64, b=0},
+	groups = {liquid=2},
 })
 
 minetest.register_node("base:lava_flowing", {
@@ -390,6 +393,7 @@ minetest.register_node("base:lava_flowing", {
 	liquid_viscosity = 7,
 	liquid_renewable = false,
 	post_effect_color = {a=192, r=255, g=64, b=0},
+	groups = {liquid=2},
 })
 
 minetest.register_node("base:torch", {
@@ -848,6 +852,17 @@ minetest.register_tool("base:shovel_copper", {
 	},
 })
 
+minetest.register_tool("base:bucket_copper", {
+	description = "Copper Bucket",
+	inventory_image = "base_bucket_copper.png",
+	liquids_pointable = true,
+	tool_capabilities = {
+		groupcaps = {
+			liquid = {times={[3]=1.50}, uses=10},
+		},
+	},
+})
+
 minetest.register_tool("base:pick_iron", {
 	description = "Iron Pick",
 	inventory_image = "base_pick_iron.png",
@@ -874,6 +889,17 @@ minetest.register_tool("base:shovel_iron", {
 	tool_capabilities = {
 		groupcaps = {
 			crumbly = {times={[1]=0.80,[2]=0.60,[3]=0.40}, uses=40},
+		},
+	},
+})
+
+minetest.register_tool("base:bucket_iron", {
+	description = "Iron Bucket",
+	inventory_image = "base_bucket_iron.png",
+	liquids_pointable = true,
+	tool_capabilities = {
+		groupcaps = {
+			liquid = {times={[2]=2.00,[3]=1.00}, uses=20},
 		},
 	},
 })
@@ -1015,6 +1041,14 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
+	output = "base:bucket_copper",
+	recipe = {
+		{"base:copper_block", "", "base:copper_block"},
+		{"", "base:copper_block", ""},
+	}
+})
+
+minetest.register_craft({
 	output = "base:pick_iron",
 	recipe = {
 		{"base:iron_block", "base:iron_block", "base:iron_block"},
@@ -1038,6 +1072,14 @@ minetest.register_craft({
 		{"base:iron_block"},
 		{"group:wood"},
 		{"group:wood"},
+	}
+})
+
+minetest.register_craft({
+	output = "base:bucket_iron",
+	recipe = {
+		{"base:iron_block", "", "base:iron_block"},
+		{"", "base:iron_block", ""},
 	}
 })
 
