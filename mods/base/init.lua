@@ -304,7 +304,7 @@ minetest.register_node("base:water_flowing", {
 	liquid_alternative_source = "base:water_source",
 	liquid_viscosity = 1,
 	post_effect_color = {a=64, r=100, g=100, b=200},
-	groups = {liquid=3},
+	groups = {liquid=3,not_in_creative_inventory=1},
 })
 
 minetest.register_node("base:lava_source", {
@@ -393,7 +393,7 @@ minetest.register_node("base:lava_flowing", {
 	liquid_viscosity = 7,
 	liquid_renewable = false,
 	post_effect_color = {a=192, r=255, g=64, b=0},
-	groups = {liquid=2},
+	groups = {liquid=2,not_in_creative_inventory=1},
 })
 
 minetest.register_node("base:torch", {
@@ -521,7 +521,7 @@ minetest.register_node("base:furnace_broken", {
 		"base_furnace_side_broken.png", "base_furnace_side_broken.png", "base_furnace_front_broken.png"},
 	paramtype2 = "facedir",
 	drop = "",
-	groups = {cracky=3},
+	groups = {cracky=3,not_in_creative_inventory=1},
 	sounds = {
 		footstep = {name="base_footstep_hard", gain=0.5},
 		place = {name="base_place_hard", gain=1.0},
@@ -554,7 +554,7 @@ minetest.register_node("base:furnace_active", {
 	paramtype2 = "facedir",
 	light_source = 8,
 	drop = "base:furnace",
-	groups = {cracky=3},
+	groups = {cracky=3,not_in_creative_inventory=1},
 	sounds = {
 		footstep = {name="base_footstep_hard", gain=0.5},
 		place = {name="base_place_hard", gain=1.0},
