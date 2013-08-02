@@ -79,6 +79,18 @@ minetest.register_node("deco:gravel", {
 	},
 })
 
+minetest.register_node("deco:bookshelf", {
+	description = "Bookshelf",
+	tiles = {"base_wood.png", "base_wood.png", "deco_bookshelf.png"},
+	stack_max = 20,
+	groups = {choppy=3},
+	sounds = {
+		footstep = {name="base_footstep_wood", gain=0.5},
+		place = {name="base_place_hard", gain=1.0},
+		dig = {name="base_dig_choppy", gain=0.5},
+	},
+})
+
 --
 -- Crafts
 --
@@ -96,6 +108,15 @@ minetest.register_craft({
 	recipe = {
 		{"base:sand", "base:stone"},
 		{"base:stone", "base:sand"},
+	},
+})
+
+minetest.register_craft({
+	output = "deco:bookshelf",
+	recipe = {
+		{"base:wood", "base:wood", "base:wood"},
+		{"base:leaves", "base:leaves", "base:leaves"},
+		{"base:wood", "base:wood", "base:wood"},
 	},
 })
 
