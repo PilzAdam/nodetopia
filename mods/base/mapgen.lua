@@ -2,6 +2,12 @@
 -- Mapgen
 --
 
+minetest.register_on_mapgen_init(function(params)
+	if params.mgname ~= "v7" then
+		minetest.log("error", "Pilztest requires mapgen v7")
+	end
+end)
+
 minetest.register_alias("mapgen_water_source", "base:water_source")
 minetest.register_alias("mapgen_lava_source", "base:lava_source")
 minetest.register_alias("mapgen_stone", "base:stone")
