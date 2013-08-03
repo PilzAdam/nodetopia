@@ -783,6 +783,7 @@ minetest.register_tool(":", {
 	type = "none",
 	wield_image = "base_hand.png",
 	wield_scale = {x=1,y=1,z=2.5},
+	range = 3,
 	tool_capabilities = {
 		groupcaps = {
 			crumbly = {times={[3]=1.00}, uses=0},
