@@ -28,7 +28,7 @@ minetest.register_node("deco:sandstonebrick", {
 })
 
 minetest.register_node("deco:glass", {
-	description = "Sand",
+	description = "Glass",
 	tiles = {"deco_glass.png"},
 	drawtype = "glasslike",
 	paramtype = "light",
