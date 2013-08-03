@@ -70,7 +70,7 @@ minetest.register_node("base:tree", {
 	description = "Tree",
 	tiles = {"base_tree_top.png", "base_tree_top.png", "base_tree.png"},
 	stack_max = 20,
-	groups = {choppy=2},
+	groups = {choppy=2,tree=1},
 	sounds = {
 		footstep = {name="base_footstep_wood", gain=0.5},
 		place = {name="base_place_hard", gain=1.0},
@@ -82,7 +82,7 @@ minetest.register_node("base:jungletree", {
 	description = "Jungletree",
 	tiles = {"base_jungletree_top.png", "base_jungletree_top.png", "base_jungletree.png"},
 	stack_max = 20,
-	groups = {choppy=2},
+	groups = {choppy=2,tree=1},
 	sounds = {
 		footstep = {name="base_footstep_wood", gain=0.5},
 		place = {name="base_place_hard", gain=1.0},
@@ -1116,13 +1116,7 @@ minetest.register_craft({
 
 minetest.register_craft({
 	type = "fuel",
-	recipe = "base:tree",
-	burntime = 30,
-})
-
-minetest.register_craft({
-	type = "fuel",
-	recipe = "base:jungletree",
+	recipe = "group:tree",
 	burntime = 30,
 })
 
@@ -1153,7 +1147,7 @@ minetest.register_craft({
 minetest.register_craft({
 	type = "cooking",
 	output = "base:coal_block",
-	recipe = "base:tree",
+	recipe = "group:tree",
 })
 
 minetest.register_craft({
