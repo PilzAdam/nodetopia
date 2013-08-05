@@ -261,6 +261,7 @@ minetest.register_node("base:water_source", {
 	liquid_alternative_flowing = "base:water_flowing",
 	liquid_alternative_source = "base:water_source",
 	liquid_viscosity = 1,
+	drowning = 1,
 	post_effect_color = {a=64, r=100, g=100, b=200},
 	groups = {liquid=3},
 })
@@ -303,6 +304,7 @@ minetest.register_node("base:water_flowing", {
 	liquid_alternative_flowing = "base:water_flowing",
 	liquid_alternative_source = "base:water_source",
 	liquid_viscosity = 1,
+	drowning = 1,
 	post_effect_color = {a=64, r=100, g=100, b=200},
 	groups = {liquid=3,not_in_creative_inventory=1},
 })
@@ -348,6 +350,7 @@ minetest.register_node("base:lava_source", {
 	liquid_alternative_source = "base:lava_source",
 	liquid_viscosity = 7,
 	liquid_renewable = false,
+	drowning = 1,
 	post_effect_color = {a=192, r=255, g=64, b=0},
 	groups = {liquid=2},
 })
@@ -392,6 +395,7 @@ minetest.register_node("base:lava_flowing", {
 	liquid_alternative_source = "base:lava_source",
 	liquid_viscosity = 7,
 	liquid_renewable = false,
+	drowning = 1,
 	post_effect_color = {a=192, r=255, g=64, b=0},
 	groups = {liquid=2,not_in_creative_inventory=1},
 })
