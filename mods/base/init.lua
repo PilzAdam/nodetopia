@@ -1179,7 +1179,7 @@ dofile(minetest.get_modpath("base").."/mapgen.lua")
 -- Player
 --
 
-minetest.register_on_joinplayer(function(player)
+minetest.register_on_newplayer(function(player)
 	player:set_hp(10)
 end)
 
