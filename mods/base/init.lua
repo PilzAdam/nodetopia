@@ -263,7 +263,7 @@ minetest.register_node("base:water_source", {
 	liquid_viscosity = 1,
 	drowning = 1,
 	post_effect_color = {a=64, r=100, g=100, b=200},
-	groups = {liquid=3},
+	groups = {liquid=3, water=1},
 })
 
 minetest.register_node("base:water_flowing", {
@@ -306,7 +306,7 @@ minetest.register_node("base:water_flowing", {
 	liquid_viscosity = 1,
 	drowning = 1,
 	post_effect_color = {a=64, r=100, g=100, b=200},
-	groups = {liquid=3,not_in_creative_inventory=1},
+	groups = {liquid=3, not_in_creative_inventory=1, water=1},
 })
 
 minetest.register_node("base:lava_source", {

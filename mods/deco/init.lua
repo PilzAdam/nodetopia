@@ -151,7 +151,6 @@ minetest.register_decoration({
 	height_max = 4,
 })
 
-
 minetest.register_ore({
 	ore_type       = "scatter",
 	ore            = "deco:gravel",
