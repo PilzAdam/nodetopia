@@ -1,3 +1,84 @@
+--
+-- Hunger
+--
+
+local hunger = {}
+local timer = 0
+
+file = io.open(minetest:get_worldpath().."/hunger.txt", "r")
+if file then
+		local table = minetest.deserialize(file:read("*all"))
+		if type(table) == "table" then
+			hunger = table
+		else
+			minetest.log("error", "Corrupted hunger file")
+		end
+		file:close()
+end
+
+local function update_player_hunger(player, hunger, force)
+	if hunger > 60 then
+		player:set_hp(player:get_hp()-1)
+		minetest.log("action", player:get_player_name() .. " is hungry and gets damaged")
+	end
+	
+	local hunger = math.min(hunger, 41)
+	if force and hunger <= 20 then
+		player:set_physics_override(1, nil, nil)
+	end
+	if hunger > 20 and (force or hunger < 41) then
+		local tmp = math.abs(hunger-40)  / 40 + 0.5
+		minetest.log("action", player:get_player_name() .. " is hungry and gets slower ("..(tmp*100).."% of speed)")
+		player:set_physics_override(tmp, nil, nil)
+	end
+end
+
+local function save_hunger()
+	file = io.open(minetest:get_worldpath().."/hunger.txt", "w")
+	if file then
+		file:write(minetest.serialize(hunger))
+		file:close()
+	else
+		minetest.log("error", "Can't save hunger")
+	end
+end
+
+minetest.register_globalstep(function(dtime)
+	timer = timer+dtime
+	if timer < 60 then
+		return
+	end
+	timer = 0
+	
+	for _,player in ipairs(minetest.get_connected_players()) do
+		local name = player:get_player_name()
+		if not hunger[name] then
+			hunger[name] = 0
+		end
+		hunger[name] = hunger[name]+1
+		
+		update_player_hunger(player, hunger[name], false)
+	end
+	save_hunger()
+end)
+
+minetest.register_on_joinplayer(function(player)
+	if not hunger[player:get_player_name()] then
+		hunger[player:get_player_name()] = 0
+		save_hunger()
+	end
+	minetest.after(1, update_player_hunger, player, hunger[player:get_player_name()], true)
+end)
+
+minetest.register_on_respawnplayer(function(player)
+	player:set_hp(10)
+	hunger[player:get_player_name()] = 0
+	update_player_hunger(player, 0, true)
+end)
+
+minetest.register_on_newplayer(function(player)
+	player:set_hp(10)
+end)
 
 --
 -- Soil
@@ -181,13 +262,29 @@ minetest.register_node("food:pumpkin", {
 			return itemstack
 		end
 		local hp = user:get_hp()
+		local name = user:get_player_name()
+		local playerhunger = hunger[name] or -1
+		local used = false
+		
 		if hp > 0 and hp < 10 then
 			user:set_hp(hp+1)
-			minetest.log("action", user:get_player_name().." heals 1 HP")
+			minetest.log("action", name.." heals 1 hp")
+			used = true
+		end
+			
+		if playerhunger > 9 then
+			hunger[name] = playerhunger - 10
+			save_hunger()
+			update_player_hunger(user, hunger[name], true)
+			used = true
+		end
+			
+		if used then
 			itemstack:take_item()
 			return itemstack
+		else
+			return itemstack
 		end
-		return itemstack
 	end,
 })
 

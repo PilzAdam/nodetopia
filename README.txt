@@ -17,6 +17,7 @@ Tips:
 - Wood can be made out of 4 leaves, which is required to make tools.
 - The furnace is made out of clay.
 - Pumpkins are food, can be found in forests and grow on wet soil.
+- Hungry players get slower.
 
 License of sourcecode:
 ----------------------

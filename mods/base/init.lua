@@ -1174,15 +1174,3 @@ minetest.register_craft({
 })
 
 dofile(minetest.get_modpath("base").."/mapgen.lua")
-
---
--- Player
---
-
-minetest.register_on_newplayer(function(player)
-	player:set_hp(10)
-end)
-
-minetest.register_on_respawnplayer(function(player)
-	player:set_hp(10)
-end)
