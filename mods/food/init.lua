@@ -258,9 +258,6 @@ minetest.register_node("food:pumpkin", {
 	},
 	
 	on_use = function(itemstack, user, pointed_thing)
-		if pointed_thing and pointed_thing.type ~= "nothing" then
-			return itemstack
-		end
 		local hp = user:get_hp()
 		local name = user:get_player_name()
 		local playerhunger = hunger[name] or -1
