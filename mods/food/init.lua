@@ -17,6 +17,10 @@ if file then
 end
 
 local function update_player_hunger(player, hunger, force)
+	if minetest.setting_getbool("creative_mode") then
+		return
+	end
+	
 	if hunger > 60 then
 		player:set_hp(player:get_hp()-1)
 		minetest.log("action", player:get_player_name() .. " is hungry and gets damaged")
@@ -43,6 +47,8 @@ local function save_hunger()
 	end
 end
 
+if not minetest.setting_getbool("creative_mode") then
+
 minetest.register_globalstep(function(dtime)
 	timer = timer+dtime
 	if timer < 60 then
@@ -61,6 +67,8 @@ minetest.register_globalstep(function(dtime)
 	end
 	save_hunger()
 end)
+
+end
 
 minetest.register_on_joinplayer(function(player)
 	if not hunger[player:get_player_name()] then
@@ -276,7 +284,7 @@ minetest.register_node("food:pumpkin", {
 			used = true
 		end
 			
-		if used then
+		if used and not minetest.setting_getbool("creative_mode") then
 			itemstack:take_item()
 			return itemstack
 		else
