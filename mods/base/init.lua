@@ -352,7 +352,7 @@ minetest.register_node("base:lava_source", {
 	liquid_renewable = false,
 	drowning = 1,
 	post_effect_color = {a=192, r=255, g=64, b=0},
-	groups = {liquid=2},
+	groups = {liquid=2,lava=1},
 })
 
 minetest.register_node("base:lava_flowing", {
@@ -397,7 +397,18 @@ minetest.register_node("base:lava_flowing", {
 	liquid_renewable = false,
 	drowning = 1,
 	post_effect_color = {a=192, r=255, g=64, b=0},
-	groups = {liquid=2,not_in_creative_inventory=1},
+	groups = {liquid=2,not_in_creative_inventory=1,lava=1},
+})
+
+minetest.register_abm({
+	nodenames = {"group:lava"},
+	neighbors = {"group:water"},
+	interval = 1.0,
+	chance = 1,
+	action = function(pos, node)
+		minetest.set_node(pos, {name="base:stone"})
+		minetest.sound_play("base_lava_cool", {pos = pos,  gain = 0.25})
+	end,
 })
 
 minetest.register_node("base:torch", {
