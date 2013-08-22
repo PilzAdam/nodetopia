@@ -21,17 +21,17 @@ local function update_player_hunger(player, hunger, force)
 		return
 	end
 	
-	if hunger > 60 then
+	if hunger > 40 then
 		player:set_hp(player:get_hp()-1)
 		minetest.log("action", player:get_player_name() .. " is hungry and gets damaged")
 	end
 	
-	local hunger = math.min(hunger, 41)
-	if force and hunger <= 20 then
+	local hunger = math.min(hunger, 21)
+	if force and hunger <= 10 then
 		player:set_physics_override(1, nil, nil)
 	end
-	if hunger > 20 and (force or hunger < 41) then
-		local tmp = math.abs(hunger-40)  / 40 + 0.5
+	if hunger > 10 and (force or hunger < 21) then
+		local tmp = math.abs(hunger-20)  / 20 + 0.5
 		minetest.log("action", player:get_player_name() .. " is hungry and gets slower ("..(tmp*100).."% of speed)")
 		player:set_physics_override(tmp, nil, nil)
 	end
