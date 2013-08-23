@@ -140,7 +140,7 @@ minetest.register_node("base:clay", {
 
 minetest.register_node("base:copper", {
 	description = "Copper Ore",
-	tiles = {"base_stone.png^base_copper.png"},
+	tiles = {"base_stone.png^base_copper_ore.png"},
 	stack_max = 20,
 	groups = {cracky=3},
 	sounds = {
@@ -164,7 +164,7 @@ minetest.register_node("base:copper_block", {
 
 minetest.register_node("base:iron", {
 	description = "Iron Ore",
-	tiles = {"base_stone.png^base_iron.png"},
+	tiles = {"base_stone.png^base_iron_ore.png"},
 	stack_max = 20,
 	groups = {cracky=2},
 	sounds = {
@@ -200,7 +200,7 @@ minetest.register_node("base:coal", {
 
 minetest.register_node("base:coal_block", {
 	description = "Coal Block",
-	tiles = {"base_coal.png"},
+	tiles = {"base_coal_block.png"},
 	stack_max = 20,
 	groups = {cracky=4},
 	sounds = {

@@ -27,7 +27,18 @@ License of media:
 -----------------
 CC BY-SA 3.0
 
-Authors of media files:
------------------------
-See: https://github.com/minetest/minetest_game/blob/master/mods/default/README.txt
-Everything not listed there is created by PilzAdam.
+Author of textures:
+-------------------
+Everything not listed here is created by PilzAdam.
+
+VanessaE:
+  base_torch.png
+  base_torch_ceiling.png
+  base_torch_floor.png
+  base_torch_inventory.png
+
+celeron55:
+  base_furnace_fire_bg.png
+  base_furnace_fire_fg.png
+  player.png
+  player_back.png
