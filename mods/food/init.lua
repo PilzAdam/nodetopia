@@ -256,7 +256,7 @@ minetest.register_craft({
 
 minetest.register_node("food:pumpkin", {
 	description = "Pumpkin",
-	tiles = {"food_pumpkin_top.png", "food_pumpkin_top.png", "food_pumpkin.png"},
+	tiles = {"food_pumpkin_top.png", "food_pumpkin_bottom.png", "food_pumpkin.png"},
 	stack_max = 20,
 	groups = {choppy=3, plant=1},
 	sounds = {
