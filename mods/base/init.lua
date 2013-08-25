@@ -440,12 +440,12 @@ minetest.register_node("base:torch", {
 })
 
 local furnace_inactive_formspec =
-	"size[8,9]"..
-	"image[2,2;1,1;base_furnace_fire_bg.png]"..
-	"list[current_name;fuel;2,3;1,1;]"..
-	"list[current_name;src;2,1;1,1;]"..
-	"list[current_name;dst;5,1;2,2;]"..
-	"list[current_player;main;0,5;8,4;]"
+	"size[5,4.5]"..
+	"image[0.5,1;1,1;base_furnace_fire_bg.png]"..
+	"list[current_name;fuel;0.5,2;1,1;]"..
+	"list[current_name;src;0.5,0;1,1;]"..
+	"list[current_name;dst;2.5,0;2,2;]"..
+	"list[current_player;main;0,3.5;5,1;]"
 
 minetest.register_node("base:furnace", {
 	description = "Furnace",
@@ -715,13 +715,13 @@ minetest.register_abm({
 					meta:get_float("fuel_totaltime") * 100)
 			hacky_swap_node(pos,"base:furnace_active")
 			meta:set_string("formspec",
-				"size[8,9]"..
-				"image[2,2;1,1;base_furnace_fire_bg.png^[lowpart:"..
+				"size[5,4.5]"..
+				"image[0.5,1;1,1;base_furnace_fire_bg.png^[lowpart:"..
 				(100-percent)..":base_furnace_fire_fg.png]"..
-				"list[current_name;fuel;2,3;1,1;]"..
-				"list[current_name;src;2,1;1,1;]"..
-				"list[current_name;dst;5,1;2,2;]"..
-				"list[current_player;main;0,5;8,4;]"
+				"list[current_name;fuel;0.5,2;1,1;]"..
+				"list[current_name;src;0.5,0;1,1;]"..
+				"list[current_name;dst;2.5,0;2,2;]"..
+				"list[current_player;main;0,3.5;5,1;]"
 			)
 			return
 		end
@@ -775,9 +775,9 @@ minetest.register_node("base:chest", {
 	on_construct = function(pos)
 		local meta = minetest.get_meta(pos)
 		meta:set_string("formspec",
-				"size[8,9]"..
+				"size[8,5.5]"..
 				"list[current_name;main;0,0;8,4;]"..
-				"list[current_player;main;0,5;8,4;]"
+				"list[current_player;main;1.5,4.5;5,1;]"
 		)
 		meta:set_string("infotext", "Chest")
 		local inv = meta:get_inventory()
