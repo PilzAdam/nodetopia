@@ -18,6 +18,8 @@ Tips:
 - The furnace is made out of clay.
 - Pumpkins are food, can be found in forests and grow on wet soil.
 - Hungry players get slower.
+- Every player gets one backpack.
+- Place the backpack to interact with it.
 
 License of sourcecode:
 ----------------------
