@@ -21,6 +21,10 @@ Tips:
 - Every player gets one backpack.
 - Place the backpack to interact with it.
 
+Servers:
+--------
+- Use /givebackpack <name> instead of /give <name> backpack:backpack.
+
 License of sourcecode:
 ----------------------
 LGPL

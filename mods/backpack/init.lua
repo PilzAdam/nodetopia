@@ -13,6 +13,30 @@ minetest.register_on_joinplayer(function(player)
 	end
 end)
 
+minetest.register_chatcommand("givebackpack", {
+	params = "<name> | <none>",
+	description = "Gives player a new backpack",
+	privs = {give=true},
+	func = function(name, param)
+		local playername = param
+		if playername == "" then
+			playername = name
+		end
+		local player = minetest.get_player_by_name(playername)
+		if not player or not player:is_player() then
+			minetest.chat_send_player(name, "Unkown player\""..playername.."\"")
+			return
+		end
+		
+		local inv = player:get_inventory()
+		local stack = {name="backpack:backpack", metadata=playername}
+		if inv:get_stack("main", 5):is_empty() then
+			inv:set_stack("main", 5, stack)
+		else
+			inv:add_item("main", stack)
+		end
+	end,
+})
 
 minetest.register_on_newplayer(function(player)
 	local inv = player:get_inventory()
