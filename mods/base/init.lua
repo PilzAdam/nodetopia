@@ -1163,13 +1163,13 @@ minetest.register_craft({
 minetest.register_craft({
 	type = "cooking",
 	output = "base:copper",
-	recipe = "base:copper",
+	recipe = "base:copper_ore",
 })
 
 minetest.register_craft({
 	type = "cooking",
 	output = "base:iron",
-	recipe = "base:iron",
+	recipe = "base:iron_ore",
 })
 
 minetest.register_craft({
