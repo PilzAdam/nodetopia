@@ -42,7 +42,7 @@ minetest.register_node("backpack:backpack", {
 		if inv:get_stack("main", 5):is_empty() then
 			inv:set_stack("main", 5, stack)
 		else
-			inv:add_item("main", stack)
+			minetest.handle_node_drops(pos, {stack}, digger)
 		end
 		minetest.node_dig(pos, node, digger)
 	end,
