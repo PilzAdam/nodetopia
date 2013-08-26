@@ -46,19 +46,17 @@ minetest.register_node("backpack:backpack", {
 		end
 		minetest.node_dig(pos, node, digger)
 	end,
-	on_construct = function(pos)
+	after_place_node = function(pos, placer, itemstack)
 		local meta = minetest.get_meta(pos)
+		local name = itemstack:get_metadata()
+		meta:set_string("infotext", name.."'s Backpack")
+		meta:set_string("owner", name)
 		meta:set_string("formspec",
 			"size[5,8.5]"..
 			"list[current_player;main;0,3.5;5,1;]"..
-			"list[current_player;backpack;0,4.5;5,4;]"..
+			"list[player:"..name..";backpack;0,4.5;5,4;]"..
 			"list[current_player;craft;0.5,0;3,3;]"..
 			"list[current_player;craftpreview;3.5,1;1,1;]"
 		)
-	end,
-	after_place_node = function(pos, placer, itemstack)
-		local meta = minetest.get_meta(pos)
-		meta:set_string("infotext", itemstack:get_metadata().."'s Backpack")
-		meta:set_string("owner", itemstack:get_metadata()) -- not needed yet
 	end,
 })
