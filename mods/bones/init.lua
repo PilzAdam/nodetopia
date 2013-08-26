@@ -70,19 +70,14 @@ minetest.register_on_dieplayer(function(player)
 	local meta = minetest.get_meta(pos)
 	local inv = meta:get_inventory()
 	local player_inv = player:get_inventory()
-	inv:set_size("main", 8*4)
+	inv:set_size("main", 5)
 	
 	local empty_list = inv:get_list("main")
 	inv:set_list("main", player_inv:get_list("main"))
 	player_inv:set_list("main", empty_list)
 	
-	for i=1,player_inv:get_size("craft") do
-		inv:add_item("main", player_inv:get_stack("craft", i))
-		player_inv:set_stack("craft", i, nil)
-	end
-	
-	meta:set_string("formspec", "size[8,9;]"..
-			"list[current_name;main;0,0;8,4;]"..
-			"list[current_player;main;0,5;8,4;]")
+	meta:set_string("formspec", "size[5,2.5;]"..
+			"list[current_name;main;0,0;5,1;]"..
+			"list[current_player;main;0,1.5;5,1;]")
 	meta:set_string("infotext", player:get_player_name().."'s bones")
 end)
