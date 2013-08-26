@@ -226,7 +226,7 @@ minetest.register_tool("food:hoe_mese", {
 minetest.register_craft({
 	output = "food:hoe_copper",
 	recipe = {
-		{"base:copper_block", "base:copper_block"},
+		{"base:copper", "base:copper"},
 		{"", "group:wood"},
 		{"", "group:wood"},
 	}
@@ -235,7 +235,7 @@ minetest.register_craft({
 minetest.register_craft({
 	output = "food:hoe_iron",
 	recipe = {
-		{"base:iron_block", "base:iron_block"},
+		{"base:iron", "base:iron"},
 		{"", "group:wood"},
 		{"", "group:wood"},
 	}
