@@ -417,7 +417,7 @@ minetest.register_node("base:lamp", {
 	paramtype = "light",
 	light_source = 12,
 	stack_max = 20,
-	groups = {dig_immediate=2},
+	groups = {choppy=3},
 	sounds = {
 		footstep = {name="base_footstep_wood", gain=0.5},
 		place = {name="base_place_hard", gain=1.0},
@@ -809,7 +809,7 @@ minetest.register_tool("base:axe_stone", {
 	inventory_image = "base_axe_stone.png",
 	tool_capabilities = {
 		groupcaps = {
-			choppy = {times={[2]=3.20,[3]=2.60}, uses=10},
+			choppy = {times={[2]=3.20,[3]=2.00}, uses=10},
 			snappy = {times={[3]=0.70}, uses=20},
 		},
 	},
@@ -839,7 +839,7 @@ minetest.register_tool("base:axe_copper", {
 	inventory_image = "base_axe_copper.png",
 	tool_capabilities = {
 		groupcaps = {
-			choppy = {times={[2]=2.40,[3]=1.80}, uses=20},
+			choppy = {times={[2]=2.40,[3]=1.20}, uses=20},
 			snappy = {times={[3]=0.60}, uses=40},
 		},
 	},
@@ -880,7 +880,7 @@ minetest.register_tool("base:axe_iron", {
 	inventory_image = "base_axe_iron.png",
 	tool_capabilities = {
 		groupcaps = {
-			choppy = {times={[2]=1.50,[3]=1.00}, uses=40},
+			choppy = {times={[2]=1.50,[3]=0.80}, uses=40},
 			snappy = {times={[3]=0.50}, uses=80},
 		},
 	},
@@ -921,7 +921,7 @@ minetest.register_tool("base:axe_mese", {
 	inventory_image = "base_axe_mese.png",
 	tool_capabilities = {
 		groupcaps = {
-			choppy = {times={[2]=0.90,[3]=0.60}, uses=80},
+			choppy = {times={[2]=0.90,[3]=0.50}, uses=80},
 			snappy = {times={[3]=0.30}, uses=160},
 		},
 	},
