@@ -411,31 +411,17 @@ minetest.register_abm({
 	end,
 })
 
-minetest.register_node("base:torch", {
-	description = "Torch",
-	drawtype = "torchlike",
-	tiles = {
-		{name="base_torch_floor.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=3.0}},
-		{name="base_torch_ceiling.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=3.0}},
-		{name="base_torch.png", animation={type="vertical_frames", aspect_w=16, aspect_h=16, length=3.0}}
-	},
-	inventory_image = "base_torch_inventory.png",
-	wield_image = "base_torch_inventory.png",
+minetest.register_node("base:lamp", {
+	description = "Lamp",
+	tiles = {"base_lamp.png"},
 	paramtype = "light",
-	paramtype2 = "wallmounted",
-	sunlight_propagates = true,
-	walkable = false,
 	light_source = 12,
 	stack_max = 20,
-	selection_box = {
-		type = "wallmounted",
-		wall_top = {-0.1, 0.5-0.6, -0.1, 0.1, 0.5, 0.1},
-		wall_bottom = {-0.1, -0.5, -0.1, 0.1, -0.5+0.6, 0.1},
-		wall_side = {-0.5, -0.3, -0.1, -0.5+0.3, 0.3, 0.1},
-	},
-	groups = {dig_immediate=3,attached_node=1},
+	groups = {dig_immediate=2},
 	sounds = {
+		footstep = {name="base_footstep_wood", gain=0.5},
 		place = {name="base_place_hard", gain=1.0},
+		dig = {name="base_dig_choppy", gain=0.5},
 	},
 })
 
@@ -963,10 +949,11 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = "base:torch 2",
+	output = "base:lamp 2",
 	recipe = {
-		{"base:coal"},
-		{"group:wood"},
+		{"", "group:wood", ""},
+		{"group:wood", "base:coal", "group:wood"},
+		{"", "group:wood", ""},
 	},
 })
 

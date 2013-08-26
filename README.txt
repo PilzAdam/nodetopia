@@ -20,6 +20,7 @@ Tips:
 - Hungry players get slower.
 - Every player gets one backpack.
 - Place the backpack to interact with it.
+- A lamp is crafted with coal and 4 wood.
 
 Servers:
 --------
@@ -36,12 +37,6 @@ CC BY-SA 3.0
 Author of textures:
 -------------------
 Everything not listed here is created by PilzAdam.
-
-VanessaE:
-  base_torch.png
-  base_torch_ceiling.png
-  base_torch_floor.png
-  base_torch_inventory.png
 
 celeron55:
   base_furnace_fire_bg.png
