@@ -141,7 +141,7 @@ minetest.register_ore({
 
 minetest.register_ore({
 	ore_type       = "scatter",
-	ore            = "base:copper",
+	ore            = "base:copper_ore",
 	wherein        = "base:stone",
 	clust_scarcity = 8*8*8,
 	clust_num_ores = 3,
@@ -152,7 +152,7 @@ minetest.register_ore({
 
 minetest.register_ore({
 	ore_type       = "scatter",
-	ore            = "base:coal",
+	ore            = "base:coal_ore",
 	wherein        = "base:stone",
 	clust_scarcity = 10*10*10,
 	clust_num_ores = 4,
@@ -163,7 +163,7 @@ minetest.register_ore({
 
 minetest.register_ore({
 	ore_type       = "scatter",
-	ore            = "base:iron",
+	ore            = "base:iron_ore",
 	wherein        = "base:stone",
 	clust_scarcity = 12*12*12,
 	clust_num_ores = 3,
@@ -174,7 +174,7 @@ minetest.register_ore({
 
 minetest.register_ore({
 	ore_type       = "scatter",
-	ore            = "base:iron",
+	ore            = "base:iron_ore",
 	wherein        = "base:stone",
 	clust_scarcity = 10*10*10,
 	clust_num_ores = 4,
