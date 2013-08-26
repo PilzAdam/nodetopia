@@ -56,7 +56,7 @@ minetest.register_node("backpack:backpack", {
 	paramtype2 = "facedir",
 	stack_max = 1,
 	drop = "",
-	groups = {dig_immediate=2},
+	groups = {dig_immediate=3},
 	
 	on_dig = function(pos, node, digger)
 		local inv = digger:get_inventory()
