@@ -43,6 +43,15 @@ minetest.register_biome({
 })
 
 minetest.register_biome({
+	name           = "base_firforest",
+	
+	height_min     = 3,
+	height_max     = 40,
+	heat_point     = 20.0,
+	humidity_point = 55.0,
+})
+
+minetest.register_biome({
 	name           = "base_highland",
 	
 	height_min     = 41,
@@ -114,6 +123,16 @@ minetest.register_decoration({
 	fill_ratio = 0.2,
 	biomes = {"base_jungle"},
 	schematic = minetest.get_modpath("base").."/schematics/base_jungletree.mts",
+	flags = "place_center_x, place_center_z",
+})
+
+minetest.register_decoration({
+	deco_type = "schematic",
+	place_on = "base:dirt_with_grass",
+	sidelen = 16,
+	fill_ratio = 0.02,
+	biomes = {"base_firforest"},
+	schematic = minetest.get_modpath("base").."/schematics/base_fir.mts",
 	flags = "place_center_x, place_center_z",
 })
 
