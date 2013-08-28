@@ -32,6 +32,7 @@ minetest.register_node("deco:glass", {
 	tiles = {"deco_glass.png"},
 	drawtype = "glasslike",
 	paramtype = "light",
+	sunlight_propagates = true,
 	drop = "",
 	stack_max = 20,
 	groups = {cracky=4},
