@@ -110,7 +110,7 @@ minetest.register_node("food:soil_wet", {
 	tiles = {"food_soil_wet.png", "food_soil_wet_side.png"},
 	stack_max = 20,
 	drop = "base:dirt",
-	groups = {crumbly=2, not_in_creative_inventory=1, soil=1},
+	groups = {crumbly=2, not_in_creative_inventory=1},
 	sounds = {
 		footstep = {name="base_footstep_dirt", gain=1.0},
 		place = {name="base_place", gain=1.0},
@@ -119,34 +119,22 @@ minetest.register_node("food:soil_wet", {
 })
 
 minetest.register_abm({
-	nodenames = {"food:soil", "foos:soil_wet"},
-	interval = 15,
-	chance = 4,
+	nodenames = {"food:soil"},
+	neighbors = {"group:water"},
+	interval = 1,
+	chance = 10,
 	action = function(pos, node)
-		pos.y = pos.y+1
-		local nn = minetest.get_node(pos).name
-		pos.y = pos.y-1
-		if minetest.registered_nodes[nn] and
-				minetest.registered_nodes[nn].walkable and
-				minetest.get_item_group(nn, "plant") == 0
-		then
-			minetest.set_node(pos, {name="base:dirt"})
-		end
-		
-		if node.name == "food:soil" and
-				minetest.find_node_near(pos, 3, {"group:water"}) then
-			
-			if node.name == "food:soil" then
-				minetest.set_node(pos, {name="food:soil_wet"})
-			end
-		else
-			if node.name == "food:soil" then
-				if minetest.get_item_group(nn, "plant") == 0 then
-					minetest.set_node(pos, {name="base:dirt"})
-				end
-			elseif node.name == "food:soil_wet" then
-				minetest.set_node(pos, {name="food:soil"})
-			end
+		minetest.set_node(pos, {name="food:soil_wet"})
+	end,
+})
+
+minetest.register_abm({
+	nodenames = {"food:soil_wet"},
+	interval = 2,
+	chance = 30,
+	action = function(pos, node)
+		if not minetest.find_node_near(pos, 1, {"group:water"}) then
+			minetest.set_node(pos, {name="food:soil"})
 		end
 	end,
 })
@@ -162,19 +150,12 @@ local function hoe_on_place(itemstack, user, pt, uses)
 	if pt.type ~= "node" then
 		return
 	end
+	if pt.under.y+1 ~= pt.above.y then
+		return
+	end
 	
 	local under = minetest.get_node(pt.under)
-	local p = {x=pt.under.x, y=pt.under.y+1, z=pt.under.z}
-	local above = minetest.get_node(p)
-	
 	if not minetest.registered_nodes[under.name] then
-		return
-	end
-	if not minetest.registered_nodes[above.name] then
-		return
-	end
-	
-	if above.name ~= "air" then
 		return
 	end
 	
@@ -187,6 +168,7 @@ local function hoe_on_place(itemstack, user, pt, uses)
 		pos = pt.under,
 		gain = 0.5,
 	})
+	
 	if not minetest.setting_getbool("creative_mode") then
 		itemstack:add_wear(65535/(uses-1))
 	end
@@ -295,19 +277,19 @@ minetest.register_node("food:pumpkin", {
 
 minetest.register_abm({
 	nodenames = {"food:pumpkin"},
-	neighbors = {"group:soil"},
+	neighbors = {"food:soil_wet"},
 	interval = 30,
 	chance = 20,
 	action = function(pos, node)
 		pos.y = pos.y - 1
 		local nu = minetest.get_node(pos).name
-		if minetest.get_item_group(nu, "soil") == 0 then
+		if nu ~= "food:soil_wet" then
 			return
 		end
 		
 		local minp = {x=pos.x-2, y=pos.y-1, z=pos.z-2}
 		local maxp = {x=pos.x+2, y=pos.y+3, z=pos.z+2}
-		local soils = minetest.find_nodes_in_area(minp, maxp, {"group:soil"})
+		local soils = minetest.find_nodes_in_area(minp, maxp, {"food:soil_wet"})
 		local newpos = soils[math.random(1, #soils)]
 		newpos.y = newpos.y + 1
 		
