@@ -1,6 +1,6 @@
 
 local debug = function(...)
-	--print("mobs: ", ...)
+	--print("mobs:", ...)
 end
 
 minetest.register_entity("mobs:stone_monster", {
@@ -166,5 +166,47 @@ minetest.register_entity("mobs:stone_monster", {
 	
 	get_staticdata = function(self)
 		
+	end,
+})
+
+minetest.register_abm({
+	nodenames = {"base:stone"},
+	neighbors = {"air"},
+	interval = 30,
+	chance = 8000,
+	action = function(pos, node, active_object_count, active_object_count_wider)
+		if active_object_count > 40 then
+			debug("spawn abm: too many objects")
+			return
+		end
+		pos.y = pos.y+2
+		if minetest.get_node(pos).name ~= "air" then
+			debug("spawn abm: not enough air")
+			return
+		end
+		pos.y = pos.y-1
+		if minetest.get_node(pos).name ~= "air" then
+			debug("spawn abm: not enough air")
+			return
+		end
+		if minetest.get_node_light(pos) > 2 then
+			debug("spawn abm: too bright")
+			return
+		end
+		local num_objects = 0
+		local _,obj
+		for _,obj in ipairs(minetest.get_objects_inside_radius(pos, 16)) do
+			if obj.get_luaentity and obj:get_luaentity().name == "mobs:stone_monster" then
+				num_objects = num_objects+1
+			end
+		end
+		debug("spawn abm: num_objects="..num_objects)
+		if num_objects > 3 then
+			debug("spawn abm: too many objects")
+			return
+		end
+		
+		debug("spawn abm: === spawning stone_monster at "..minetest.pos_to_string(pos))
+		minetest.add_entity(pos, "mobs:stone_monster")
 	end,
 })
