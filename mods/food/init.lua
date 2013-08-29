@@ -259,8 +259,8 @@ minetest.register_node("food:pumpkin", {
 			used = true
 		end
 			
-		if playerhunger > 9 then
-			hunger[name] = playerhunger - 10
+		if playerhunger > 5 then
+			hunger[name] = playerhunger - math.min(playerhunger, 10)
 			save_hunger()
 			update_player_hunger(user, hunger[name], true)
 			used = true
