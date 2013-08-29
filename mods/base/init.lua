@@ -812,6 +812,7 @@ minetest.register_tool("base:pick_stone", {
 		groupcaps = {
 			cracky = {times={[3]=2.50,[4]=1.40}, uses=10},
 		},
+		damage_groups = {cracky=20},
 	},
 })
 
@@ -842,6 +843,7 @@ minetest.register_tool("base:pick_copper", {
 		groupcaps = {
 			cracky = {times={[2]=1.90,[3]=1.20,[4]=0.90}, uses=20},
 		},
+		damage_groups = {cracky=25},
 	},
 })
 
@@ -884,6 +886,7 @@ minetest.register_tool("base:pick_iron", {
 			cracky = {times={[1]=5.00,[2]=1.20,[3]=0.80,[4]=0.70}, uses=40},
 		},
 	},
+	damage_groups = {cracky=40},
 })
 
 minetest.register_tool("base:axe_iron", {
@@ -925,6 +928,7 @@ minetest.register_tool("base:pick_mese", {
 			cracky = {times={[1]=2.00,[2]=0.70,[3]=0.40,[4]=0.30}, uses=80},
 		},
 	},
+	damage_groups = {cracky=50},
 })
 
 minetest.register_tool("base:axe_mese", {

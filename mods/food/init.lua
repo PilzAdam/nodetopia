@@ -76,6 +76,7 @@ minetest.register_on_joinplayer(function(player)
 		save_hunger()
 	end
 	minetest.after(1, update_player_hunger, player, hunger[player:get_player_name()], true)
+	player:set_armor_groups({fleshy=100})
 end)
 
 minetest.register_on_respawnplayer(function(player)
