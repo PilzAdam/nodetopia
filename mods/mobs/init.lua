@@ -147,10 +147,16 @@ minetest.register_entity("mobs:stone_monster", {
 		local def = tool:get_definition()
 		if def and def.tool_capabilities and def.tool_capabilities.groupcaps and def.tool_capabilities.groupcaps.cracky then
 			local uses = def.tool_capabilities.groupcaps.cracky.uses
-			if uses and not minetest.setting_getbool("creative_mode") then
-				debug("on_punch(): wearing out tool")
-				tool:add_wear(65535/(uses*3))
-				hitter:set_wielded_item(tool)
+			if uses then
+				minetest.sound_play("base_dig_cracky", {
+					object = self.object,
+					gain = 0.5,
+				})
+				if not minetest.setting_getbool("creative_mode") then
+					debug("on_punch(): wearing out tool")
+					tool:add_wear(65535/(uses*3))
+					hitter:set_wielded_item(tool)
+				end
 			end
 		end
 		
