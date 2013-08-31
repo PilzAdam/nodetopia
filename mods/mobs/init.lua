@@ -49,6 +49,11 @@ minetest.register_entity("mobs:stone_monster", {
 				self.attack = ""
 				return
 			end
+			if player:gethp() <= 0 then
+				debug("on_step(): player is dead")
+				self.attack = ""
+				return
+			end
 			
 			local pp = player:getpos()
 			pp.y = pp.y+1
@@ -65,7 +70,7 @@ minetest.register_entity("mobs:stone_monster", {
 				self:set_velocity(yaw, self.attack_speed)
 			end
 			
-			if math.sqrt(vec.x^2 + vec.z^2 + vec.y^2) <= 3 then
+			if math.sqrt(vec.x^2 + vec.z^2 + vec.y^2) <= 2.5 then
 				self:set_velocity(yaw, 0)
 				self.object:setyaw(yaw)
 				local i
@@ -117,15 +122,17 @@ minetest.register_entity("mobs:stone_monster", {
 			if minetest.setting_getbool("enable_damage") then
 				local player, _
 				for _,player in ipairs(minetest.get_connected_players()) do
-					local pp = player:getpos()
-					pp.y = pp.y + 1
-					local sp = self.object:getpos()
-					sp.y = sp.y + 1
-					local vec = {x=pp.x-sp.x, y=pp.y-sp.y, z=pp.z-sp.z}
-					local dist = math.sqrt(vec.x^2 + vec.z^2)
-					if dist < 3 or (dist < 15 and minetest.line_of_sight(sp, pp, 0.5)) then
-						debug("on_step(): attacking "..player:get_player_name())
-						self.attack = player:get_player_name()
+					if player:gethp() > 0 then
+						local pp = player:getpos()
+						pp.y = pp.y + 1
+						local sp = self.object:getpos()
+						sp.y = sp.y + 1
+						local vec = {x=pp.x-sp.x, y=pp.y-sp.y, z=pp.z-sp.z}
+						local dist = math.sqrt(vec.x^2 + vec.z^2)
+						if dist < 3 or (dist < 15 and minetest.line_of_sight(sp, pp, 0.5)) then
+							debug("on_step(): attacking "..player:get_player_name())
+							self.attack = player:get_player_name()
+						end
 					end
 				end
 			end
