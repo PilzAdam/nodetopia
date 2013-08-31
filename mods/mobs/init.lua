@@ -49,7 +49,7 @@ minetest.register_entity("mobs:stone_monster", {
 				self.attack = ""
 				return
 			end
-			if player:gethp() <= 0 then
+			if player:get_hp() <= 0 then
 				debug("on_step(): player is dead")
 				self.attack = ""
 				return
@@ -122,7 +122,7 @@ minetest.register_entity("mobs:stone_monster", {
 			if minetest.setting_getbool("enable_damage") then
 				local player, _
 				for _,player in ipairs(minetest.get_connected_players()) do
-					if player:gethp() > 0 then
+					if player:get_hp() > 0 then
 						local pp = player:getpos()
 						pp.y = pp.y + 1
 						local sp = self.object:getpos()
