@@ -949,7 +949,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = "base:lamp 2",
+	output = "base:lamp 4",
 	recipe = {
 		{"", "group:wood", ""},
 		{"group:wood", "base:coal", "group:wood"},
