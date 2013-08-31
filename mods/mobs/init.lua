@@ -202,7 +202,7 @@ minetest.register_abm({
 		local num_objects = 0
 		local _,obj
 		for _,obj in ipairs(minetest.get_objects_inside_radius(pos, 16)) do
-			if obj.get_luaentity and obj:get_luaentity().name == "mobs:stone_monster" then
+			if obj.get_luaentity and obj:get_luaentity() and obj:get_luaentity().name == "mobs:stone_monster" then
 				num_objects = num_objects+1
 			end
 		end
