@@ -38,10 +38,6 @@ minetest.register_entity("mobs:stone_monster", {
 	end,
 	
 	on_step = function(self, dtime)
-		if self.timer > 0 then
-			self.timer = self.timer - dtime
-		end
-		
 		if self.attack ~= "" then
 			local player = minetest.get_player_by_name(self.attack)
 			if not player then
@@ -78,11 +74,15 @@ minetest.register_entity("mobs:stone_monster", {
 				for i=0, 2, 0.5 do
 					pp.y = pp.y+i
 					if minetest.line_of_sight(sp, pp, 0.1) then
-						if self.timer <= 0 then
+						if self.timer < 1 then
+							self.timer = self.timer + dtime
+						end
+						if self.timer >= 1 then
 							debug("on_step(): punching "..self.attack)
 							player:punch(self.object, 1.0, {damage_groups={fleshy=self.damage}})
-							self.timer = 1.0
+							self.timer = 0
 						end
+						break
 					end
 					pp.y = pp.y-i
 				end
