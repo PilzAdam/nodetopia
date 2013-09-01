@@ -58,8 +58,9 @@ minetest.register_entity("mobs:stone_monster", {
 			local pp = player:getpos()
 			pp.y = pp.y+1
 			local sp = self.object:getpos()
-			sp.y = sp.y+1
+			sp.y = sp.y+0.5
 			local vec = {x=pp.x-sp.x, y=pp.y-sp.y, z=pp.z-sp.z}
+			pp.y = pp.y-1
 			local dist = math.sqrt(vec.x^2 + vec.z^2)
 			local yaw = math.atan2(-vec.x, vec.z)
 			
@@ -126,7 +127,7 @@ minetest.register_entity("mobs:stone_monster", {
 						local pp = player:getpos()
 						pp.y = pp.y + 1
 						local sp = self.object:getpos()
-						sp.y = sp.y + 1
+						sp.y = sp.y + 0.5
 						local vec = {x=pp.x-sp.x, y=pp.y-sp.y, z=pp.z-sp.z}
 						local dist = math.sqrt(vec.x^2 + vec.z^2)
 						if dist < 3 or (dist < 15 and minetest.line_of_sight(sp, pp, 0.5)) then
