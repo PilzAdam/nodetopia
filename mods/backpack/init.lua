@@ -6,7 +6,10 @@ minetest.register_on_joinplayer(function(player)
 		minetest.after(0, player.hud_set_hotbar_selected_image, player, "backpack_hotbar_selected.png")
 		player:set_inventory_formspec(
 			"size[5,1;]"..
-			"list[current_player;main;0,0;5,1;]"
+			"list[current_player;main;0,0;5,1;]"..
+			
+			"background[-0.0625,-0.0625;5.125,1.125;backpack_inventory_background.png]"..
+			"background[0,0;5,1;backpack_inventory.png]"
 		)
 		player:get_inventory():set_size("main", 5)
 		player:get_inventory():set_size("backpack", 5*4)
@@ -84,7 +87,12 @@ minetest.register_node("backpack:backpack", {
 			"list[current_player;main;0,3.5;5,1;]"..
 			"list[player:"..name..";backpack;0,4.5;5,4;]"..
 			"list[current_player;craft;0.5,0;3,3;]"..
-			"list[current_player;craftpreview;3.5,1;1,1;]"
+			"list[current_player;craftpreview;3.5,1;1,1;]"..
+			
+			"background[-0.0625,-0.0625;5.125,8.625;backpack_formspec_background.png]"..
+			"background[0,3.5;5,1;backpack_inventory.png]"..
+			"background[0,4.5;5,4;backpack_formspec_inventory.png]"..
+			"background[0.5,0;4,3;backpack_formspec_craft.png]"
 		)
 	end,
 })
