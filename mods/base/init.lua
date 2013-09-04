@@ -431,7 +431,11 @@ local furnace_inactive_formspec =
 	"list[current_name;fuel;0.5,2;1,1;]"..
 	"list[current_name;src;0.5,0;1,1;]"..
 	"list[current_name;dst;2.5,0;2,2;]"..
-	"list[current_player;main;0,3.5;5,1;]"
+	"list[current_player;main;0,3.5;5,1;]"..
+	
+	"background[-0.0625,-0.0625;5.125,4.625;base_furnace_formspec_background.png]"..
+	"background[0,3.5;5,1;backpack_inventory.png]"..
+	"background[0.5,0;4,3;base_furnace_formspec_inventory.png]"
 
 minetest.register_node("base:furnace", {
 	description = "Furnace",
@@ -707,7 +711,11 @@ minetest.register_abm({
 				"list[current_name;fuel;0.5,2;1,1;]"..
 				"list[current_name;src;0.5,0;1,1;]"..
 				"list[current_name;dst;2.5,0;2,2;]"..
-				"list[current_player;main;0,3.5;5,1;]"
+				"list[current_player;main;0,3.5;5,1;]"..
+				
+				"background[-0.0625,-0.0625;5.125,4.625;base_furnace_formspec_background.png]"..
+				"background[0,3.5;5,1;backpack_inventory.png]"..
+				"background[0.5,0;4,3;base_furnace_formspec_inventory.png]"
 			)
 			return
 		end
@@ -763,7 +771,11 @@ minetest.register_node("base:chest", {
 		meta:set_string("formspec",
 				"size[8,5.5]"..
 				"list[current_name;main;0,0;8,4;]"..
-				"list[current_player;main;1.5,4.5;5,1;]"
+				"list[current_player;main;1.5,4.5;5,1;]"..
+				
+				"background[-0.0625,-0.0625;8.125,5.625;base_chest_formspec_background.png]"..
+				"background[1.5,4.5;5,1;backpack_inventory.png]"..
+				"background[0,0;8,4;base_chest_formspec_inventory.png]"
 		)
 		meta:set_string("infotext", "Chest")
 		local inv = meta:get_inventory()
