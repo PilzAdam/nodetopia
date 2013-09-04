@@ -2,6 +2,8 @@
 minetest.register_on_joinplayer(function(player)
 	if not minetest.setting_getbool("creative_mode") then
 		minetest.after(0, player.hud_set_hotbar_itemcount, player, 5)
+		minetest.after(0, player.hud_set_hotbar_image, player, "backpack_hotbar_5.png")
+		minetest.after(0, player.hud_set_hotbar_selected_image, player, "backpack_hotbar_selected.png")
 		player:set_inventory_formspec(
 			"size[5,1;]"..
 			"list[current_player;main;0,0;5,1;]"
@@ -9,6 +11,8 @@ minetest.register_on_joinplayer(function(player)
 		player:get_inventory():set_size("main", 5)
 		player:get_inventory():set_size("backpack", 5*4)
 	else
+		minetest.after(0, player.hud_set_hotbar_image, player, "backpack_hotbar_8.png")
+		minetest.after(0, player.hud_set_hotbar_selected_image, player, "backpack_hotbar_selected.png")
 		player:get_inventory():set_size("main", 8*4)
 	end
 end)
