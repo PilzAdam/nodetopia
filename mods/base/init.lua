@@ -254,6 +254,114 @@ minetest.register_node("base:mese", {
 	},
 })
 
+local function place_liquid(itemstack, placer, pointed_thing)
+	local item = itemstack:peek_item()
+	local def = itemstack:get_definition()
+	if def.type ~= "node" or pointed_thing.type ~= "node" then
+		return itemstack
+	end
+	
+	local under = pointed_thing.under
+	local oldnode_under = minetest.get_node_or_nil(under)
+	local above = pointed_thing.above
+	local oldnode_above = minetest.get_node_or_nil(above)
+	
+	if not oldnode_under or not oldnode_above then
+		minetest.log("info", placer:get_player_name() .. " tried to place"
+			.. " node in unloaded position " .. minetest.pos_to_string(above))
+		return itemstack
+	end
+	
+	local olddef_under = ItemStack({name=oldnode_under.name}):get_definition()
+	olddef_under = olddef_under or minetest.nodedef_default
+	local olddef_above = ItemStack({name=oldnode_above.name}):get_definition()
+	olddef_above = olddef_above or minetest.nodedef_default
+	
+	if not (olddef_above.buildable_to and olddef_above.liquidtype == "none")
+			and not (olddef_under.buildable_to and olddef_under.liquidtype == "none") then
+		minetest.log("info", placer:get_player_name() .. " tried to place"
+			.. " node in invalid position " .. minetest.pos_to_string(above)
+			.. ", replacing " .. oldnode_above.name)
+		return itemstack
+	end
+	
+	-- Place above pointed node
+	local place_to = {x = above.x, y = above.y, z = above.z}
+	
+	-- If node under is buildable_to, place into it instead (eg. snow)
+	if olddef_under.buildable_to and olddef_under.liquidtype == "none" then
+		minetest.log("info", "node under is buildable to")
+		place_to = {x = under.x, y = under.y, z = under.z}
+	end
+	
+	minetest.log("action", placer:get_player_name() .. " places node "
+		.. def.name .. " at " .. minetest.pos_to_string(place_to))
+	
+	local oldnode = minetest.get_node(place_to)
+	local newnode = {name = def.name, param1 = 0, param2 = 0}
+	
+	-- Calculate direction for wall mounted stuff like torches and signs
+	if def.paramtype2 == 'wallmounted' then
+		local dir = {
+			x = under.x - above.x,
+			y = under.y - above.y,
+			z = under.z - above.z
+		}
+		newnode.param2 = minetest.dir_to_wallmounted(dir)
+	-- Calculate the direction for furnaces and chests and stuff
+	elseif def.paramtype2 == 'facedir' then
+		local placer_pos = placer:getpos()
+		if placer_pos then
+			local dir = {
+				x = above.x - placer_pos.x,
+				y = above.y - placer_pos.y,
+				z = above.z - placer_pos.z
+			}
+			newnode.param2 = minetest.dir_to_facedir(dir)
+			minetest.log("action", "facedir: " .. newnode.param2)
+		end
+	end
+	
+	-- Check if the node is attached and if it can be placed there
+	if minetest.get_item_group(def.name, "attached_node") ~= 0 and
+		not check_attached_node(place_to, newnode) then
+		minetest.log("action", "attached node " .. def.name ..
+			" can not be placed at " .. minetest.pos_to_string(place_to))
+		return itemstack
+	end
+	
+	-- Add node and update
+	minetest.add_node(place_to, newnode)
+	
+	local take_item = true
+	
+	-- Run callback
+	if def.after_place_node then
+		-- Copy place_to because callback can modify it
+		local place_to_copy = {x=place_to.x, y=place_to.y, z=place_to.z}
+		if def.after_place_node(place_to_copy, placer, itemstack) then
+			take_item = false
+		end
+	end
+	
+	-- Run script hook
+	local _, callback
+	for _, callback in ipairs(minetest.registered_on_placenodes) do
+		-- Copy pos and node because callback can modify them
+		local place_to_copy = {x=place_to.x, y=place_to.y, z=place_to.z}
+		local newnode_copy = {name=newnode.name, param1=newnode.param1, param2=newnode.param2}
+		local oldnode_copy = {name=oldnode.name, param1=oldnode.param1, param2=oldnode.param2}
+		if callback(place_to_copy, newnode_copy, placer, oldnode_copy, itemstack) then
+			take_item = false
+		end
+	end
+	
+	if take_item then
+		itemstack:take_item()
+	end
+	return itemstack
+end
+
 minetest.register_node("base:water_source", {
 	description = "Water Source",
 	inventory_image = minetest.inventorycube("base_water_inventory.png"),
@@ -289,54 +397,15 @@ minetest.register_node("base:water_source", {
 	buildable_to = true,
 	stack_max = 20,
 	liquidtype = "source",
-	liquid_alternative_flowing = "base:water_flowing",
+	liquid_alternative_flowing = "base:water_source",
 	liquid_alternative_source = "base:water_source",
-	liquid_viscosity = 1,
+	liquid_range = 0,
+	liquids_pointable = true,
 	drowning = 1,
 	post_effect_color = {a=64, r=100, g=100, b=200},
 	groups = {liquid=3, water=1},
-})
-
-minetest.register_node("base:water_flowing", {
-	description = "Water Flowing",
-	inventory_image = minetest.inventorycube("base_water_inventory.png"),
-	drawtype = "flowingliquid",
-	tiles = {"base_water_inventory.png"},
-	special_tiles = {
-		{
-			image="base_water_flowing.png",
-			backface_culling=false,
-			animation={
-				type="vertical_frames",
-				aspect_w=16,
-				aspect_h=16,
-				length=0.8,
-			},
-		},
-		{
-			image="base_water_flowing.png",
-			backface_culling=true,
-			animation={
-				type="vertical_frames",
-				aspect_w=16,
-				aspect_h=16,
-				length=0.8,
-			},
-		},
-	},
-	alpha = 160,
-	paramtype = "light",
-	walkable = false,
-	pointable = false,
-	buildable_to = true,
-	drop = "",
-	liquidtype = "flowing",
-	liquid_alternative_flowing = "base:water_flowing",
-	liquid_alternative_source = "base:water_source",
-	liquid_viscosity = 1,
-	drowning = 1,
-	post_effect_color = {a=64, r=100, g=100, b=200},
-	groups = {liquid=3, not_in_creative_inventory=1, water=1},
+	
+	on_place = place_liquid,
 })
 
 minetest.register_node("base:lava_source", {
@@ -375,58 +444,19 @@ minetest.register_node("base:lava_source", {
 	buildable_to = true,
 	stack_max = 20,
 	liquidtype = "source",
-	liquid_alternative_flowing = "base:lava_flowing",
+	liquid_alternative_flowing = "base:lava_source",
 	liquid_alternative_source = "base:lava_source",
-	liquid_viscosity = 7,
-	liquid_renewable = false,
+	liquid_range = 0,
+	liquids_pointable = true,
 	drowning = 1,
 	post_effect_color = {a=192, r=255, g=64, b=0},
 	groups = {liquid=2,lava=1},
+	
+	on_place = place_liquid,
 })
 
-minetest.register_node("base:lava_flowing", {
-	description = "Water Flowing",
-	inventory_image = minetest.inventorycube("base_lava_inventory.png"),
-	drawtype = "flowingliquid",
-	tiles = {"base_lava_inventory.png"},
-	special_tiles = {
-		{
-			image="base_lava_flowing.png",
-			backface_culling=false,
-			animation={
-				type="vertical_frames",
-				aspect_w=16,
-				aspect_h=16,
-				length=3.3,
-			},
-		},
-		{
-			image="base_lava_flowing.png",
-			backface_culling=true,
-			animation={
-				type="vertical_frames",
-				aspect_w=16,
-				aspect_h=16,
-				length=3.3,
-			},
-		},
-	},
-	paramtype = "light",
-	light_source = 12,
-	damage_per_second = 4,
-	walkable = false,
-	pointable = false,
-	buildable_to = true,
-	drop = "",
-	liquidtype = "flowing",
-	liquid_alternative_flowing = "base:lava_flowing",
-	liquid_alternative_source = "base:lava_source",
-	liquid_viscosity = 7,
-	liquid_renewable = false,
-	drowning = 1,
-	post_effect_color = {a=192, r=255, g=64, b=0},
-	groups = {liquid=2,not_in_creative_inventory=1,lava=1},
-})
+minetest.register_alias("base:water_flowing", "air");
+minetest.register_alias("base:lava_flowing", "air");
 
 minetest.register_abm({
 	nodenames = {"group:lava"},
