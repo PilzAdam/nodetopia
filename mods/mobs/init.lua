@@ -33,6 +33,25 @@ minetest.register_entity("mobs:stone_monster", {
 	
 	on_activate = function(self, staticdata, dtime_s)
 		debug("on_activate()")
+		if staticdata == "not_first_activation" then
+			local objects = minetest.get_objects_inside_radius(self.object:getpos(), 10)
+			local remove = true
+			local obj
+			if #objects < 40 then
+				for _,obj in ipairs(objects) do
+					if obj:is_player() then
+						debug("on_activate(): not removing self: player nearby")
+						remove = false
+						break
+					end
+				end
+			end
+			if remove then
+				debug("on_activate(): removing self")
+				self.object:remove()
+				return
+			end
+		end
 		self.object:set_armor_groups({cracky=100})
 		self.object:setacceleration({x=0, y=-9.81, z=0})
 	end,
@@ -179,15 +198,15 @@ minetest.register_entity("mobs:stone_monster", {
 	end,
 	
 	get_staticdata = function(self)
-		
+		return "not_first_activation"
 	end,
 })
 
 minetest.register_abm({
 	nodenames = {"base:stone"},
 	neighbors = {"air"},
-	interval = 30,
-	chance = 8000,
+	interval = 15,
+	chance = 16000,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		if active_object_count > 40 then
 			debug("spawn abm: too many objects")
@@ -209,15 +228,29 @@ minetest.register_abm({
 		end
 		local num_objects = 0
 		local _,obj
+		local players = {}
 		for _,obj in ipairs(minetest.get_objects_inside_radius(pos, 16)) do
 			if obj.get_luaentity and obj:get_luaentity() and obj:get_luaentity().name == "mobs:stone_monster" then
 				num_objects = num_objects+1
 			end
+			if obj:is_player() then
+				table.insert(players, obj)
+			end
 		end
 		debug("spawn abm: num_objects="..num_objects)
 		if num_objects > 3 then
-			debug("spawn abm: too many objects")
+			debug("spawn abm: too many mobs")
 			return
+		end
+		
+		local player
+		for _,player in ipairs(players) do
+			local pp = player:getpos()
+			local vec = {x=pp.x-pos.x, y=pp.y-pos.y, z=pp.z-pos.z}
+			local dist = math.sqrt(vec.x^2 + vec.y^2 + vec.z^2)
+			if dist > 8 then
+				debug("spawn abm: player too close")
+			end
 		end
 		
 		debug("spawn abm: === spawning stone_monster at "..minetest.pos_to_string(pos))
