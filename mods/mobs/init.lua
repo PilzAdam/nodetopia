@@ -15,6 +15,7 @@ minetest.register_entity("mobs:stone_monster", {
 		is_visible = true,
 		makes_footstep_sound = true,
 		stepheight = 1.1,
+		automatic_face_movement_dir = 270,
 	},
 	
 	attack = "",
@@ -163,10 +164,6 @@ minetest.register_entity("mobs:stone_monster", {
 		end
 		
 		self.object:setvelocity({x=self.velocity.x, y=self.object:getvelocity().y, z=self.velocity.z})
-		if math.abs(self.velocity.x) > 0.001 or math.abs(self.velocity.z) > 0.001 then
-			local yaw = math.atan2(-self.velocity.x, self.velocity.z)
-			self.object:setyaw(yaw)
-		end
 	end,
 	
 	on_punch = function(self, hitter)
