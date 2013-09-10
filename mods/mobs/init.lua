@@ -24,7 +24,7 @@ minetest.register_entity("mobs:stone_monster", {
 	
 	attack_speed = 3.5,
 	walk_speed = 1.0,
-	damage = 2,
+	damage = 1,
 	
 	set_velocity = function(self, dir, velocity)
 		self.velocity.x = math.sin(dir) * -velocity;
@@ -71,22 +71,26 @@ minetest.register_entity("mobs:stone_monster", {
 			end
 			
 			local pp = player:getpos()
-			pp.y = pp.y+1
+			pp.y = pp.y+1.5
 			local sp = self.object:getpos()
 			sp.y = sp.y+0.5
 			local vec = {x=pp.x-sp.x, y=pp.y-sp.y, z=pp.z-sp.z}
-			pp.y = pp.y-1
-			local dist = math.sqrt(vec.x^2 + vec.z^2)
+			pp.y = pp.y-1.5
+			local dist2 = math.sqrt(vec.x^2 + vec.z^2)
+			local dist3 = math.sqrt(vec.x^2 + vec.z^2 + vec.y^2)
 			local yaw = math.atan2(-vec.x, vec.z)
 			
-			if dist > 20 then
+			if dist3 > 20 then
 				debug("on_step(): stop attacking "..self.attack)
 				self.attack = ""
-			elseif dist > 1.5 then
+			elseif dist2 > 1.5 then
 				self:set_velocity(yaw, self.attack_speed)
+			else
+				self:set_velocity(yaw, 0)
+				self.object:setyaw(yaw)
 			end
 			
-			if math.sqrt(vec.x^2 + vec.z^2 + vec.y^2) <= 2.5 then
+			if dist3 <= 2.5 then
 				self:set_velocity(yaw, 0)
 				self.object:setyaw(yaw)
 				local i
