@@ -3,8 +3,18 @@
 --
 
 minetest.register_on_mapgen_init(function(params)
-	if params.mgname ~= "v7" then
-		minetest.log("error", "Pilztest requires mapgen v7")
+	if
+		params.mgname ~= "v7" or
+		params.water_level ~= 1 or
+		params.flags ~= "caves"
+	then
+		minetest.log("error", "Modified mapgen settings found; resetting")
+		minetest.set_mapgen_params({
+			mgname = "v7",
+			seed = params.seed,
+			water_level = 1,
+			flags = "caves"
+		})
 	end
 end)
 
