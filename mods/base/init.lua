@@ -28,6 +28,38 @@ minetest.register_node("base:dirt_with_grass", {
 	},
 })
 
+minetest.register_abm({
+	nodenames = {"base:dirt"},
+	neighbors = {"base:dirt_with_grass"},
+	interval = 1,
+	chance = 400,
+	action = function(pos, node)
+		local pa = {x=pos.x, y=pos.y+1, z=pos.z}
+		local na = minetest.get_node(pa)
+		local da = minetest.registered_nodes[na.name]
+		if da and da.liquidtype == "none" and minetest.get_node_light(pa) >= 13 then
+			minetest.set_node(pos, {name="base:dirt_with_grass"})
+		end
+	end,
+})
+
+minetest.register_abm({
+	nodenames = {"base:dirt_with_grass"},
+	interval = 1,
+	chance = 40,
+	action = function(pos, node)
+		local pa = {x=pos.x, y=pos.y+1, z=pos.z}
+		local na = minetest.get_node(pa)
+		local da = minetest.registered_nodes[na.name]
+		if not da then
+			return
+		end
+		if da.liquidtype ~= "none" or (da.paramtype ~= "light" and not da.sunlight_propagates) then
+			minetest.set_node(pos, {name="base:dirt"})
+		end
+	end,
+})
+
 minetest.register_node("base:stone", {
 	description = "Stone",
 	tiles = {"base_stone.png"},
