@@ -443,7 +443,7 @@ minetest.register_node("base:lamp", {
 	description = "Lamp",
 	tiles = {"base_lamp.png"},
 	paramtype = "light",
-	light_source = 12,
+	light_source = 13,
 	stack_max = 20,
 	groups = {choppy=3},
 	sounds = {
