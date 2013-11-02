@@ -37,7 +37,8 @@ minetest.register_abm({
 		local pa = {x=pos.x, y=pos.y+1, z=pos.z}
 		local na = minetest.get_node(pa)
 		local da = minetest.registered_nodes[na.name]
-		if da and da.liquidtype == "none" and minetest.get_node_light(pa) >= 13 then
+		local light = minetest.get_node_light(pa) or 0
+		if da and da.liquidtype == "none" and light  >= 13 then
 			minetest.set_node(pos, {name="base:dirt_with_grass"})
 		end
 	end,
