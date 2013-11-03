@@ -496,6 +496,8 @@ local furnace_inactive_formspec =
 	"list[current_name;dst;2.5,0;2,2;]"..
 	"list[current_player;main;0,3.5;5,1;]"..
 	
+	"listcolors[#0000;#CCC6]"..
+	"bgcolor[#0000;false]"..
 	"background[-0.0625,-0.0625;5.125,4.625;base_furnace_formspec_background.png]"..
 	"background[0,3.5;5,1;backpack_inventory.png]"..
 	"background[0.5,0;4,3;base_furnace_formspec_inventory.png]"
@@ -776,6 +778,8 @@ minetest.register_abm({
 				"list[current_name;dst;2.5,0;2,2;]"..
 				"list[current_player;main;0,3.5;5,1;]"..
 				
+				"listcolors[#0000;#CCC6]"..
+				"bgcolor[#0000;false]"..
 				"background[-0.0625,-0.0625;5.125,4.625;base_furnace_formspec_background.png]"..
 				"background[0,3.5;5,1;backpack_inventory.png]"..
 				"background[0.5,0;4,3;base_furnace_formspec_inventory.png]"
@@ -836,6 +840,8 @@ minetest.register_node("base:chest", {
 				"list[current_name;main;0,0;8,4;]"..
 				"list[current_player;main;1.5,4.5;5,1;]"..
 				
+				"listcolors[#0000;#CCC6]"..
+				"bgcolor[#0000;false]"..
 				"background[-0.0625,-0.0625;8.125,5.625;base_chest_formspec_background.png]"..
 				"background[1.5,4.5;5,1;backpack_inventory.png]"..
 				"background[0,0;8,4;base_chest_formspec_inventory.png]"

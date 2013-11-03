@@ -81,6 +81,8 @@ minetest.register_on_dieplayer(function(player)
 			"list[current_name;main;0,0;5,1;]"..
 			"list[current_player;main;0,1.5;5,1;]"..
 			
+			"listcolors[#0000;#CCC6]"..
+			"bgcolor[#0000;false]"..
 			"background[-0.0625,-0.0625;5.125,2.625;bones_formspec_background.png]"..
 			"background[0,0;5,1;backpack_inventory.png]"..
 			"background[0,1.5;5,1;backpack_inventory.png]"
