@@ -34,8 +34,8 @@ License of media:
 -----------------
 CC BY-SA 3.0
 
-Author of textures:
--------------------
+Authors of media:
+-----------------
 Everything not listed here is created by PilzAdam.
 
 celeron55:
@@ -43,3 +43,5 @@ celeron55:
   base_furnace_fire_fg.png
   player.png
   player_back.png
+
+All sounds created by Mito551.
