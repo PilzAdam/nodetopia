@@ -8,8 +8,8 @@ minetest.register_on_joinplayer(function(player)
 			"size[5,1;]"..
 			"list[current_player;main;0,0;5,1;]"..
 			
-			"listcolors[#0000;#CCC6]"..
-			"bgcolor[#0000;false]"..
+			"listcolors[#0000;#FFF3]"..
+			"bgcolor[#000000A0;true]"..
 			"background[-0.0625,-0.0625;5.125,1.125;backpack_inventory_background.png]"..
 			"background[0,0;5,1;backpack_inventory.png]"
 		)
@@ -91,8 +91,8 @@ minetest.register_node("backpack:backpack", {
 			"list[current_player;craft;0.5,0;3,3;]"..
 			"list[current_player;craftpreview;3.5,1;1,1;]"..
 			
-			"listcolors[#0000;#CCC6]"..
-			"bgcolor[#0000;false]"..
+			"listcolors[#0000;#FFF3]"..
+			"bgcolor[#000000A0;true]"..
 			"background[-0.0625,-0.0625;5.125,8.625;backpack_formspec_background.png]"..
 			"background[0,3.5;5,1;backpack_inventory.png]"..
 			"background[0,4.5;5,4;backpack_formspec_inventory.png]"..

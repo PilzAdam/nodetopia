@@ -91,8 +91,8 @@ creative_inventory.set_creative_formspec = function(player, start_i, pagenum)
 			"label[5,1.5;Trash:]"..
 			"list[detached:creative_trash;main;5,2;1,1;]"..
 			
-			"listcolors[#0000;#CCC6]"..
-			"bgcolor[#0000;false]"..
+			"listcolors[#0000;#FFF3]"..
+			"bgcolor[#000000A0;true]"..
 			"background[-0.0625,-0.0625;13.125,7.625;creative_formspec_background.png]"..
 			"background[0,0;13,7.5;creative_formspec_inventory.png]"
 	)
