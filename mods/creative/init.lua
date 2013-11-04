@@ -150,6 +150,7 @@ if minetest.setting_getbool("creative_mode") then
 				cracky = {times={[1]=0.0, [2]=0.0, [3]=0.0, [4]=0.0}, uses=0, maxlevel=3},
 				snappy = {times={[1]=0.0, [2]=0.0, [3]=0.0}, uses=0, maxlevel=3},
 				choppy = {times={[1]=0.0, [2]=0.0, [3]=0.0}, uses=0, maxlevel=3},
+				liquid = {times={[1]=0.0, [2]=0.0, [3]=0.0}, uses=0, maxlevel=3},
 				oddly_breakable_by_hand = {times={[1]=0.0, [2]=0.0, [3]=0.0}, uses=0, maxlevel=3},
 			},
 			damage_groups = {fleshy = 10},
