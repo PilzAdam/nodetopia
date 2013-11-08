@@ -140,7 +140,7 @@ if minetest.setting_getbool("creative_mode") then
 	minetest.register_item(":", {
 		type = "none",
 		wield_image = "base_hand.png",
-		wield_scale = {x=1,y=1,z=2.5},
+		wield_scale = {x=1,y=1,z=1.5},
 		range = 10,
 		tool_capabilities = {
 			full_punch_interval = 0.5,

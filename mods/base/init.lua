@@ -864,6 +864,7 @@ minetest.register_node("base:chest", {
 minetest.register_tool(":", {
 	type = "none",
 	wield_image = "base_hand.png",
+	wield_scale = {x=1,y=1,z=1.5},
 	range = 3,
 	tool_capabilities = {
 		groupcaps = {
