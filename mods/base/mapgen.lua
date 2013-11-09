@@ -18,8 +18,8 @@ minetest.register_on_mapgen_init(function(params)
 	end
 end)
 
-minetest.register_alias("mapgen_water_source", "base:water_source")
-minetest.register_alias("mapgen_lava_source", "base:lava_source")
+minetest.register_alias("mapgen_water_source", "base:water")
+minetest.register_alias("mapgen_lava_source", "base:lava")
 minetest.register_alias("mapgen_stone", "base:stone")
 minetest.register_alias("mapgen_sand", "base:sand")
 minetest.register_alias("mapgen_dirt", "base:dirt")

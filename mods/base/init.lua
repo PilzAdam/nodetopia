@@ -363,13 +363,13 @@ local function place_liquid(itemstack, placer, pointed_thing)
 	return itemstack
 end
 
-minetest.register_node("base:water_source", {
-	description = "Water Source",
+minetest.register_node("base:water", {
+	description = "Water",
 	inventory_image = minetest.inventorycube("base_water_inventory.png"),
 	drawtype = "liquid",
 	tiles = {
 		{
-			name="base_water_source.png",
+			name="base_water.png",
 			animation= {
 				type="vertical_frames",
 				aspect_w=16,
@@ -381,7 +381,7 @@ minetest.register_node("base:water_source", {
 	special_tiles = {
 		-- New-style water source material (mostly unused)
 		{
-			name="base_water_source.png",
+			name="base_water.png",
 			animation={
 				type="vertical_frames",
 				aspect_w=16,
@@ -398,8 +398,8 @@ minetest.register_node("base:water_source", {
 	buildable_to = true,
 	stack_max = 20,
 	liquidtype = "source",
-	liquid_alternative_flowing = "base:water_source",
-	liquid_alternative_source = "base:water_source",
+	liquid_alternative_flowing = "base:water",
+	liquid_alternative_source = "base:water",
 	liquid_range = 0,
 	liquids_pointable = true,
 	liquid_renewable = false,
@@ -411,13 +411,13 @@ minetest.register_node("base:water_source", {
 	on_place = place_liquid,
 })
 
-minetest.register_node("base:lava_source", {
-	description = "Lava Source",
+minetest.register_node("base:lava", {
+	description = "Lava",
 	inventory_image = minetest.inventorycube("base_lava_inventory.png"),
 	drawtype = "liquid",
 	tiles = {
 		{
-			name="base_lava_source.png",
+			name="base_lava.png",
 			animation= {
 				type="vertical_frames",
 				aspect_w=16,
@@ -429,7 +429,7 @@ minetest.register_node("base:lava_source", {
 	special_tiles = {
 		-- New-style water source material (mostly unused)
 		{
-			name="base_lava_source.png",
+			name="base_lava.png",
 			animation={
 				type="vertical_frames",
 				aspect_w=16,
@@ -447,8 +447,8 @@ minetest.register_node("base:lava_source", {
 	buildable_to = true,
 	stack_max = 20,
 	liquidtype = "source",
-	liquid_alternative_flowing = "base:lava_source",
-	liquid_alternative_source = "base:lava_source",
+	liquid_alternative_flowing = "base:lava",
+	liquid_alternative_source = "base:lava",
 	liquid_range = 0,
 	liquids_pointable = true,
 	liquid_renewable = false,
@@ -461,7 +461,9 @@ minetest.register_node("base:lava_source", {
 })
 
 minetest.register_alias("base:water_flowing", "air");
+minetest.register_alias("base:water_source", "base:water");
 minetest.register_alias("base:lava_flowing", "air");
+minetest.register_alias("base:lava_source", "base:lava");
 
 minetest.register_abm({
 	nodenames = {"group:lava"},
