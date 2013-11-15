@@ -2,6 +2,8 @@
 -- Hunger
 --
 
+food = {}
+food.speed = {} -- save the speed for the models mod
 local hunger = {}
 local timer = 0
 
@@ -29,11 +31,13 @@ local function update_player_hunger(player, hunger, force)
 	local hunger = math.min(hunger, 21)
 	if force and hunger <= 10 then
 		player:set_physics_override(1, nil, nil)
+		food.speed[player:get_player_name()] = 1
 	end
 	if hunger > 10 and (force or hunger < 21) then
 		local tmp = math.abs(hunger-20)  / 20 + 0.5
 		minetest.log("action", player:get_player_name() .. " is hungry and gets slower ("..(tmp*100).."% of speed)")
 		player:set_physics_override(tmp, nil, nil)
+		food.speed[player:get_player_name()] = tmp
 	end
 end
 

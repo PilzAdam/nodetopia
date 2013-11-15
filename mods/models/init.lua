@@ -48,6 +48,7 @@ minetest.register_globalstep(function(dtime)
 		local pitch = player:get_look_pitch()*180/math.pi
 		if pitch > 50 then pitch = 50 end
 		if pitch < -70 then pitch = -70 end
+		local player_speed = food.speed[name] or 1
 		
 		if walk then
 			if players[name].ArmLeft.dir == 0 then
@@ -68,14 +69,14 @@ minetest.register_globalstep(function(dtime)
 		end
 		
 		if sneak then
-			players[name].ArmLeft.speed = 20*2
+			players[name].ArmLeft.speed = 20*2 * player_speed
 			players[name].ArmLeft.lim = {20, -20}
-			players[name].LegLeft.speed = 30*2
+			players[name].LegLeft.speed = 30*2 * player_speed
 			players[name].LegLeft.lim = {30, -30}
 		else
-			players[name].ArmLeft.speed = 30*5
+			players[name].ArmLeft.speed = 30*5 * player_speed
 			players[name].ArmLeft.lim = {30, -30}
-			players[name].LegLeft.speed = 40*5
+			players[name].LegLeft.speed = 40*5 * player_speed
 			players[name].LegLeft.lim = {40, -40}
 		end
 		
@@ -95,10 +96,10 @@ minetest.register_globalstep(function(dtime)
 				players[name].ArmRight.speed = 30*10
 				players[name].ArmRight.lim = {-players[name].ArmLeft.rot.x+1, -players[name].ArmLeft.rot.x-1}
 			elseif sneak then
-				players[name].ArmRight.speed = 20*2
+				players[name].ArmRight.speed = 20*2 * player_speed
 				players[name].ArmRight.lim = {20, -20}
 			else
-				players[name].ArmRight.speed = 30*5
+				players[name].ArmRight.speed = 30*5 * player_speed
 				players[name].ArmRight.lim = {30, -30}
 			end
 		end
