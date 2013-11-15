@@ -68,7 +68,7 @@ minetest.register_globalstep(function(dtime)
 	save_hunger()
 end)
 
-end
+end -- not creative_mode
 
 minetest.register_on_joinplayer(function(player)
 	if not hunger[player:get_player_name()] then
@@ -88,6 +88,31 @@ end)
 minetest.register_on_newplayer(function(player)
 	player:set_hp(10)
 end)
+
+minetest.register_chatcommand("hunger", {
+	params = "<name> | <name>, <hunger>",
+	description = "Prints or sets hunger for player",
+	privs = {give=true},
+	func = function(name, param)
+		local playername, playerhunger = string.match(param, "^([a-zA-Z0-9_%-]+) *([0-9]+)$")
+		if not playerhunger then
+			playername = param
+		end
+		local player = minetest.get_player_by_name(playername)
+		if not player or not player:is_player() then
+			minetest.chat_send_player(name, "Unkown player\""..playername.."\"")
+			return
+		end
+		
+		if tonumber(playerhunger) then
+			hunger[playername] = tonumber(playerhunger)
+			minetest.chat_send_player(name, "Hunger of "..playername.." set to "..hunger[playername])
+			update_player_hunger(player, hunger[playername], true)
+		else
+			minetest.chat_send_player(name, "The hunger of "..playername.." is "..hunger[playername])
+		end
+	end,
+})
 
 --
 -- Soil
