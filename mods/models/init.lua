@@ -72,6 +72,11 @@ minetest.register_globalstep(function(dtime)
 			players[name].ArmLeft.lim = {20, -20}
 			players[name].LegLeft.speed = 30*2
 			players[name].LegLeft.lim = {30, -30}
+		else
+			players[name].ArmLeft.speed = 30*5
+			players[name].ArmLeft.lim = {30, -30}
+			players[name].LegLeft.speed = 40*5
+			players[name].LegLeft.lim = {40, -40}
 		end
 		
 		if placed[name] then
