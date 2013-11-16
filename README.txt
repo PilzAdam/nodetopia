@@ -41,7 +41,7 @@ Everything not listed here is created by PilzAdam.
 celeron55:
   base_furnace_fire_bg.png
   base_furnace_fire_fg.png
-  player.png
-  player_back.png
 
 All sounds created by Mito551.
+
+models_player.png based on Jordach's character.png
