@@ -52,7 +52,7 @@ minetest.register_abm({
 		local pa = {x=pos.x, y=pos.y+1, z=pos.z}
 		local na = minetest.get_node(pa)
 		local da = minetest.registered_nodes[na.name]
-		if not da then
+		if not da or na.name == "ignore" then
 			return
 		end
 		if da.liquidtype ~= "none" or (da.paramtype ~= "light" and not da.sunlight_propagates) then
