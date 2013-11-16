@@ -28,20 +28,36 @@ Servers:
 
 License of sourcecode:
 ----------------------
-LGPL
+Pilztest
+Copyright (C) 2013  PilzAdam
 
-License of media:
------------------
-CC BY-SA 3.0
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-Authors of media:
------------------
-Everything not listed here is created by PilzAdam.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-celeron55:
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+License of media (textures, sounds and models):
+-----------------------------------------------
+Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)
+http://creativecommons.org/licenses/by-sa/3.0/
+
+License of media (textures, sounds and models):
+-----------------------------------------------
+Everything not listed here: Copyright (C) 2013 PilzAdam
+
+Copyright (C) 2010-2012 celeron55, Perttu Ahola <celeron55@gmail.com>:
   base_furnace_fire_bg.png
   base_furnace_fire_fg.png
 
-All sounds created by Mito551.
+Copyright (C) 2013 Mito551:
+  All soundfiles (*.ogg)
 
 models_player.png based on Jordach's character.png
