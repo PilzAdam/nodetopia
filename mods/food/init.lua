@@ -207,7 +207,7 @@ local function hoe_on_place(itemstack, user, pt, uses)
 		return
 	end
 	
-	if under.name ~= "base:dirt" and under.name ~= "base:dirt_with_grass" then
+	if under.name ~= "base:dirt" and under.name ~= "base:grass" then
 		return
 	end
 	
@@ -351,7 +351,7 @@ minetest.register_abm({
 
 minetest.register_decoration({
 	deco_type  = "simple",
-	place_on   = "base:dirt_with_grass",
+	place_on   = "base:grass",
 	sidelen    = 80,
 	fill_ratio = 0.0005,
 	biomes = {"base_forest", "base_firforest"},

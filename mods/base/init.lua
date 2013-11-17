@@ -32,10 +32,9 @@ minetest.register_node("base:dirt", {
 	},
 })
 
-minetest.register_node("base:dirt_with_grass", {
+minetest.register_node("base:grass", {
 	description = "Dirt with Grass",
-	tiles = {"base_grass.png", "base_dirt.png", "base_dirt.png^base_grass_side.png"},
-	drop = 'base:dirt',
+	tiles = {"base_grass.png"},
 	stack_max = 20,
 	groups = {crumbly=2},
 	sounds = {
@@ -44,10 +43,11 @@ minetest.register_node("base:dirt_with_grass", {
 		dig = {name="base_dig_crumbly", gain=0.5},
 	},
 })
+minetest.register_alias("base:dirt_with_grass", "base:grass")
 
 minetest.register_abm({
 	nodenames = {"base:dirt"},
-	neighbors = {"base:dirt_with_grass"},
+	neighbors = {"base:grass"},
 	interval = 1,
 	chance = 400,
 	action = function(pos, node)
@@ -56,13 +56,13 @@ minetest.register_abm({
 		local da = minetest.registered_nodes[na.name]
 		local light = minetest.get_node_light(pa) or 0
 		if da and da.liquidtype == "none" and light  >= 13 then
-			minetest.set_node(pos, {name="base:dirt_with_grass"})
+			minetest.set_node(pos, {name="base:grass"})
 		end
 	end,
 })
 
 minetest.register_abm({
-	nodenames = {"base:dirt_with_grass"},
+	nodenames = {"base:grass"},
 	interval = 1,
 	chance = 40,
 	action = function(pos, node)

@@ -172,7 +172,7 @@ minetest.register_decoration({
 minetest.register_ore({
 	ore_type       = "scatter",
 	ore            = "deco:gravel",
-	wherein        = {"base:dirt", "base:dirt_with_grass"},
+	wherein        = {"base:dirt", "base:grass"},
 	clust_scarcity = 26*26*26,
 	clust_num_ores = 200,
 	clust_size     = 10,

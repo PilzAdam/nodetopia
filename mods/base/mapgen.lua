@@ -41,7 +41,7 @@ minetest.register_alias("mapgen_lava_source", "base:lava")
 minetest.register_alias("mapgen_stone", "base:stone")
 minetest.register_alias("mapgen_sand", "base:sand")
 minetest.register_alias("mapgen_dirt", "base:dirt")
-minetest.register_alias("mapgen_dirt_with_grass", "base:dirt_with_grass")
+minetest.register_alias("mapgen_dirt_with_grass", "base:grass")
 
 minetest.register_biome({
 	name           = "base_normal",
@@ -126,7 +126,7 @@ minetest.register_biome({
 
 minetest.register_decoration({
 	deco_type = "schematic",
-	place_on = "base:dirt_with_grass",
+	place_on = "base:gras",
 	sidelen = 16,
 	fill_ratio = 0.005,
 	biomes = {"base_normal"},
@@ -136,7 +136,7 @@ minetest.register_decoration({
 
 minetest.register_decoration({
 	deco_type = "schematic",
-	place_on = "base:dirt_with_grass",
+	place_on = "base:grass",
 	sidelen = 8,
 	fill_ratio = 0.1,
 	biomes = {"base_forest"},
@@ -146,7 +146,7 @@ minetest.register_decoration({
 
 minetest.register_decoration({
 	deco_type = "schematic",
-	place_on = "base:dirt_with_grass",
+	place_on = "base:grass",
 	sidelen = 8,
 	fill_ratio = 0.2,
 	biomes = {"base_jungle"},
@@ -156,7 +156,7 @@ minetest.register_decoration({
 
 minetest.register_decoration({
 	deco_type = "schematic",
-	place_on = "base:dirt_with_grass",
+	place_on = "base:grass",
 	sidelen = 16,
 	fill_ratio = 0.02,
 	biomes = {"base_firforest"},
