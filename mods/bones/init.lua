@@ -85,22 +85,22 @@ minetest.register_on_dieplayer(function(player)
 	local meta = minetest.get_meta(pos)
 	local inv = meta:get_inventory()
 	local player_inv = player:get_inventory()
-	inv:set_size("main", 5)
+	inv:set_size("main", 6)
 	
 	local empty_list = inv:get_list("main")
 	inv:set_list("main", player_inv:get_list("main"))
 	player_inv:set_list("main", empty_list)
 	
 	meta:set_string("formspec",
-			"size[5,2.5;]"..
-			"list[current_name;main;0,0;5,1;]"..
-			"list[current_player;main;0,1.5;5,1;]"..
+			"size[6,2.5;]"..
+			"list[current_name;main;0,0;6,1;]"..
+			"list[current_player;main;0,1.5;6,1;]"..
 			
 			"listcolors[#0000;#FFF3]"..
 			"bgcolor[#000000A0;true]"..
-			"background[-0.0625,-0.0625;5.125,2.625;bones_formspec_background.png]"..
-			"background[0,0;5,1;backpack_inventory.png]"..
-			"background[0,1.5;5,1;backpack_inventory.png]"
+			"background[-0.0625,-0.0625;6.125,2.625;bones_formspec_background.png]"..
+			"background[0,0;6,1;backpack_inventory.png]"..
+			"background[0,1.5;6,1;backpack_inventory.png]"
 	)
 	meta:set_string("infotext", player:get_player_name().."'s bones")
 end)

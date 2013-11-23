@@ -18,20 +18,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 minetest.register_on_joinplayer(function(player)
 	if not minetest.setting_getbool("creative_mode") then
-		minetest.after(0, player.hud_set_hotbar_itemcount, player, 5)
-		minetest.after(0, player.hud_set_hotbar_image, player, "backpack_hotbar_5.png")
+		minetest.after(0, player.hud_set_hotbar_itemcount, player, 6)
+		minetest.after(0, player.hud_set_hotbar_image, player, "backpack_hotbar_6.png")
 		minetest.after(0, player.hud_set_hotbar_selected_image, player, "backpack_hotbar_selected.png")
 		player:set_inventory_formspec(
-			"size[5,1;]"..
-			"list[current_player;main;0,0;5,1;]"..
+			"size[6,1;]"..
+			"list[current_player;main;0,0;6,1;]"..
 			
 			"listcolors[#0000;#FFF3]"..
 			"bgcolor[#000000A0;true]"..
-			"background[-0.0625,-0.0625;5.125,1.125;backpack_inventory_background.png]"..
-			"background[0,0;5,1;backpack_inventory.png]"
+			"background[-0.0625,-0.0625;6.125,1.125;backpack_inventory_background.png]"..
+			"background[0,0;6,1;backpack_inventory.png]"
 		)
-		player:get_inventory():set_size("main", 5)
-		player:get_inventory():set_size("backpack", 5*4)
+		player:get_inventory():set_size("main", 6)
+		player:get_inventory():set_size("backpack", 6*4)
 	else
 		minetest.after(0, player.hud_set_hotbar_image, player, "backpack_hotbar_8.png")
 		minetest.after(0, player.hud_set_hotbar_selected_image, player, "backpack_hotbar_selected.png")
@@ -56,8 +56,8 @@ minetest.register_chatcommand("givebackpack", {
 		
 		local inv = player:get_inventory()
 		local stack = {name="backpack:backpack", metadata=playername}
-		if inv:get_stack("main", 5):is_empty() then
-			inv:set_stack("main", 5, stack)
+		if inv:get_stack("main", 6):is_empty() then
+			inv:set_stack("main", 6, stack)
 		else
 			inv:add_item("main", stack)
 		end
@@ -65,8 +65,10 @@ minetest.register_chatcommand("givebackpack", {
 })
 
 minetest.register_on_newplayer(function(player)
-	local inv = player:get_inventory()
-	inv:set_stack("main", 5, {name="backpack:backpack", metadata=player:get_player_name()})
+	if not minetest.setting_getbool("creative_mode") then
+		local inv = player:get_inventory()
+		inv:set_stack("main", 6, {name="backpack:backpack", metadata=player:get_player_name()})
+	end
 end)
 
 minetest.register_node("backpack:backpack", {
@@ -89,8 +91,8 @@ minetest.register_node("backpack:backpack", {
 		local meta = minetest.get_meta(pos)
 		local stack = {name="backpack:backpack", metadata=meta:get_string("owner")}
 		-- 5 is preferred position
-		if inv:get_stack("main", 5):is_empty() then
-			inv:set_stack("main", 5, stack)
+		if inv:get_stack("main", 6):is_empty() then
+			inv:set_stack("main", 6, stack)
 		else
 			minetest.handle_node_drops(pos, {stack}, digger)
 		end
@@ -102,18 +104,18 @@ minetest.register_node("backpack:backpack", {
 		meta:set_string("infotext", name.."'s Backpack")
 		meta:set_string("owner", name)
 		meta:set_string("formspec",
-			"size[5,8.5]"..
-			"list[current_player;main;0,3.5;5,1;]"..
-			"list[player:"..name..";backpack;0,4.5;5,4;]"..
-			"list[current_player;craft;0.5,0;3,3;]"..
-			"list[current_player;craftpreview;3.5,1;1,1;]"..
+			"size[6,8.5]"..
+			"list[current_player;main;0,3.5;6,1;]"..
+			"list[player:"..name..";backpack;0,4.5;6,4;]"..
+			"list[current_player;craft;1,0;3,3;]"..
+			"list[current_player;craftpreview;4,1;1,1;]"..
 			
 			"listcolors[#0000;#FFF3]"..
 			"bgcolor[#000000A0;true]"..
-			"background[-0.0625,-0.0625;5.125,8.625;backpack_formspec_background.png]"..
-			"background[0,3.5;5,1;backpack_inventory.png]"..
-			"background[0,4.5;5,4;backpack_formspec_inventory.png]"..
-			"background[0.5,0;4,3;backpack_formspec_craft.png]"
+			"background[-0.0625,-0.0625;6.125,8.625;backpack_formspec_background.png]"..
+			"background[0,3.5;6,1;backpack_inventory.png]"..
+			"background[0,4.5;6,4;backpack_formspec_inventory.png]"..
+			"background[1,0;4,3;backpack_formspec_craft.png]"
 		)
 	end,
 })
