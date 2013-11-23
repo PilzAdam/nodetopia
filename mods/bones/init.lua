@@ -27,7 +27,7 @@ minetest.register_node("bones:bones", {
 		"bones_front.png"
 	},
 	paramtype2 = "facedir",
-	groups = {dig_immediate=2},
+	groups = {crumbly=3},
 	sounds = {
 		footstep = {name="deco_footstep_gravel", gain=0.5},
 		place = {name="base_place", gain=1.0},
