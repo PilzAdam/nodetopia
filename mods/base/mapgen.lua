@@ -21,19 +21,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --
 
 minetest.register_on_mapgen_init(function(params)
-	if
-		params.mgname ~= "v7" or
-		params.water_level ~= 1 or
-		params.flags ~= "caves"
-	then
-		minetest.log("error", "Modified mapgen settings found; resetting")
-		minetest.set_mapgen_params({
-			mgname = "v7",
-			seed = params.seed,
-			water_level = 1,
-			flags = "caves"
-		})
-	end
+	minetest.set_mapgen_params({
+		mgname = "v7",
+		seed = params.seed,
+		water_level = 1,
+		flags = "caves",
+		flagmask = "trees, caves, flat, v6_biome_blend, v6_jungles, dungeons, nolight",
+	})
 end)
 
 minetest.register_alias("mapgen_water_source", "base:water")
