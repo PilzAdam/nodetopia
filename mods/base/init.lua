@@ -24,7 +24,7 @@ minetest.register_node("base:dirt", {
 	description = "Dirt",
 	tiles = {"base_dirt.png"},
 	stack_max = 20,
-	groups = {crumbly=2},
+	groups = {crumbly=3},
 	sounds = {
 		footstep = {name="base_footstep_dirt", gain=1.0},
 		place = {name="base_place", gain=1.0},
