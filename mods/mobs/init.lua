@@ -26,9 +26,10 @@ minetest.register_entity("mobs:stone_monster", {
 		physical = true,
 		collide_with_objects = true,
 		collisionbox = {-0.3, -1.0, -0.3,  0.3, 1.0, 0.3},
-		visual = "upright_sprite",
-		visual_size = {x=1, y=2},
-		textures = {"mobs_stone_monster.png", "mobs_stone_monster_back.png"},
+		visual = "mesh",
+		mesh = "models_player.b3d",
+		visual_size = {x=10/16, y=20/32},
+		textures = {"mobs_stone_monster.png"},
 		is_visible = true,
 		makes_footstep_sound = true,
 		stepheight = 1.1,
@@ -43,6 +44,106 @@ minetest.register_entity("mobs:stone_monster", {
 	attack_speed = 3.5,
 	walk_speed = 1.0,
 	damage = 1,
+	
+	anim = {
+		ArmLeft = {pos={x=0.54, y=1, z=0}, rot={x=0, y=0, z=0}, dir=0, speed=30*5, lim={30, -30}},
+		ArmRight = {pos={x=-0.51, y=1, z=0}, rot={x=0, y=0, z=0}, dir=0, speed=30*5, lim={30, -30}},
+		LegLeft = {pos={x=0.19, y=0, z=0}, rot={x=0, y=0, z=0}, dir=0, speed=40*5, lim={40, -40}},
+	},
+	punched = false,
+	
+	update_animation = function(self, dtime)
+		local obj = self.object
+		
+		-- Calc changes in dir
+		local v = vector.length(obj:getvelocity())
+		local pitch = 0--player:get_look_pitch()*180/math.pi
+		if self.attack ~= "" then
+			local player = minetest.get_player_by_name(self.attack)
+			local pp = player:getpos()
+			pp.y = pp.y + 1.5
+			local sp = obj:getpos()
+			sp.y = sp.y + 0.5
+			local vec = {x=pp.x-sp.x, y=pp.y-sp.y, z=pp.z-sp.z}
+			pitch = math.asin(vec.y/vector.length(vec))*180/math.pi
+		end
+		if pitch > 50 then pitch = 50 end
+		if pitch < -70 then pitch = -70 end
+		
+		if v > 0.1 then
+			if self.anim.ArmLeft.dir == 0 then
+				self.anim.ArmLeft.dir = -1
+			end
+			if self.anim.ArmRight.dir == 0 then
+				self.anim.ArmRight.dir = 1
+			end
+			if self.anim.LegLeft.dir == 0 then
+				self.anim.LegLeft.dir = 1
+			end
+		else
+			self.anim.ArmLeft.dir = 0
+			self.anim.ArmRight.dir = 0
+			self.anim.LegLeft.dir = 0
+			v = 2
+		end
+		
+		self.anim.ArmLeft.speed = 30*5 * v/4
+		self.anim.ArmLeft.lim = {30 - (4-v)*7, -30 + (4-v)*7}
+		self.anim.LegLeft.speed = 40*5 * v/4
+		self.anim.LegLeft.lim = {40 - (4-v)*7, -40 + (4-v)*7}
+		
+		if self.punched then
+			self.anim.ArmRight.rot.x = 90
+			self.punched = false
+		end
+		
+		if math.abs(-self.anim.ArmLeft.rot.x - self.anim.ArmRight.rot.x) > 15 then
+			self.anim.ArmRight.speed = 30*10
+			self.anim.ArmRight.lim = {-self.anim.ArmLeft.rot.x+1, -self.anim.ArmLeft.rot.x-1}
+		else
+			self.anim.ArmRight.speed = 30*5 * v/4
+			self.anim.ArmRight.lim = {30 - (4-v)*7, -30 + (4-v)*7}
+		end
+		
+		-- Calc new rotation
+		for bone,tab in pairs(self.anim) do
+			if tab.dir == -1 then
+				tab.rot.x = tab.rot.x - tab.speed*dtime
+				if tab.rot.x < tab.lim[2] then
+					tab.dir = 1
+				end
+			elseif tab.dir == 1 then
+				tab.rot.x = tab.rot.x + tab.speed*dtime
+				if tab.rot.x > tab.lim[1] then
+					tab.dir = -1
+				end
+			else
+				if tab.rot.x < 0 then
+					tab.rot.x = tab.rot.x + tab.speed*dtime
+					if tab.rot.x > 0 then
+						tab.rot.x = 0
+					end
+				elseif tab.rot.x > 0 then
+					tab.rot.x = tab.rot.x - tab.speed*dtime
+					if tab.rot.x < 0 then
+						tab.rot.x = 0
+					end
+				end
+			end
+		end
+		
+		-- apply it
+		for bone,tab in pairs(self.anim) do
+			obj:set_bone_position(bone, tab.pos, tab.rot)
+			if bone == "LegLeft" then
+				local rot = {x=tab.rot.x, y=tab.rot.y, z=tab.rot.z}
+				rot.x = -rot.x
+				obj:set_bone_position("LegRight", {x=-0.19, y=0, z=0}, rot)
+			end
+		end
+		obj:set_bone_position("Body",{x=0,y=0,z=0}, {x=180,y=0,z=180})
+		obj:set_bone_position("Head", vector.new(0,1,0), vector.new(pitch,0,0))
+	end,
 	
 	set_velocity = function(self, dir, velocity)
 		self.velocity.x = math.sin(dir) * -velocity;
@@ -80,11 +181,13 @@ minetest.register_entity("mobs:stone_monster", {
 			if not player then
 				debug("on_step(): player not found")
 				self.attack = ""
+				self:update_animation(dtime)
 				return
 			end
 			if player:get_hp() <= 0 then
 				debug("on_step(): player is dead")
 				self.attack = ""
+				self:update_animation(dtime)
 				return
 			end
 			
@@ -122,6 +225,7 @@ minetest.register_entity("mobs:stone_monster", {
 							debug("on_step(): punching "..self.attack)
 							player:punch(self.object, 1.0, {damage_groups={fleshy=self.damage}})
 							self.timer = 0
+							self.punched = true
 						end
 						break
 					end
@@ -181,6 +285,7 @@ minetest.register_entity("mobs:stone_monster", {
 		end
 		
 		self.object:setvelocity({x=self.velocity.x, y=self.object:getvelocity().y, z=self.velocity.z})
+		self:update_animation(dtime)
 	end,
 	
 	on_punch = function(self, hitter)
@@ -268,6 +373,7 @@ minetest.register_abm({
 			local dist = math.sqrt(vec.x^2 + vec.y^2 + vec.z^2)
 			if dist > 8 then
 				debug("spawn abm: player too close")
+				return
 			end
 		end
 		
