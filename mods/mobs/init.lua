@@ -70,7 +70,9 @@ minetest.register_entity("mobs:stone_monster", {
 		
 		-- Calc changes in dir
 		local v = vector.length(obj:getvelocity())
-		local pitch = 0--player:get_look_pitch()*180/math.pi
+		
+		local pitch = 0
+		local yaw = 0
 		if self.attack ~= "" then
 			local player = minetest.get_player_by_name(self.attack)
 			local pp = player:getpos()
@@ -79,6 +81,9 @@ minetest.register_entity("mobs:stone_monster", {
 			sp.y = sp.y + 0.5
 			local vec = {x=pp.x-sp.x, y=pp.y-sp.y, z=pp.z-sp.z}
 			pitch = math.asin(vec.y/vector.length(vec))*180/math.pi
+			
+			yaw = math.atan2(-vec.x, vec.z)
+			yaw = (yaw - obj:getyaw())*180/math.pi
 		end
 		if pitch > 50 then pitch = 50 end
 		if pitch < -70 then pitch = -70 end
@@ -155,7 +160,7 @@ minetest.register_entity("mobs:stone_monster", {
 			end
 		end
 		obj:set_bone_position("Body",{x=0,y=0,z=0}, {x=180,y=0,z=180})
-		obj:set_bone_position("Head", vector.new(0,1,0), vector.new(pitch,0,0))
+		obj:set_bone_position("Head", vector.new(0,1,0), vector.new(pitch,-yaw,0))
 		self:debug_t("update_animation()", t1)
 	end,
 	
