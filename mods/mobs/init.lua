@@ -16,9 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ]]
 
-local debug = function(...)
-	--print("mobs:", ...)
-end
+local next_id = 0
 
 minetest.register_entity("mobs:stone_monster", {
 	initial_properties = {
@@ -45,6 +43,8 @@ minetest.register_entity("mobs:stone_monster", {
 	walk_speed = 1.0,
 	damage = 1,
 	
+	id = -1,
+	
 	anim = {
 		ArmLeft = {pos={x=0.54, y=1, z=0}, rot={x=0, y=0, z=0}, dir=0, speed=30*5, lim={30, -30}},
 		ArmRight = {pos={x=-0.51, y=1, z=0}, rot={x=0, y=0, z=0}, dir=0, speed=30*5, lim={30, -30}},
@@ -52,7 +52,20 @@ minetest.register_entity("mobs:stone_monster", {
 	},
 	punched = false,
 	
+	debug = function(self, str)
+		--minetest.log("action", "mob "..self.id..": "..str)
+	end,
+	
+	debug_t = function(self, func, t1)
+		local delta = os.clock() - t1
+		if delta == 0 then
+			return
+		end
+		--minetest.log("action", "mob "..self.id..": "..func..string.format(" took %.2fms", delta * 1000))
+	end,
+	
 	update_animation = function(self, dtime)
+		local t1 = os.clock()
 		local obj = self.object
 		
 		-- Calc changes in dir
@@ -143,15 +156,17 @@ minetest.register_entity("mobs:stone_monster", {
 		end
 		obj:set_bone_position("Body",{x=0,y=0,z=0}, {x=180,y=0,z=180})
 		obj:set_bone_position("Head", vector.new(0,1,0), vector.new(pitch,0,0))
+		self:debug_t("update_animation()", t1)
 	end,
 	
 	set_velocity = function(self, dir, velocity)
-		self.velocity.x = math.sin(dir) * -velocity;
-		self.velocity.z = math.cos(dir) * velocity;
+		self.velocity.x = math.sin(dir) * -velocity
+		self.velocity.z = math.cos(dir) * velocity
 	end,
 	
 	on_activate = function(self, staticdata, dtime_s)
-		debug("on_activate()")
+		self:debug("on_activate()")
+		local t1 = os.clock()
 		if staticdata == "not_first_activation" then
 			local objects = minetest.get_objects_inside_radius(self.object:getpos(), 10)
 			local remove = true
@@ -159,35 +174,41 @@ minetest.register_entity("mobs:stone_monster", {
 			if #objects < 40 then
 				for _,obj in ipairs(objects) do
 					if obj:is_player() then
-						debug("on_activate(): not removing self: player nearby")
+						self:debug("on_activate(): not removing self: player nearby")
 						remove = false
 						break
 					end
 				end
 			end
 			if remove then
-				debug("on_activate(): removing self")
+				self:debug("on_activate(): removing self")
 				self.object:remove()
 				return
 			end
 		end
 		self.object:set_armor_groups({cracky=100})
 		self.object:setacceleration({x=0, y=-9.81, z=0})
+		self.id = next_id
+		next_id = next_id+1
+		self:debug_t("on_activate()", t1)
 	end,
 	
 	on_step = function(self, dtime)
+		local t1 = os.clock()
 		if self.attack ~= "" then
 			local player = minetest.get_player_by_name(self.attack)
 			if not player then
-				debug("on_step(): player not found")
+				self:debug("on_step(): player not found")
 				self.attack = ""
 				self:update_animation(dtime)
+				self:debug_t("step()", t1)
 				return
 			end
 			if player:get_hp() <= 0 then
-				debug("on_step(): player is dead")
+				self:debug("on_step(): player is dead")
 				self.attack = ""
 				self:update_animation(dtime)
+				self:debug_t("step()", t1)
 				return
 			end
 			
@@ -202,7 +223,7 @@ minetest.register_entity("mobs:stone_monster", {
 			local yaw = math.atan2(-vec.x, vec.z)
 			
 			if dist3 > 20 then
-				debug("on_step(): stop attacking "..self.attack)
+				self:debug("on_step(): stop attacking "..self.attack)
 				self.attack = ""
 			elseif dist2 > 1.5 then
 				self:set_velocity(yaw, self.attack_speed)
@@ -222,7 +243,7 @@ minetest.register_entity("mobs:stone_monster", {
 							self.timer = self.timer + dtime
 						end
 						if self.timer >= 1 then
-							debug("on_step(): punching "..self.attack)
+							self:debug("on_step(): punching "..self.attack)
 							player:punch(self.object, 1.0, {damage_groups={fleshy=self.damage}})
 							self.timer = 0
 							self.punched = true
@@ -238,7 +259,7 @@ minetest.register_entity("mobs:stone_monster", {
 				self.velocity = {x=0, y=0, z=0}
 				
 				if math.random(1, 100) == 1 then
-					debug("on_step(): changing state from stand to walk")
+					self:debug("on_step(): changing state from stand to walk")
 					self.state = "walk"
 					self:set_velocity(self.object:getyaw(), self.walk_speed)
 				end
@@ -249,16 +270,16 @@ minetest.register_entity("mobs:stone_monster", {
 				local v1 = self.object:getvelocity()
 				local v2 = self.velocity
 				if math.abs(v1.x - v2.x) > 0.5 or math.abs(v1.z - v2.z) > 0.5 then
-					debug("on_step(): not moving in desired direction; change yaw")
+					self:debug("on_step(): not moving in desired direction; change yaw")
 					yaw = yaw + math.pi + (math.abs(-45, 45)/180*math.pi)
 				elseif math.random(1, 100) == 1 then
-					debug("on_step(): changing yaw while walking")
+					self:debug("on_step(): changing yaw while walking")
 					yaw = yaw + math.random(-90, 90) / 180 * math.pi
 				end
 				self:set_velocity(yaw, self.walk_speed)
 				
 				if math.random(1, 400) == 1 then
-					debug("on_step(): changing state from walk to stand")
+					self:debug("on_step(): changing state from walk to stand")
 					self.state = "stand"
 					self.velocity = {x=0, y=0, z=0}
 				end
@@ -276,7 +297,7 @@ minetest.register_entity("mobs:stone_monster", {
 						local vec = {x=pp.x-sp.x, y=pp.y-sp.y, z=pp.z-sp.z}
 						local dist = math.sqrt(vec.x^2 + vec.z^2)
 						if dist < 3 or (dist < 15 and minetest.line_of_sight(sp, pp, 0.5)) then
-							debug("on_step(): attacking "..player:get_player_name())
+							self:debug("on_step(): attacking "..player:get_player_name())
 							self.attack = player:get_player_name()
 						end
 					end
@@ -285,11 +306,13 @@ minetest.register_entity("mobs:stone_monster", {
 		end
 		
 		self.object:setvelocity({x=self.velocity.x, y=self.object:getvelocity().y, z=self.velocity.z})
+		self:debug_t("step()", t1)
 		self:update_animation(dtime)
 	end,
 	
 	on_punch = function(self, hitter)
-		debug("on_punch()")
+		local t1 = os.clock()
+		self:debug("on_punch()")
 		if not hitter then
 			return
 		end
@@ -303,7 +326,7 @@ minetest.register_entity("mobs:stone_monster", {
 					gain = 0.5,
 				})
 				if not minetest.setting_getbool("creative_mode") then
-					debug("on_punch(): wearing out tool")
+					self:debug("on_punch(): wearing out tool")
 					tool:add_wear(65535/(uses*3))
 					hitter:set_wielded_item(tool)
 				end
@@ -311,9 +334,10 @@ minetest.register_entity("mobs:stone_monster", {
 		end
 		
 		if hitter:is_player() then
-			debug("on_punch(): attacking "..hitter:get_player_name())
+			self:debug("on_punch(): attacking "..hitter:get_player_name())
 			self.attack = hitter:get_player_name()
 		end
+		self:debug_t("on_punch()", t1)
 	end,
 	
 	on_rightclick = function(self, clicker)
@@ -325,28 +349,45 @@ minetest.register_entity("mobs:stone_monster", {
 	end,
 })
 
+local debug = function(str)
+	--minetest.log("action", str)
+end
+
+debug_t = function(t1)
+	local delta = os.clock() - t1
+	if delta == 0 then
+		return
+	end
+	--minetest.log("action", "spawn abm took "..string.format("%.2fms", delta * 1000))
+end,
+
 minetest.register_abm({
 	nodenames = {"base:stone"},
 	neighbors = {"air"},
 	interval = 15,
 	chance = 16000,
 	action = function(pos, node, active_object_count, active_object_count_wider)
+		local t1 = os.clock()
 		if active_object_count > 40 then
 			debug("spawn abm: too many objects")
+			debug_t(t1)
 			return
 		end
 		pos.y = pos.y+2
 		if minetest.get_node(pos).name ~= "air" then
 			debug("spawn abm: not enough air")
+			debug_t(t1)
 			return
 		end
 		pos.y = pos.y-1
 		if minetest.get_node(pos).name ~= "air" then
 			debug("spawn abm: not enough air")
+			debug_t(t1)
 			return
 		end
 		if minetest.get_node_light(pos) > 2 then
 			debug("spawn abm: too bright")
+			debug_t(t1)
 			return
 		end
 		local num_objects = 0
@@ -363,6 +404,7 @@ minetest.register_abm({
 		debug("spawn abm: num_objects="..num_objects)
 		if num_objects > 3 then
 			debug("spawn abm: too many mobs")
+			debug_t(t1)
 			return
 		end
 		
@@ -373,11 +415,13 @@ minetest.register_abm({
 			local dist = math.sqrt(vec.x^2 + vec.y^2 + vec.z^2)
 			if dist > 8 then
 				debug("spawn abm: player too close")
+				debug_t(t1)
 				return
 			end
 		end
 		
-		debug("spawn abm: === spawning stone_monster at "..minetest.pos_to_string(pos))
+		debug("spawn abm: SPAWNING stone_monster at "..minetest.pos_to_string(pos))
 		minetest.add_entity(pos, "mobs:stone_monster")
+		debug_t(t1)
 	end,
 })
