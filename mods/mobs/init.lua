@@ -364,7 +364,10 @@ debug_t = function(t1)
 		return
 	end
 	--minetest.log("action", "spawn abm took "..string.format("%.2fms", delta * 1000))
-end,
+end
+
+local spawn_mobs = minetest.setting_getbool("spawn_mobs")
+if spawn_mobs or spawn_mobs == nil then
 
 minetest.register_abm({
 	nodenames = {"base:stone"},
@@ -430,3 +433,4 @@ minetest.register_abm({
 		debug_t(t1)
 	end,
 })
+end

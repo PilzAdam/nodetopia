@@ -12,19 +12,26 @@ This game aims to have a bit more challenging gameplay than minetest_game.
 
 The "voxel idea" plays a big role, there are only a few non blocky items.
 
-Tips:
------
+Tips (for people who know minetest_game):
+-----------------------------------------
 - Wood can be made out of 4 leaves, which is required to make tools.
 - The furnace is made out of clay.
 - Pumpkins are food, can be found in forests and grow on wet soil.
 - Hungry players get slower.
 - Every player gets one backpack.
-- Place the backpack to interact with it.
 - A lamp is crafted with coal and 4 wood.
 
-Servers:
---------
-- Use /givebackpack <name> instead of /give <name> backpack:backpack.
+Commands:
+---------
+- /givebackpack <name>: use this instead of /give <name> backpack:backpack
+- /hunger <name> | <name> <amount>: prints or sets the hunger of a player.
+
+Settings:
+---------
+- creative_mode: boolean, unlimited items, bigger inventory, no bones after
+                 death, no hunger and items don't wear out.
+- enable_damage: boolean, players cant die, mobs don't chase players.
+- spawn_mobs: boolean, weather mobs should spawn (only read at server startup).
 
 License of sourcecode:
 ----------------------
