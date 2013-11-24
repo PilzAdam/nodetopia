@@ -3,14 +3,12 @@ Pilztest game for the Minetest engine
 
 Installation:
 -------------
-Place it in the $path_user/games/ and select it in the main menu.
-Make sure that you select mapgen v7 when creating a new world.
+Place it in $path_user/games/ and select it in the main menu.
 
 Goal:
 -----
-This game aims to have a bit more challenging gameplay than minetest_game.
-
-The "voxel idea" plays a big role, there are only a few non blocky items.
+This game aims to have a challenging survival gameplay.
+The "voxel idea" plays a big role, there are only a few non cubic items.
 
 Tips (for people who know minetest_game):
 -----------------------------------------
@@ -36,7 +34,7 @@ Settings:
 License of sourcecode:
 ----------------------
 Pilztest
-Copyright (C) 2013  PilzAdam
+Copyright (C) 2013 PilzAdam <pilzadam@minetest.net>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -56,9 +54,9 @@ License of media (textures, sounds and models):
 Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)
 http://creativecommons.org/licenses/by-sa/3.0/
 
-License of media (textures, sounds and models):
+Authors of media (textures, sounds and models):
 -----------------------------------------------
-Everything not listed here: Copyright (C) 2013 PilzAdam
+Everything not listed here: Copyright (C) 2013 PilzAdam <pilzadam@minetest.net>
 
 Copyright (C) 2010-2012 celeron55, Perttu Ahola <celeron55@gmail.com>:
   base_furnace_fire_bg.png
