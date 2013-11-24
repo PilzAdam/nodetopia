@@ -271,7 +271,7 @@ minetest.register_entity("mobs:stone_monster", {
 				local v2 = self.velocity
 				if math.abs(v1.x - v2.x) > 0.5 or math.abs(v1.z - v2.z) > 0.5 then
 					self:debug("on_step(): not moving in desired direction; change yaw")
-					yaw = yaw + math.pi + (math.abs(-45, 45)/180*math.pi)
+					yaw = yaw + math.pi + (math.abs(-20, 20)/180*math.pi)
 				elseif math.random(1, 100) == 1 then
 					self:debug("on_step(): changing yaw while walking")
 					yaw = yaw + math.random(-90, 90) / 180 * math.pi
