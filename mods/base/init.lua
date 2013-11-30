@@ -24,6 +24,7 @@ minetest.register_node("base:dirt", {
 	description = "Dirt",
 	tiles = {"base_dirt.png"},
 	stack_max = 20,
+	is_ground_content = true,
 	groups = {crumbly=3},
 	sounds = {
 		footstep = {name="base_footstep_dirt", gain=1.0},
@@ -36,6 +37,7 @@ minetest.register_node("base:grass", {
 	description = "Dirt with Grass",
 	tiles = {"base_grass.png"},
 	stack_max = 20,
+	is_ground_content = true,
 	groups = {crumbly=2},
 	sounds = {
 		footstep = {name="base_footstep_grass", gain=0.25},
@@ -83,6 +85,7 @@ minetest.register_node("base:stone", {
 	tiles = {"base_stone.png"},
 	drop = "base:broken_stone",
 	stack_max = 20,
+	is_ground_content = true,
 	groups = {cracky=2,stone=1},
 	sounds = {
 		footstep = {name="base_footstep_hard", gain=0.5},
@@ -95,6 +98,7 @@ minetest.register_node("base:broken_stone", {
 	description = "Broken Stone",
 	tiles = {"base_broken_stone.png"},
 	stack_max = 20,
+	is_ground_content = true,
 	groups = {cracky=4,stone=1},
 	sounds = {
 		footstep = {name="base_footstep_hard", gain=0.5},
@@ -108,6 +112,7 @@ minetest.register_node("base:leaves", {
 	tiles = {"base_leaves.png"},
 	paramtype = "light",
 	stack_max = 20,
+	is_ground_content = false,
 	groups = {snappy=3},
 	sounds = {
 		footstep = {name="base_footstep_grass", gain=0.25},
@@ -120,6 +125,7 @@ minetest.register_node("base:tree", {
 	description = "Tree",
 	tiles = {"base_tree_top.png", "base_tree_top.png", "base_tree.png"},
 	stack_max = 20,
+	is_ground_content = false,
 	groups = {choppy=2,tree=1},
 	sounds = {
 		footstep = {name="base_footstep_wood", gain=0.5},
@@ -132,6 +138,7 @@ minetest.register_node("base:jungletree", {
 	description = "Jungletree",
 	tiles = {"base_jungletree_top.png", "base_jungletree_top.png", "base_jungletree.png"},
 	stack_max = 20,
+	is_ground_content = false,
 	groups = {choppy=2,tree=1},
 	sounds = {
 		footstep = {name="base_footstep_wood", gain=0.5},
@@ -144,6 +151,7 @@ minetest.register_node("base:wood", {
 	description = "Wood",
 	tiles = {"base_wood.png"},
 	stack_max = 20,
+	is_ground_content = false,
 	groups = {choppy=3,wood=1},
 	sounds = {
 		footstep = {name="base_footstep_wood", gain=0.5},
@@ -156,6 +164,7 @@ minetest.register_node("base:junglewood", {
 	description = "Junglewood",
 	tiles = {"base_junglewood.png"},
 	stack_max = 20,
+	is_ground_content = false,
 	groups = {choppy=3,wood=1},
 	sounds = {
 		footstep = {name="base_footstep_wood", gain=0.5},
@@ -168,6 +177,7 @@ minetest.register_node("base:sand", {
 	description = "Sand",
 	tiles = {"base_sand.png"},
 	stack_max = 20,
+	is_ground_content = true,
 	groups = {crumbly=3},
 	sounds = {
 		footstep = {name="base_footstep_sand", gain=0.5},
@@ -180,6 +190,7 @@ minetest.register_node("base:clay", {
 	description = "Clay",
 	tiles = {"base_clay.png"},
 	stack_max = 20,
+	is_ground_content = true,
 	groups = {crumbly=1},
 	sounds = {
 		footstep = {name="base_footstep_dirt", gain=1.0},
@@ -192,6 +203,7 @@ minetest.register_node("base:copper_ore", {
 	description = "Copper Ore",
 	tiles = {"base_stone.png^base_copper_ore.png"},
 	stack_max = 20,
+	is_ground_content = true,
 	groups = {cracky=3},
 	sounds = {
 		footstep = {name="base_footstep_hard", gain=0.5},
@@ -204,6 +216,7 @@ minetest.register_node("base:copper", {
 	description = "Copper",
 	tiles = {"base_copper.png"},
 	stack_max = 20,
+	is_ground_content = false,
 	groups = {cracky=3},
 	sounds = {
 		footstep = {name="base_footstep_hard", gain=0.5},
@@ -216,6 +229,7 @@ minetest.register_node("base:iron_ore", {
 	description = "Iron Ore",
 	tiles = {"base_stone.png^base_iron_ore.png"},
 	stack_max = 20,
+	is_ground_content = true,
 	groups = {cracky=2},
 	sounds = {
 		footstep = {name="base_footstep_hard", gain=0.5},
@@ -228,6 +242,7 @@ minetest.register_node("base:iron", {
 	description = "Iron",
 	tiles = {"base_iron.png"},
 	stack_max = 20,
+	is_ground_content = false,
 	groups = {cracky=2},
 	sounds = {
 		footstep = {name="base_footstep_hard", gain=0.5},
@@ -240,6 +255,7 @@ minetest.register_node("base:coal_ore", {
 	description = "Coal Ore",
 	tiles = {"base_stone.png^base_coal_ore.png"},
 	drop = "base:coal",
+	is_ground_content = true,
 	groups = {cracky=2},
 	sounds = {
 		footstep = {name="base_footstep_hard", gain=0.5},
@@ -252,6 +268,7 @@ minetest.register_node("base:coal", {
 	description = "Coal",
 	tiles = {"base_coal.png"},
 	stack_max = 20,
+	is_ground_content = false,
 	groups = {cracky=4},
 	sounds = {
 		footstep = {name="base_footstep_hard", gain=0.5},
@@ -264,6 +281,7 @@ minetest.register_node("base:mese", {
 	description = "Mese",
 	tiles = {"base_mese.png"},
 	stack_max = 20,
+	is_ground_content = true,
 	groups = {cracky=1},
 	sounds = {
 		footstep = {name="base_footstep_hard", gain=0.5},
@@ -499,6 +517,7 @@ minetest.register_node("base:lamp", {
 	paramtype = "light",
 	light_source = 13,
 	stack_max = 20,
+	is_ground_content = false,
 	groups = {choppy=3},
 	sounds = {
 		footstep = {name="base_footstep_wood", gain=0.5},
@@ -527,6 +546,7 @@ minetest.register_node("base:furnace", {
 		"base_furnace_side.png", "base_furnace_side.png", "base_furnace_front.png"},
 	paramtype2 = "facedir",
 	stack_max = 1,
+	is_ground_content = false,
 	groups = {cracky=3},
 	sounds = {
 		footstep = {name="base_footstep_hard", gain=0.5},
@@ -610,6 +630,7 @@ minetest.register_node("base:furnace_broken", {
 		"base_furnace_side_broken.png", "base_furnace_side_broken.png", "base_furnace_front_broken.png"},
 	paramtype2 = "facedir",
 	drop = "",
+	is_ground_content = false,
 	groups = {cracky=3,not_in_creative_inventory=1},
 	sounds = {
 		footstep = {name="base_footstep_hard", gain=0.5},
@@ -643,6 +664,7 @@ minetest.register_node("base:furnace_active", {
 	paramtype2 = "facedir",
 	light_source = 8,
 	drop = "base:furnace",
+	is_ground_content = false,
 	groups = {cracky=3,not_in_creative_inventory=1},
 	sounds = {
 		footstep = {name="base_footstep_hard", gain=0.5},
@@ -843,6 +865,7 @@ minetest.register_node("base:chest", {
 	tiles = {"base_chest_top.png", "base_chest_top.png", "base_chest_side.png",
 		"base_chest_side.png", "base_chest_side.png", "base_chest_front.png"},
 	paramtype2 = "facedir",
+	is_ground_content = false,
 	groups = {choppy=3},
 	sounds = {
 		footstep = {name="base_footstep_wood", gain=0.5},

@@ -145,6 +145,7 @@ minetest.register_node("food:soil", {
 	tiles = {"food_soil.png", "base_dirt.png"},
 	stack_max = 20,
 	drop = "base:dirt",
+	is_ground_content = true,
 	groups = {crumbly=2, not_in_creative_inventory=1},
 	sounds = {
 		footstep = {name="base_footstep_dirt", gain=1.0},
@@ -158,6 +159,7 @@ minetest.register_node("food:soil_wet", {
 	tiles = {"food_soil_wet.png", "food_soil_wet_side.png"},
 	stack_max = 20,
 	drop = "base:dirt",
+	is_ground_content = true,
 	groups = {crumbly=2, not_in_creative_inventory=1},
 	sounds = {
 		footstep = {name="base_footstep_dirt", gain=1.0},
@@ -288,6 +290,7 @@ minetest.register_node("food:pumpkin", {
 	description = "Pumpkin",
 	tiles = {"food_pumpkin_top.png", "food_pumpkin_bottom.png", "food_pumpkin.png"},
 	stack_max = 20,
+	is_ground_content = true,
 	groups = {choppy=3, plant=1},
 	sounds = {
 		footstep = {name="base_footstep_wood", gain=0.5},

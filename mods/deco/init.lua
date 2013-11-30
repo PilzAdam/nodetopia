@@ -24,6 +24,7 @@ minetest.register_node("deco:stonebrick", {
 	description = "Stonebrick",
 	tiles = {"deco_stonebrick.png"},
 	stack_max = 20,
+	is_ground_content = false,
 	groups = {cracky=2,stone=1},
 	sounds = {
 		footstep = {name="base_footstep_hard", gain=0.5},
@@ -36,6 +37,7 @@ minetest.register_node("deco:sandstonebrick", {
 	description = "Sandstonebrick",
 	tiles = {"deco_sandstonebrick.png"},
 	stack_max = 20,
+	is_ground_content = false,
 	groups = {cracky=2,stone=1},
 	sounds = {
 		footstep = {name="base_footstep_hard", gain=0.5},
@@ -52,6 +54,7 @@ minetest.register_node("deco:glass", {
 	sunlight_propagates = true,
 	drop = "",
 	stack_max = 20,
+	is_ground_content = false,
 	groups = {cracky=4},
 	sounds = {
 		footstep = {name="base_footstep_glass", gain=0.5},
@@ -65,6 +68,7 @@ minetest.register_node("deco:brick", {
 	description = "Brick",
 	tiles = {"deco_brick.png"},
 	stack_max = 20,
+	is_ground_content = false,
 	groups = {cracky=2,stone=1},
 	sounds = {
 		footstep = {name="base_footstep_hard", gain=0.5},
@@ -77,6 +81,7 @@ minetest.register_node("deco:cactus", {
 	description = "Cactus",
 	tiles = {"deco_cactus_top.png", "deco_cactus_top.png", "deco_cactus.png"},
 	stack_max = 20,
+	is_ground_content = true,
 	groups = {choppy=3},
 	sounds = {
 		footstep = {name="base_footstep_wood", gain=0.5},
@@ -89,6 +94,7 @@ minetest.register_node("deco:gravel", {
 	description = "Gravel",
 	tiles = {"deco_gravel.png"},
 	stack_max = 20,
+	is_ground_content = true,
 	groups = {crumbly=2},
 	sounds = {
 		footstep = {name="deco_footstep_gravel", gain=0.5},
@@ -101,6 +107,7 @@ minetest.register_node("deco:bookshelf", {
 	description = "Bookshelf",
 	tiles = {"base_wood.png", "base_wood.png", "deco_bookshelf.png"},
 	stack_max = 20,
+	is_ground_content = false,
 	groups = {choppy=3},
 	sounds = {
 		footstep = {name="base_footstep_wood", gain=0.5},
