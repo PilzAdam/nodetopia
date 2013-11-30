@@ -113,7 +113,7 @@ minetest.register_node("base:leaves", {
 	paramtype = "light",
 	stack_max = 20,
 	is_ground_content = false,
-	groups = {snappy=3},
+	groups = {snappy=3,fuel=2},
 	sounds = {
 		footstep = {name="base_footstep_grass", gain=0.25},
 		place = {name="base_place", gain=1.0},
@@ -126,7 +126,7 @@ minetest.register_node("base:tree", {
 	tiles = {"base_tree_top.png", "base_tree_top.png", "base_tree.png"},
 	stack_max = 20,
 	is_ground_content = false,
-	groups = {choppy=2,tree=1},
+	groups = {choppy=2,tree=1,fuel=20},
 	sounds = {
 		footstep = {name="base_footstep_wood", gain=0.5},
 		place = {name="base_place_hard", gain=1.0},
@@ -139,7 +139,7 @@ minetest.register_node("base:jungletree", {
 	tiles = {"base_jungletree_top.png", "base_jungletree_top.png", "base_jungletree.png"},
 	stack_max = 20,
 	is_ground_content = false,
-	groups = {choppy=2,tree=1},
+	groups = {choppy=2,tree=1,fuel=20},
 	sounds = {
 		footstep = {name="base_footstep_wood", gain=0.5},
 		place = {name="base_place_hard", gain=1.0},
@@ -152,7 +152,7 @@ minetest.register_node("base:wood", {
 	tiles = {"base_wood.png"},
 	stack_max = 20,
 	is_ground_content = false,
-	groups = {choppy=3,wood=1},
+	groups = {choppy=3,wood=1,fuel=10},
 	sounds = {
 		footstep = {name="base_footstep_wood", gain=0.5},
 		place = {name="base_place_hard", gain=1.0},
@@ -165,7 +165,7 @@ minetest.register_node("base:junglewood", {
 	tiles = {"base_junglewood.png"},
 	stack_max = 20,
 	is_ground_content = false,
-	groups = {choppy=3,wood=1},
+	groups = {choppy=3,wood=1,fuel=10},
 	sounds = {
 		footstep = {name="base_footstep_wood", gain=0.5},
 		place = {name="base_place_hard", gain=1.0},
@@ -269,7 +269,7 @@ minetest.register_node("base:coal", {
 	tiles = {"base_coal.png"},
 	stack_max = 20,
 	is_ground_content = false,
-	groups = {cracky=4},
+	groups = {cracky=4,fuel=30},
 	sounds = {
 		footstep = {name="base_footstep_hard", gain=0.5},
 		place = {name="base_place_hard", gain=1.0},
@@ -490,7 +490,7 @@ minetest.register_node("base:lava", {
 	liquid_viscosity = 7,
 	drowning = 1,
 	post_effect_color = {a=192, r=255, g=64, b=0},
-	groups = {liquid=2,lava=1},
+	groups = {liquid=2,lava=1,fuel=50},
 	
 	on_place = place_liquid,
 })
@@ -595,7 +595,7 @@ minetest.register_node("base:furnace", {
 		local meta = minetest.get_meta(pos)
 		local inv = meta:get_inventory()
 		if listname == "fuel" then
-			if minetest.get_craft_result({method="fuel",width=1,items={stack}}).time ~= 0 then
+			if minetest.get_item_group(stack:get_name(), "fuel") ~= 0 then
 				return stack:get_count()
 			else
 				return 0
@@ -611,7 +611,7 @@ minetest.register_node("base:furnace", {
 		local inv = meta:get_inventory()
 		local stack = inv:get_stack(from_list, from_index)
 		if to_list == "fuel" then
-			if minetest.get_craft_result({method="fuel",width=1,items={stack}}).time ~= 0 then
+			if minetest.get_item_group(stack:get_name(), "fuel") ~= 0 then
 				return count
 			else
 				return 0
@@ -707,7 +707,7 @@ minetest.register_node("base:furnace_active", {
 		local meta = minetest.get_meta(pos)
 		local inv = meta:get_inventory()
 		if listname == "fuel" then
-			if minetest.get_craft_result({method="fuel",width=1,items={stack}}).time ~= 0 then
+			if minetest.get_item_group(stack:get_name(), "fuel") ~= 0 then
 				return stack:get_count()
 			else
 				return 0
@@ -723,7 +723,7 @@ minetest.register_node("base:furnace_active", {
 		local inv = meta:get_inventory()
 		local stack = inv:get_stack(from_list, from_index)
 		if to_list == "fuel" then
-			if minetest.get_craft_result({method="fuel",width=1,items={stack}}).time ~= 0 then
+			if minetest.get_item_group(stack:get_name(), "fuel") ~= 0 then
 				return count
 			else
 				return 0
@@ -736,127 +736,81 @@ minetest.register_node("base:furnace_active", {
 	end,
 })
 
-function hacky_swap_node(pos,name)
-	local node = minetest.get_node(pos)
-	local meta = minetest.get_meta(pos)
-	local meta0 = meta:to_table()
-	if node.name == name then
-		return
-	end
-	node.name = name
-	local meta0 = meta:to_table()
-	minetest.set_node(pos,node)
-	meta = minetest.get_meta(pos)
-	meta:from_table(meta0)
-end
-
 minetest.register_abm({
 	nodenames = {"base:furnace","base:furnace_active"},
-	interval = 1.0,
+	interval = 3.0,
 	chance = 1,
 	action = function(pos, node, active_object_count, active_object_count_wider)
 		local meta = minetest.get_meta(pos)
-		for i, name in ipairs({
-				"fuel_totaltime",
-				"fuel_time",
-				"src_totaltime",
-				"src_time"
-		}) do
-			if meta:get_string(name) == "" then
-				meta:set_float(name, 0.0)
-			end
-		end
-
 		local inv = meta:get_inventory()
-
-		local srclist = inv:get_list("src")
-		local cooked = nil
-		local aftercooked
+		local wear = tonumber(meta:get_string("wear")) or 0
 		
-		if srclist then
-			cooked, aftercooked = minetest.get_craft_result({method = "cooking", width = 1, items = srclist})
-		end
-		
-		local was_active = false
-		
-		if meta:get_float("fuel_time") < meta:get_float("fuel_totaltime") then
-			was_active = true
-			meta:set_float("fuel_time", meta:get_float("fuel_time") + 1)
-			meta:set_float("src_time", meta:get_float("src_time") + 1)
-			if cooked and cooked.item and meta:get_float("src_time") >= cooked.time then
-				-- check if there's room for output in "dst" list
-				if inv:room_for_item("dst",cooked.item) and not cooked.item:is_empty() then
-					-- Put result in "dst" list
-					inv:add_item("dst", cooked.item)
-					local wear = tonumber(meta:get_string("wear")) or 0
-					wear = wear + 1
-					meta:set_string("wear", tostring(wear))
-					if wear >= 50 then
-						hacky_swap_node(pos, "base:furnace_broken")
-						meta:set_string("formspec", furnace_inactive_formspec)
-						meta:set_string("infotext", "Broken furnace")
-						return
-					end
-					-- take stuff from "src" list
-					inv:set_stack("src", 1, aftercooked.items[1])
+		local fueltime = tonumber(meta:get_string("fueltime")) or 0
+		if fueltime == 0 then
+			local fuel = inv:get_stack("fuel", 1)
+			if not fuel:is_empty() then
+				local newtime = minetest.get_item_group(fuel:get_name(), "fuel")
+				fueltime = newtime
+				if newtime ~= 0 then
+					fuel:take_item()
+					inv:set_stack("fuel", 1, fuel)
 				end
-				meta:set_string("src_time", 0)
 			end
+		else
+			fueltime = fueltime-1
 		end
+		meta:set_string("fueltime", fueltime)
 		
-		if meta:get_float("fuel_time") < meta:get_float("fuel_totaltime") then
-			local percent = math.floor(meta:get_float("fuel_time") /
-					meta:get_float("fuel_totaltime") * 100)
-			hacky_swap_node(pos,"base:furnace_active")
-			meta:set_string("formspec",
-				"size[6,4.5]"..
-				"image[1,1;1,1;base_furnace_fire_bg.png^[lowpart:"..
-				(100-percent)..":base_furnace_fire_fg.png]"..
-				"list[current_name;fuel;1,2;1,1;]"..
-				"list[current_name;src;1,0;1,1;]"..
-				"list[current_name;dst;3,0;2,2;]"..
-				"list[current_player;main;0,3.5;6,1;]"..
-				
-				"listcolors[#0000;#FFF3]"..
-				"bgcolor[#000000A0;true]"..
-				"background[-0.0625,-0.0625;6.125,4.625;base_furnace_formspec_background.png]"..
-				"background[0,3.5;6,1;backpack_inventory.png]"..
-				"background[1,0;4,3;base_furnace_formspec_inventory.png]"
-			)
-			return
-		end
-
-		local fuel = nil
-		local afterfuel
-		local cooked = nil
-		local fuellist = inv:get_list("fuel")
-		local srclist = inv:get_list("src")
-		
-		if srclist then
-			cooked = minetest.get_craft_result({method = "cooking", width = 1, items = srclist})
-		end
-		if fuellist then
-			fuel, afterfuel = minetest.get_craft_result({method = "fuel", width = 1, items = fuellist})
-		end
-
-		if fuel.time <= 0 then
-			hacky_swap_node(pos,"base:furnace")
-			meta:set_string("formspec", furnace_inactive_formspec)
-			return
-		end
-
-		if cooked.item:is_empty() then
-			if was_active then
-				hacky_swap_node(pos,"base:furnace")
+		if fueltime ~= 0 then
+			if node.name == "base:furnace" then
+				node.name = "base:furnace_active"
+				minetest.swap_node(pos, node)
+				meta:set_string("infotext", "Active Furnace")
+				meta:set_string("formspec", "size[6,4.5]"..
+					"image[1,1;1,1;base_furnace_fire_fg.png]"..
+					"list[current_name;fuel;1,2;1,1;]"..
+					"list[current_name;src;1,0;1,1;]"..
+					"list[current_name;dst;3,0;2,2;]"..
+					"list[current_player;main;0,3.5;6,1;]"..
+					
+					"listcolors[#0000;#FFF3]"..
+					"bgcolor[#000000A0;true]"..
+					"background[-0.0625,-0.0625;6.125,4.625;base_furnace_formspec_background.png]"..
+					"background[0,3.5;6,1;backpack_inventory.png]"..
+					"background[1,0;4,3;base_furnace_formspec_inventory.png]"
+				)
+			end
+			
+			local src = inv:get_stack("src", 1)
+			if not src:is_empty() then
+				local cooked = minetest.get_craft_result({
+					method = "cooking",
+					width = 1,
+					items = {src},
+				})
+				if not cooked.item:is_empty() then
+					src:take_item()
+					inv:set_stack("src", 1, src)
+					inv:add_item("dst", cooked.item)
+					wear = wear+1
+				end
+			end
+		else
+			if node.name == "base:furnace_active" then
+				node.name = "base:furnace"
+				minetest.swap_node(pos, node)
+				meta:set_string("infotext", "Furnace")
 				meta:set_string("formspec", furnace_inactive_formspec)
 			end
-			return
 		end
-
-		meta:set_string("fuel_totaltime", fuel.time)
-		meta:set_string("fuel_time", 0)
 		
-		inv:set_stack("fuel", 1, afterfuel.items[1])
+		meta:set_string("wear", wear)
+		if wear >= 50 then
+			node.name = "base:furnace_broken"
+			minetest.swap_node(pos, node)
+			meta:set_string("formspec", furnace_inactive_formspec)
+			meta:set_string("infotext", "Broken Furnace")
+		end
 	end,
 })
 
@@ -1241,30 +1195,6 @@ minetest.register_craft({
 --
 -- Crafts (Furnace)
 --
-
-minetest.register_craft({
-	type = "fuel",
-	recipe = "group:tree",
-	burntime = 30,
-})
-
-minetest.register_craft({
-	type = "fuel",
-	recipe = "group:wood",
-	burntime = 20,
-})
-
-minetest.register_craft({
-	type = "fuel",
-	recipe = "base:coal",
-	burntime = 40,
-})
-
-minetest.register_craft({
-	type = "fuel",
-	recipe = "base:leaves",
-	burntime = 2,
-})
 
 minetest.register_craft({
 	type = "cooking",
