@@ -1,5 +1,5 @@
 --[[
-Pilztest
+Nodetopia
 Copyright (C) 2012 Perttu Ahola (celeron55) <celeron55@gmail.com>
 
 This program is free software: you can redistribute it and/or modify

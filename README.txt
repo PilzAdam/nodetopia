@@ -1,5 +1,5 @@
-Pilztest game for the Minetest engine
-=====================================
+Nodetopia game for the Minetest engine
+======================================
 
 Installation:
 -------------
@@ -35,7 +35,7 @@ Settings:
 
 License of sourcecode:
 ----------------------
-Pilztest
+Nodetopia
 Copyright (C) 2013 PilzAdam <pilzadam@minetest.net>
 
 This program is free software: you can redistribute it and/or modify
