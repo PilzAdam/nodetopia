@@ -30,6 +30,8 @@ Settings:
                  death, no hunger and items don't wear out.
 - enable_damage: boolean, players cant die, mobs don't chase players.
 - spawn_mobs: boolean, weather mobs should spawn (only read at server startup).
+- enable_3d_models: boolean, weather 3D models should be used for players and
+                    mobs, default is true.
 
 License of sourcecode:
 ----------------------

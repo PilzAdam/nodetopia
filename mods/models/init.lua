@@ -16,14 +16,31 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ]]
 
+local enable_3d_models = minetest.setting_getbool("enable_3d_models")
+if enable_3d_models == nil then
+	enable_3d_models = true
+end
+
 minetest.register_on_joinplayer(function(player)
-	player:set_properties({
-		mesh = "models_player.b3d",
-		textures = {"models_player.png"},
-		visual = "mesh",
-		visual_size = {x=10/16, y=20/32},
-	})
+	if enable_3d_models then
+		player:set_properties({
+			mesh = "models_player.b3d",
+			textures = {"models_player.png"},
+			visual = "mesh",
+			visual_size = {x=10/16, y=20/32},
+		})
+	else
+		player:set_properties({
+			textures = {"models_player_2d.png", "models_player_2d_back.png"},
+			visual = "upright_sprite",
+			visual_size = {x=1, y=2},
+		})
+	end
 end)
+
+if not enable_3d_models then
+	return
+end
 
 local players = {
 	--[[

@@ -18,21 +18,35 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 local next_id = 0
 
+local enable_3d_models = minetest.setting_getbool("enable_3d_models")
+if enable_3d_models == nil then
+	enable_3d_models = true
+end
+
+local initial_properties = {
+	hp_max = 100,
+	physical = true,
+	collide_with_objects = true,
+	collisionbox = {-0.3, -1.0, -0.3,  0.3, 1.0, 0.3},
+	visual = "mesh",
+	mesh = "models_player.b3d",
+	visual_size = {x=10/16, y=20/32},
+	textures = {"mobs_stone_monster.png"},
+	is_visible = true,
+	makes_footstep_sound = true,
+	stepheight = 1.1,
+	automatic_face_movement_dir = 270,
+}
+
+if not enable_3d_models then
+	initial_properties.visual = "upright_sprite"
+	initial_properties.mesh = nil
+	initial_properties.visual_size = {x=1, y=2}
+	initial_properties.textures = {"mobs_stone_monster_2d.png", "mobs_stone_monster_2d_back.png"}
+end
+
 minetest.register_entity("mobs:stone_monster", {
-	initial_properties = {
-		hp_max = 100,
-		physical = true,
-		collide_with_objects = true,
-		collisionbox = {-0.3, -1.0, -0.3,  0.3, 1.0, 0.3},
-		visual = "mesh",
-		mesh = "models_player.b3d",
-		visual_size = {x=10/16, y=20/32},
-		textures = {"mobs_stone_monster.png"},
-		is_visible = true,
-		makes_footstep_sound = true,
-		stepheight = 1.1,
-		automatic_face_movement_dir = 270,
-	},
+	initial_properties = initial_properties,
 	
 	attack = "",
 	state = "stand",
@@ -65,6 +79,9 @@ minetest.register_entity("mobs:stone_monster", {
 	end,
 	
 	update_animation = function(self, dtime)
+		if not enable_3d_models then
+			return
+		end
 		local t1 = os.clock()
 		local obj = self.object
 		
