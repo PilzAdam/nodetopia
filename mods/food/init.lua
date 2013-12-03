@@ -48,13 +48,17 @@ local function update_player_hunger(player, hunger, force)
 	
 	local hunger = math.min(hunger, 21)
 	if force and hunger <= 10 then
-		player:set_physics_override(1, nil, nil)
+		player:set_physics_override({
+			speed = 1,
+		})
 		food.speed[player:get_player_name()] = 1
 	end
 	if hunger > 10 and (force or hunger < 21) then
 		local tmp = math.abs(hunger-20)  / 20 + 0.5
 		minetest.log("action", player:get_player_name() .. " is hungry and gets slower ("..(tmp*100).."% of speed)")
-		player:set_physics_override(tmp, nil, nil)
+		player:set_physics_override({
+			speed = tmp,
+		})
 		food.speed[player:get_player_name()] = tmp
 	end
 end
@@ -98,6 +102,12 @@ minetest.register_on_joinplayer(function(player)
 		save_hunger()
 	end
 	minetest.after(1, update_player_hunger, player, hunger[player:get_player_name()], true)
+	minetest.after(1, function(player)
+		player:set_physics_override({
+			sneak = false,
+			sneak_glitch = false,
+		})
+	end, player)
 	player:set_armor_groups({fleshy=100})
 end)
 
