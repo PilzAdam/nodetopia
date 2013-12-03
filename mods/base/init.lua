@@ -949,8 +949,8 @@ minetest.register_tool("base:pick_iron", {
 		groupcaps = {
 			cracky = {times={[1]=5.00,[2]=0.80,[3]=0.80,[4]=0.60}, uses=40},
 		},
+		damage_groups = {cracky=40},
 	},
-	damage_groups = {cracky=40},
 })
 
 minetest.register_tool("base:axe_iron", {
@@ -991,8 +991,8 @@ minetest.register_tool("base:pick_mese", {
 		groupcaps = {
 			cracky = {times={[1]=2.00,[2]=0.50,[3]=0.50,[4]=0.30}, uses=80},
 		},
+		damage_groups = {cracky=50},
 	},
-	damage_groups = {cracky=50},
 })
 
 minetest.register_tool("base:axe_mese", {
