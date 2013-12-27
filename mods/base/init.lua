@@ -87,7 +87,7 @@ minetest.register_node("base:snow", {
 	is_ground_content = true,
 	groups = {crumbly=3},
 	sounds = {
-		footstep = {name="base_footstep_grass", gain=0.25},
+		footstep = {name="base_footstep_snow", gain=0.25},
 		place = {name="base_place", gain=1.0},
 		dig = {name="base_dig_crumbly", gain=0.5},
 	},
