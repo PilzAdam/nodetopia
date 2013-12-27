@@ -140,7 +140,7 @@ minetest.register_craft({
 	output = "deco:bookshelf",
 	recipe = {
 		{"base:wood", "base:wood", "base:wood"},
-		{"base:leaves", "base:leaves", "base:leaves"},
+		{"group:leaves", "group:leaves", "group:leaves"},
 		{"base:wood", "base:wood", "base:wood"},
 	},
 })

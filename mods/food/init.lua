@@ -367,7 +367,17 @@ minetest.register_decoration({
 	place_on   = "base:grass",
 	sidelen    = 80,
 	fill_ratio = 0.0005,
-	biomes = {"base_forest", "base_firforest"},
+	biomes     = {"base_forest"},
+	decoration = "food:pumpkin",
+	height     = 1,
+})
+
+minetest.register_decoration({
+	deco_type  = "simple",
+	place_on   = "base:snowy_grass",
+	sidelen    = 80,
+	fill_ratio = 0.0005,
+	biomes     = {"base_taiga"},
 	decoration = "food:pumpkin",
 	height     = 1,
 })

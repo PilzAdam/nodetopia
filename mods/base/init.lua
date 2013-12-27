@@ -80,6 +80,48 @@ minetest.register_abm({
 	end,
 })
 
+minetest.register_node("base:snow", {
+	description = "Snow",
+	tiles = {"base_snow.png"},
+	stack_max = 20,
+	is_ground_content = true,
+	groups = {crumbly=3},
+	sounds = {
+		footstep = {name="base_footstep_grass", gain=0.25},
+		place = {name="base_place", gain=1.0},
+		dig = {name="base_dig_crumbly", gain=0.5},
+	},
+})
+
+minetest.register_node("base:snowy_grass", {
+	description = "Snowy Grass",
+	tiles = {"base_snowy_grass.png"},
+	stack_max = 20,
+	is_ground_content = true,
+	groups = {crumbly=3},
+	sounds = {
+		footstep = {name="base_footstep_grass", gain=0.25},
+		place = {name="base_place", gain=1.0},
+		dig = {name="base_dig_crumbly", gain=0.5},
+	},
+})
+
+minetest.register_node("base:ice", {
+	description = "Ice",
+	tiles = {"base_ice.png"},
+	drawtype = "glasslike",
+	use_texture_alpha = true,
+	paramtype = "light",
+	stack_max = 20,
+	is_ground_content = true,
+	groups = {cracky=4},
+	sounds = {
+		footstep = {name="base_footstep_glass", gain=0.5},
+		place = {name="base_place_hard", gain=1.0},
+		dig = {name="base_dig_cracky", gain=0.5},
+	},
+})
+
 minetest.register_node("base:stone", {
 	description = "Stone",
 	tiles = {"base_stone.png"},
@@ -113,7 +155,21 @@ minetest.register_node("base:leaves", {
 	paramtype = "light",
 	stack_max = 20,
 	is_ground_content = false,
-	groups = {snappy=3,fuel=2},
+	groups = {snappy=3,fuel=2,leaves=1},
+	sounds = {
+		footstep = {name="base_footstep_grass", gain=0.25},
+		place = {name="base_place", gain=1.0},
+		dig = {name="base_dig_crumbly", gain=0.4},
+	},
+})
+
+minetest.register_node("base:snowy_leaves", {
+	description = "Snowy Leaves",
+	tiles = {"base_snowy_leaves.png"},
+	paramtype = "light",
+	stack_max = 20,
+	is_ground_content = false,
+	groups = {snappy=3,fuel=2,leaves=1},
 	sounds = {
 		footstep = {name="base_footstep_grass", gain=0.25},
 		place = {name="base_place", gain=1.0},
@@ -1022,8 +1078,8 @@ minetest.register_tool("base:shovel_mese", {
 minetest.register_craft({
 	output = "base:wood 2",
 	recipe = {
-		{"base:leaves", "base:leaves"},
-		{"base:leaves", "base:leaves"},
+		{"group:leaves", "group:leaves"},
+		{"group:leaves", "group:leaves"},
 	},
 })
 
