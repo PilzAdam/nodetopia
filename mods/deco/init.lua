@@ -60,7 +60,7 @@ minetest.register_node("deco:glass", {
 		footstep = {name="base_footstep_glass", gain=0.5},
 		place = {name="base_place_hard", gain=1.0},
 		dig = {name="base_dig_cracky", gain=0.5},
-		dug = {name="base_dug_glass", gain=1.0},
+		dug = {name="deco_dug_glass", gain=1.0},
 	},
 })
 
