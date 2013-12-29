@@ -23,7 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 minetest.register_node("deco:stonebrick", {
 	description = "Stonebrick",
 	tiles = {"deco_stonebrick.png"},
-	stack_max = 20,
+	stack_max = 256,
 	is_ground_content = false,
 	groups = {cracky=2,stone=1},
 	sounds = {
@@ -36,7 +36,7 @@ minetest.register_node("deco:stonebrick", {
 minetest.register_node("deco:sandstonebrick", {
 	description = "Sandstonebrick",
 	tiles = {"deco_sandstonebrick.png"},
-	stack_max = 20,
+	stack_max = 256,
 	is_ground_content = false,
 	groups = {cracky=2,stone=1},
 	sounds = {
@@ -53,7 +53,7 @@ minetest.register_node("deco:glass", {
 	paramtype = "light",
 	sunlight_propagates = true,
 	drop = "",
-	stack_max = 20,
+	stack_max = 256,
 	is_ground_content = false,
 	groups = {cracky=4},
 	sounds = {
@@ -67,7 +67,7 @@ minetest.register_node("deco:glass", {
 minetest.register_node("deco:brick", {
 	description = "Brick",
 	tiles = {"deco_brick.png"},
-	stack_max = 20,
+	stack_max = 256,
 	is_ground_content = false,
 	groups = {cracky=2,stone=1},
 	sounds = {
@@ -80,7 +80,7 @@ minetest.register_node("deco:brick", {
 minetest.register_node("deco:cactus", {
 	description = "Cactus",
 	tiles = {"deco_cactus_top.png", "deco_cactus_top.png", "deco_cactus.png"},
-	stack_max = 20,
+	stack_max = 256,
 	is_ground_content = true,
 	groups = {choppy=3},
 	sounds = {
@@ -93,7 +93,7 @@ minetest.register_node("deco:cactus", {
 minetest.register_node("deco:gravel", {
 	description = "Gravel",
 	tiles = {"deco_gravel.png"},
-	stack_max = 20,
+	stack_max = 256,
 	is_ground_content = true,
 	groups = {crumbly=2},
 	sounds = {
@@ -106,7 +106,7 @@ minetest.register_node("deco:gravel", {
 minetest.register_node("deco:bookshelf", {
 	description = "Bookshelf",
 	tiles = {"base_wood.png", "base_wood.png", "deco_bookshelf.png"},
-	stack_max = 20,
+	stack_max = 256,
 	is_ground_content = false,
 	groups = {choppy=3},
 	sounds = {

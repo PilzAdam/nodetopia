@@ -153,7 +153,7 @@ minetest.register_chatcommand("hunger", {
 minetest.register_node("food:soil", {
 	description = "Soil",
 	tiles = {"food_soil.png", "base_dirt.png"},
-	stack_max = 20,
+	stack_max = 256,
 	drop = "base:dirt",
 	is_ground_content = true,
 	groups = {crumbly=2, not_in_creative_inventory=1},
@@ -167,7 +167,7 @@ minetest.register_node("food:soil", {
 minetest.register_node("food:soil_wet", {
 	description = "Wet Soil",
 	tiles = {"food_soil_wet.png", "food_soil_wet_side.png"},
-	stack_max = 20,
+	stack_max = 256,
 	drop = "base:dirt",
 	is_ground_content = true,
 	groups = {crumbly=2, not_in_creative_inventory=1},
@@ -299,7 +299,7 @@ minetest.register_craft({
 minetest.register_node("food:pumpkin", {
 	description = "Pumpkin",
 	tiles = {"food_pumpkin_top.png", "food_pumpkin_bottom.png", "food_pumpkin.png"},
-	stack_max = 20,
+	stack_max = 256,
 	is_ground_content = true,
 	groups = {choppy=3, plant=1},
 	sounds = {

@@ -23,7 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 minetest.register_node("base:dirt", {
 	description = "Dirt",
 	tiles = {"base_dirt.png"},
-	stack_max = 20,
+	stack_max = 256,
 	is_ground_content = true,
 	groups = {crumbly=3},
 	sounds = {
@@ -36,7 +36,7 @@ minetest.register_node("base:dirt", {
 minetest.register_node("base:grass", {
 	description = "Dirt with Grass",
 	tiles = {"base_grass.png"},
-	stack_max = 20,
+	stack_max = 256,
 	is_ground_content = true,
 	groups = {crumbly=2},
 	sounds = {
@@ -83,7 +83,7 @@ minetest.register_abm({
 minetest.register_node("base:snow", {
 	description = "Snow",
 	tiles = {"base_snow.png"},
-	stack_max = 20,
+	stack_max = 256,
 	is_ground_content = true,
 	groups = {crumbly=3},
 	sounds = {
@@ -96,7 +96,7 @@ minetest.register_node("base:snow", {
 minetest.register_node("base:snowy_grass", {
 	description = "Snowy Grass",
 	tiles = {"base_snowy_grass.png"},
-	stack_max = 20,
+	stack_max = 256,
 	is_ground_content = true,
 	groups = {crumbly=3},
 	sounds = {
@@ -112,7 +112,7 @@ minetest.register_node("base:ice", {
 	drawtype = "glasslike",
 	use_texture_alpha = true,
 	paramtype = "light",
-	stack_max = 20,
+	stack_max = 256,
 	is_ground_content = true,
 	groups = {cracky=4},
 	sounds = {
@@ -126,7 +126,7 @@ minetest.register_node("base:stone", {
 	description = "Stone",
 	tiles = {"base_stone.png"},
 	drop = "base:broken_stone",
-	stack_max = 20,
+	stack_max = 256,
 	is_ground_content = true,
 	groups = {cracky=2,stone=1},
 	sounds = {
@@ -139,7 +139,7 @@ minetest.register_node("base:stone", {
 minetest.register_node("base:broken_stone", {
 	description = "Broken Stone",
 	tiles = {"base_broken_stone.png"},
-	stack_max = 20,
+	stack_max = 256,
 	is_ground_content = true,
 	groups = {cracky=4,stone=1},
 	sounds = {
@@ -153,7 +153,7 @@ minetest.register_node("base:leaves", {
 	description = "Leaves",
 	tiles = {"base_leaves.png"},
 	paramtype = "light",
-	stack_max = 20,
+	stack_max = 256,
 	is_ground_content = false,
 	groups = {snappy=3,fuel=2,leaves=1},
 	sounds = {
@@ -167,7 +167,7 @@ minetest.register_node("base:snowy_leaves", {
 	description = "Snowy Leaves",
 	tiles = {"base_snowy_leaves.png"},
 	paramtype = "light",
-	stack_max = 20,
+	stack_max = 256,
 	is_ground_content = false,
 	groups = {snappy=3,fuel=2,leaves=1},
 	sounds = {
@@ -180,7 +180,7 @@ minetest.register_node("base:snowy_leaves", {
 minetest.register_node("base:tree", {
 	description = "Tree",
 	tiles = {"base_tree_top.png", "base_tree_top.png", "base_tree.png"},
-	stack_max = 20,
+	stack_max = 256,
 	is_ground_content = false,
 	groups = {choppy=2,tree=1,fuel=20},
 	sounds = {
@@ -193,7 +193,7 @@ minetest.register_node("base:tree", {
 minetest.register_node("base:jungletree", {
 	description = "Jungletree",
 	tiles = {"base_jungletree_top.png", "base_jungletree_top.png", "base_jungletree.png"},
-	stack_max = 20,
+	stack_max = 256,
 	is_ground_content = false,
 	groups = {choppy=2,tree=1,fuel=20},
 	sounds = {
@@ -206,7 +206,7 @@ minetest.register_node("base:jungletree", {
 minetest.register_node("base:wood", {
 	description = "Wood",
 	tiles = {"base_wood.png"},
-	stack_max = 20,
+	stack_max = 256,
 	is_ground_content = false,
 	groups = {choppy=3,wood=1,fuel=10},
 	sounds = {
@@ -219,7 +219,7 @@ minetest.register_node("base:wood", {
 minetest.register_node("base:junglewood", {
 	description = "Junglewood",
 	tiles = {"base_junglewood.png"},
-	stack_max = 20,
+	stack_max = 256,
 	is_ground_content = false,
 	groups = {choppy=3,wood=1,fuel=10},
 	sounds = {
@@ -232,7 +232,7 @@ minetest.register_node("base:junglewood", {
 minetest.register_node("base:sand", {
 	description = "Sand",
 	tiles = {"base_sand.png"},
-	stack_max = 20,
+	stack_max = 256,
 	is_ground_content = true,
 	groups = {crumbly=3},
 	sounds = {
@@ -245,7 +245,7 @@ minetest.register_node("base:sand", {
 minetest.register_node("base:clay", {
 	description = "Clay",
 	tiles = {"base_clay.png"},
-	stack_max = 20,
+	stack_max = 256,
 	is_ground_content = true,
 	groups = {crumbly=1},
 	sounds = {
@@ -258,7 +258,7 @@ minetest.register_node("base:clay", {
 minetest.register_node("base:copper_ore", {
 	description = "Copper Ore",
 	tiles = {"base_stone.png^base_copper_ore.png"},
-	stack_max = 20,
+	stack_max = 256,
 	is_ground_content = true,
 	groups = {cracky=3},
 	sounds = {
@@ -271,7 +271,7 @@ minetest.register_node("base:copper_ore", {
 minetest.register_node("base:copper", {
 	description = "Copper",
 	tiles = {"base_copper.png"},
-	stack_max = 20,
+	stack_max = 256,
 	is_ground_content = false,
 	groups = {cracky=3},
 	sounds = {
@@ -284,7 +284,7 @@ minetest.register_node("base:copper", {
 minetest.register_node("base:iron_ore", {
 	description = "Iron Ore",
 	tiles = {"base_stone.png^base_iron_ore.png"},
-	stack_max = 20,
+	stack_max = 256,
 	is_ground_content = true,
 	groups = {cracky=2},
 	sounds = {
@@ -297,7 +297,7 @@ minetest.register_node("base:iron_ore", {
 minetest.register_node("base:iron", {
 	description = "Iron",
 	tiles = {"base_iron.png"},
-	stack_max = 20,
+	stack_max = 256,
 	is_ground_content = false,
 	groups = {cracky=2},
 	sounds = {
@@ -323,7 +323,7 @@ minetest.register_node("base:coal_ore", {
 minetest.register_node("base:coal", {
 	description = "Coal",
 	tiles = {"base_coal.png"},
-	stack_max = 20,
+	stack_max = 256,
 	is_ground_content = false,
 	groups = {cracky=4,fuel=30},
 	sounds = {
@@ -336,7 +336,7 @@ minetest.register_node("base:coal", {
 minetest.register_node("base:mese", {
 	description = "Mese",
 	tiles = {"base_mese.png"},
-	stack_max = 20,
+	stack_max = 256,
 	is_ground_content = true,
 	groups = {cracky=1},
 	sounds = {
@@ -487,7 +487,7 @@ minetest.register_node("base:water", {
 	walkable = false,
 	pointable = false,
 	buildable_to = true,
-	stack_max = 20,
+	stack_max = 256,
 	liquidtype = "source",
 	liquid_alternative_flowing = "base:water",
 	liquid_alternative_source = "base:water",
@@ -536,7 +536,7 @@ minetest.register_node("base:lava", {
 	walkable = false,
 	pointable = false,
 	buildable_to = true,
-	stack_max = 20,
+	stack_max = 256,
 	liquidtype = "source",
 	liquid_alternative_flowing = "base:lava",
 	liquid_alternative_source = "base:lava",
@@ -572,7 +572,7 @@ minetest.register_node("base:lamp", {
 	tiles = {"base_lamp.png"},
 	paramtype = "light",
 	light_source = 13,
-	stack_max = 20,
+	stack_max = 256,
 	is_ground_content = false,
 	groups = {choppy=3},
 	sounds = {
