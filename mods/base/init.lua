@@ -98,7 +98,7 @@ minetest.register_node("base:snowy_grass", {
 	tiles = {"base_snowy_grass.png"},
 	stack_max = 256,
 	is_ground_content = true,
-	groups = {crumbly=3},
+	groups = {crumbly=2},
 	sounds = {
 		footstep = {name="base_footstep_grass", gain=0.25},
 		place = {name="base_place", gain=1.0},
