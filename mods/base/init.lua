@@ -918,9 +918,9 @@ minetest.register_tool(":", {
 	range = 3,
 	tool_capabilities = {
 		groupcaps = {
-			crumbly = {times={[3]=1.00}, uses=0},
-			snappy = {times={[3]=0.80}, uses=0},
-			cracky = {times={[4]=3.50}, uses=0},
+			crumbly = {times={[3]=0.90}, uses=0},
+			snappy = {times={[3]=0.70}, uses=0},
+			cracky = {times={[4]=3.00}, uses=0},
 		},
 	},
 })
@@ -930,7 +930,7 @@ minetest.register_tool("base:pick_stone", {
 	inventory_image = "base_pick_stone.png",
 	tool_capabilities = {
 		groupcaps = {
-			cracky = {times={[3]=1.50,[4]=1.20}, uses=10},
+			cracky = {times={[3]=1.50,[4]=0.90}, uses=15},
 		},
 		damage_groups = {cracky=20},
 	},
@@ -941,8 +941,8 @@ minetest.register_tool("base:axe_stone", {
 	inventory_image = "base_axe_stone.png",
 	tool_capabilities = {
 		groupcaps = {
-			choppy = {times={[2]=2.00,[3]=1.40}, uses=10},
-			snappy = {times={[3]=0.70}, uses=30},
+			choppy = {times={[2]=2.00,[3]=1.00}, uses=15},
+			snappy = {times={[3]=0.50}, uses=45},
 		},
 	},
 })
@@ -951,7 +951,7 @@ minetest.register_tool("base:shovel_stone", {
 	inventory_image = "base_shovel_stone.png",
 	tool_capabilities = {
 		groupcaps = {
-			crumbly = {times={[1]=1.50,[2]=0.80,[3]=0.60}, uses=10},
+			crumbly = {times={[1]=1.00,[2]=0.60,[3]=0.50}, uses=15},
 		},
 	},
 })
@@ -961,7 +961,7 @@ minetest.register_tool("base:pick_copper", {
 	inventory_image = "base_pick_copper.png",
 	tool_capabilities = {
 		groupcaps = {
-			cracky = {times={[2]=1.20,[3]=1.20,[4]=0.80}, uses=20},
+			cracky = {times={[2]=0.90,[3]=0.90,[4]=0.70}, uses=25},
 		},
 		damage_groups = {cracky=25},
 	},
@@ -972,8 +972,8 @@ minetest.register_tool("base:axe_copper", {
 	inventory_image = "base_axe_copper.png",
 	tool_capabilities = {
 		groupcaps = {
-			choppy = {times={[2]=1.50,[3]=1.10}, uses=20},
-			snappy = {times={[3]=0.60}, uses=60},
+			choppy = {times={[2]=1.50,[3]=0.80}, uses=25},
+			snappy = {times={[3]=0.40}, uses=75},
 		},
 	},
 })
@@ -982,7 +982,7 @@ minetest.register_tool("base:shovel_copper", {
 	inventory_image = "base_shovel_copper.png",
 	tool_capabilities = {
 		groupcaps = {
-			crumbly = {times={[1]=1.00,[2]=0.60,[3]=0.50}, uses=20},
+			crumbly = {times={[1]=0.80,[2]=0.50,[3]=0.40}, uses=25},
 		},
 	},
 })
@@ -993,7 +993,7 @@ minetest.register_tool("base:bucket_copper", {
 	liquids_pointable = true,
 	tool_capabilities = {
 		groupcaps = {
-			liquid = {times={[3]=1.50}, uses=5},
+			liquid = {times={[3]=1.50}, uses=10},
 		},
 	},
 })
@@ -1003,7 +1003,7 @@ minetest.register_tool("base:pick_iron", {
 	inventory_image = "base_pick_iron.png",
 	tool_capabilities = {
 		groupcaps = {
-			cracky = {times={[1]=5.00,[2]=0.80,[3]=0.80,[4]=0.60}, uses=40},
+			cracky = {times={[1]=5.00,[2]=0.70,[3]=0.70,[4]=0.50}, uses=45},
 		},
 		damage_groups = {cracky=40},
 	},
@@ -1014,8 +1014,8 @@ minetest.register_tool("base:axe_iron", {
 	inventory_image = "base_axe_iron.png",
 	tool_capabilities = {
 		groupcaps = {
-			choppy = {times={[2]=1.20,[3]=0.80}, uses=40},
-			snappy = {times={[3]=0.50}, uses=120},
+			choppy = {times={[2]=1.20,[3]=0.60}, uses=45},
+			snappy = {times={[3]=0.30}, uses=135},
 		},
 	},
 })
@@ -1024,7 +1024,7 @@ minetest.register_tool("base:shovel_iron", {
 	inventory_image = "base_shovel_iron.png",
 	tool_capabilities = {
 		groupcaps = {
-			crumbly = {times={[1]=0.80,[2]=0.40,[3]=0.40}, uses=40},
+			crumbly = {times={[1]=0.60,[2]=0.40,[3]=0.30}, uses=55},
 		},
 	},
 })
@@ -1035,7 +1035,7 @@ minetest.register_tool("base:bucket_iron", {
 	liquids_pointable = true,
 	tool_capabilities = {
 		groupcaps = {
-			liquid = {times={[2]=2.00,[3]=1.00}, uses=10},
+			liquid = {times={[2]=2.00,[3]=1.00}, uses=20},
 		},
 	},
 })
@@ -1056,8 +1056,8 @@ minetest.register_tool("base:axe_mese", {
 	inventory_image = "base_axe_mese.png",
 	tool_capabilities = {
 		groupcaps = {
-			choppy = {times={[2]=0.90,[3]=0.60}, uses=80},
-			snappy = {times={[3]=0.30}, uses=240},
+			choppy = {times={[2]=0.90,[3]=0.40}, uses=80},
+			snappy = {times={[3]=0.20}, uses=240},
 		},
 	},
 })
@@ -1066,7 +1066,7 @@ minetest.register_tool("base:shovel_mese", {
 	inventory_image = "base_shovel_mese.png",
 	tool_capabilities = {
 		groupcaps = {
-			crumbly = {times={[1]=0.40,[2]=0.30,[3]=0.20}, uses=80},
+			crumbly = {times={[1]=0.40,[2]=0.30,[3]=0.20}, uses=100},
 		},
 	},
 })
