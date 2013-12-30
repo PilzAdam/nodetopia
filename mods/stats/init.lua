@@ -174,6 +174,14 @@ end)
 
 minetest.register_on_dieplayer(function(player)
 	stats.increase_stat(player, "died", 1)
+	-- Broadcast death
+	local name = player:get_player_name()
+	minetest.log("action", name .. " died at " .. minetest.pos_to_string(player:getpos()))
+	for _,p in ipairs(minetest.get_connected_players()) do
+		if p:get_player_name() ~= name then
+			minetest.chat_send_player(p:get_player_name(), name .. " died.")
+		end
+	end
 end)
 
 minetest.register_chatcommand("stats", {
