@@ -18,6 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 local next_id = 0
 
+stats.register_stat({
+	name = "stone_monsters_killed",
+	description = function(value)
+		return " - Stone Monsters killed: "..value
+	end,
+})
+
 local enable_3d_models = minetest.setting_getbool("enable_3d_models")
 if enable_3d_models == nil then
 	enable_3d_models = true
@@ -358,6 +365,9 @@ minetest.register_entity("mobs:stone_monster", {
 		if hitter:is_player() then
 			self:debug("on_punch(): attacking "..hitter:get_player_name())
 			self.attack = hitter:get_player_name()
+			if self.object:get_hp() <= 0 then
+				stats.increase_stat(hitter, "stone_monsters_killed", 1)
+			end
 		end
 		self:debug_t("on_punch()", t1)
 	end,

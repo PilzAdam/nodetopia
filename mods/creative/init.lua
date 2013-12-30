@@ -44,6 +44,7 @@ minetest.after(0, function()
 		on_put = function(inv, listname, index, stack, player)
 		end,
 		on_take = function(inv, listname, index, stack, player)
+			stats.increase_stat(player, "creative_inv_taken", stack:get_count())
 		end,
 	})
 	local creative_list = {}
@@ -86,6 +87,7 @@ local trash = minetest.create_detached_inventory("creative_trash", {
 		end
 	end,
 	on_put = function(inv, listname, index, stack, player)
+		stats.increase_stat(player, "creative_inv_trashed", stack:get_count())
 		inv:set_stack(listname, index, "")
 	end,
 })
@@ -191,5 +193,19 @@ if minetest.setting_getbool("creative_mode") then
 			end
 		end
 	end
+	
+	stats.register_stat( {
+		name = "creative_inv_taken",
+		description = function(value)
+			return " - Items taken from creative inventory: "..value
+		end,
+	})
+	
+	stats.register_stat( {
+		name = "creative_inv_trashed",
+		description = function(value)
+			return " - Items trashed in creative inventory: "..value
+		end,
+	})
 	
 end

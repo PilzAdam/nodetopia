@@ -25,7 +25,7 @@ food.speed = {} -- save the speed for the models mod
 local hunger = {}
 local timer = 0
 
-file = io.open(minetest:get_worldpath().."/hunger.txt", "r")
+local file = io.open(minetest:get_worldpath().."/hunger.txt", "r")
 if file then
 		local table = minetest.deserialize(file:read("*all"))
 		if type(table) == "table" then
@@ -64,7 +64,7 @@ local function update_player_hunger(player, hunger, force)
 end
 
 local function save_hunger()
-	file = io.open(minetest:get_worldpath().."/hunger.txt", "w")
+	local file = io.open(minetest:get_worldpath().."/hunger.txt", "w")
 	if file then
 		file:write(minetest.serialize(hunger))
 		file:close()
@@ -296,6 +296,13 @@ minetest.register_craft({
 -- Pumpkin
 --
 
+stats.register_stat({
+	name = "eaten_pumpkins",
+	description = function(value)
+		return " - Eaten pumpkins: "..value
+	end,
+})
+
 minetest.register_node("food:pumpkin", {
 	description = "Pumpkin",
 	tiles = {"food_pumpkin_top.png", "food_pumpkin_bottom.png", "food_pumpkin.png"},
@@ -326,7 +333,11 @@ minetest.register_node("food:pumpkin", {
 			update_player_hunger(user, hunger[name], true)
 			used = true
 		end
-			
+		
+		if used then
+			stats.increase_stat(user, "eaten_pumpkins", 1)
+		end
+		
 		if used and not minetest.setting_getbool("creative_mode") then
 			itemstack:take_item()
 			return itemstack
