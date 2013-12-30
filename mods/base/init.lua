@@ -80,7 +80,7 @@ minetest.register_node("base:ice", {
 	use_texture_alpha = true,
 	paramtype = "light",
 	stack_max = 256,
-	is_ground_content = true,
+	is_ground_content = false, -- caves also dont remove water
 	groups = {cracky=4},
 	sounds = {
 		footstep = {name="base_footstep_glass", gain=0.5},
