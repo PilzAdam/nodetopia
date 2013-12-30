@@ -960,7 +960,7 @@ minetest.register_tool("base:bucket_copper", {
 	liquids_pointable = true,
 	tool_capabilities = {
 		groupcaps = {
-			liquid = {times={[3]=1.50}, uses=10},
+			liquid = {times={[3]=1.00}, uses=25},
 		},
 	},
 })
@@ -1002,7 +1002,7 @@ minetest.register_tool("base:bucket_iron", {
 	liquids_pointable = true,
 	tool_capabilities = {
 		groupcaps = {
-			liquid = {times={[2]=2.00,[3]=1.00}, uses=20},
+			liquid = {times={[2]=1.00,[3]=0.70}, uses=45},
 		},
 	},
 })
