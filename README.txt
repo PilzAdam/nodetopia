@@ -23,6 +23,7 @@ Commands:
 ---------
 - /givebackpack <name>: use this instead of /give <name> backpack:backpack
 - /hunger <name> | <name> <amount>: prints or sets the hunger of a player.
+- /stats <name>: prints the stats of a player.
 
 Settings:
 ---------
