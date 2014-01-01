@@ -165,11 +165,15 @@ minetest.register_on_shutdown(function()
 end)
 
 minetest.register_on_dignode(function(pos, oldnode, player)
-	stats.increase_stat(player, "digged_nodes", 1)
+	if player and player:is_player() then
+		stats.increase_stat(player, "digged_nodes", 1)
+	end
 end)
 
 minetest.register_on_placenode(function(pos, newnode, player, oldnode, itemstack)
-	stats.increase_stat(player, "placed_nodes", 1)
+	if player and player:is_player() then
+		stats.increase_stat(player, "placed_nodes", 1)
+	end
 end)
 
 minetest.register_on_dieplayer(function(player)
