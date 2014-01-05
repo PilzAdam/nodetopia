@@ -108,7 +108,6 @@ minetest.register_on_joinplayer(function(player)
 			sneak_glitch = false,
 		})
 	end, player)
-	player:set_armor_groups({fleshy=100})
 end)
 
 minetest.register_on_respawnplayer(function(player)

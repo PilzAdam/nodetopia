@@ -62,7 +62,7 @@ minetest.register_entity("mobs:stone_monster", {
 	
 	attack_speed = 3.5,
 	walk_speed = 1.0,
-	damage = 1,
+	damage = 3,
 	
 	id = -1,
 	

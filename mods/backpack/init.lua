@@ -22,16 +22,31 @@ minetest.register_on_joinplayer(function(player)
 		minetest.after(0, player.hud_set_hotbar_image, player, "backpack_hotbar_6.png")
 		minetest.after(0, player.hud_set_hotbar_selected_image, player, "backpack_hotbar_selected.png")
 		player:set_inventory_formspec(
-			"size[6,1;]"..
-			"list[current_player;main;0,0;6,1;]"..
+			"size[6,5;]"..
+			"list[current_player;main;0,4;6,1;]"..
+			
+			"list[current_player;helmet;2.5,0;1,1;]"..
+			"list[current_player;body_armor;2.5,1;1,1;]"..
+			"list[current_player;glove_left;1.5,1;1,1;]"..
+			"list[current_player;glove_right;3.5,1;1,1;]"..
+			"list[current_player;boot_left;2,2;1,1;]"..
+			"list[current_player;boot_right;3,2;1,1;]"..
 			
 			"listcolors[#0000;#FFF3]"..
 			"bgcolor[#000000A0;true]"..
-			"background[-0.0625,-0.0625;6.125,1.125;backpack_inventory_background.png]"..
-			"background[0,0;6,1;backpack_inventory.png]"
+			"background[-0.0625,-0.0625;6.125,5.125;backpack_inventory_background.png]"..
+			"background[0,4;6,1;backpack_inventory.png]"..
+			"background[1.5,0;3,3;backpack_inventory_armor.png]"
 		)
-		player:get_inventory():set_size("main", 6)
-		player:get_inventory():set_size("backpack", 6*4)
+		local inv = player:get_inventory()
+		inv:set_size("main", 6)
+		inv:set_size("helmet", 1)
+		inv:set_size("body_armor", 1)
+		inv:set_size("glove_left", 1)
+		inv:set_size("glove_right", 1)
+		inv:set_size("boot_left", 1)
+		inv:set_size("boot_right", 1)
+		inv:set_size("backpack", 6*4)
 	else
 		minetest.after(0, player.hud_set_hotbar_image, player, "backpack_hotbar_8.png")
 		minetest.after(0, player.hud_set_hotbar_selected_image, player, "backpack_hotbar_selected.png")
