@@ -92,6 +92,10 @@ minetest.register_on_dieplayer(function(player)
 	inv:set_list("main", player_inv:get_list("main"))
 	player_inv:set_list("main", empty_list)
 	
+	for _,name in ipairs({"helmet", "body_armor", "glove_left", "glove_right", "boot_left", "boot_right"}) do
+		player_inv:set_stack(name, 1, ItemStack(""))
+	end
+	
 	meta:set_string("formspec",
 			"size[6,2.5;]"..
 			"list[current_name;main;0,0;6,1;]"..
