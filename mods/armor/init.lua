@@ -31,6 +31,32 @@ local function get_armor_from_item(name, part)
 	end
 end
 
+local enable_3d_models = minetest.setting_getbool("enable_3d_models")
+if enable_3d_models == nil then
+	enable_3d_models = true
+end
+
+local function get_armor_overlay_from_item(name, part)
+	local def = minetest.registered_items[name]
+	if (not def) or (not def.armor) then
+		return "", ""
+	else
+		if enable_3d_models then
+			if def.armor.overlay and part == def.armor.part then
+				return def.armor.overlay, ""
+			else
+				return "", ""
+			end
+		else
+			if def.armor.overlay_2d_front and def.armor.overlay_2d_back and part == def.armor.part then
+				return def.armor.overlay_2d_front, def.armor.overlay_2d_back
+			else
+				return "", ""
+			end
+		end
+	end
+end
+
 local function get_armor(player)
 	inv = player:get_inventory()
 	local armor = 0
@@ -56,11 +82,40 @@ local function update_armor(player, new_armor)
 	new_armor = math.min(new_armor, 75)
 	player:set_armor_groups({fleshy=100-new_armor})
 	
+	local textures = {"models_player.png"}
+	if not enable_3d_models then
+		textures = {"models_player_2d.png", "models_player_2d_back.png"}
+	end
+	
 	for name,value in pairs(armor[pname]) do
 		if name ~= "armor" then
 			armor[pname][name] = inv:get_stack(name, 1):get_name()
+			
+			-- set overlay for model
+			if armor[pname][name] ~= "" then
+				local part = name
+				if string.sub(name, 1, 5) == "glove" then
+					part = "glove"
+				elseif string.sub(name, 1, 4) == "boot" then
+					part = "boot"
+				end
+				local overlay_front, overlay_back = get_armor_overlay_from_item(armor[pname][name], part)
+				if overlay_front ~= "" then
+					textures[1] = textures[1] .. "^" .. overlay_front
+					print (overlay_front)
+					print(textures[1])
+				end
+				if overlay_back ~= "" then
+					textures[2] = textures[2] .. "^" .. overlay_back
+				end
+			end
 		end
 	end
+	
+	player:set_properties({
+		textures = textures,
+	})
+	
 	if armor[pname].helmet ~= "" then
 		hud_ids[pname] = player:hud_add({
 			hud_elem_type = "image",
@@ -125,6 +180,9 @@ minetest.register_craftitem("armor:body_armor_iron", {
 	armor = {
 		part = "body_armor",
 		amount = 15,
+		overlay_2d_front = "armor_body_armor_iron_overlay_2d.png",
+		overlay_2d_back = "armor_body_armor_iron_overlay_2d.png",
+		overlay = "armor_body_armor_iron_overlay.png",
 	},
 })
 
@@ -135,6 +193,9 @@ minetest.register_craftitem("armor:helmet_iron", {
 	armor = {
 		part = "helmet",
 		amount = 10,
+		overlay_2d_back = "armor_helmet_iron_overlay_2d_back.png",
+		overlay_2d_front = "armor_helmet_iron_overlay_2d_front.png",
+		overlay = "armor_helmet_iron_overlay.png",
 	},
 })
 
@@ -145,6 +206,9 @@ minetest.register_craftitem("armor:glove_iron", {
 	armor = {
 		part = "glove",
 		amount = 7,
+		overlay_2d_front = "armor_glove_iron_overlay_2d.png",
+		overlay_2d_back = "armor_glove_iron_overlay_2d.png",
+		overlay = "armor_glove_iron_overlay.png",
 	},
 })
 
@@ -155,6 +219,9 @@ minetest.register_craftitem("armor:boot_iron", {
 	armor = {
 		part = "boot",
 		amount = 8,
+		overlay_2d_front = "armor_boot_iron_overlay_2d.png",
+		overlay_2d_back = "armor_boot_iron_overlay_2d.png",
+		overlay = "armor_boot_iron_overlay.png",
 	},
 })
 
