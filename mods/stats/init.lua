@@ -121,6 +121,13 @@ stats.register_stat({
 	end,
 })
 
+stats.register_stat({
+	name = "crafted",
+	description = function(value)
+		return " - Crafted items: "..value
+	end,
+})
+
 local file = io.open(minetest:get_worldpath().."/stats.txt", "r")
 if file then
 		local table = minetest.deserialize(file:read("*all"))
@@ -186,6 +193,10 @@ minetest.register_on_dieplayer(function(player)
 			minetest.chat_send_player(p:get_player_name(), name .. " died.")
 		end
 	end
+end)
+
+minetest.register_on_craft(function(itemstack, player, old_craft_grid, craft_inv)
+	stats.increase_stat(player, "crafted", itemstack:get_count())
 end)
 
 minetest.register_chatcommand("stats", {
