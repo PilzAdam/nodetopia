@@ -38,7 +38,7 @@ minetest.register_on_joinplayer(function(player)
 	end
 end)
 
-if not enable_3d_models then
+if not enable_3d_models or minetest.is_singleplayer() then
 	return
 end
 
