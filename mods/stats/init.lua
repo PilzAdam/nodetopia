@@ -154,15 +154,17 @@ local timer2 = 0
 minetest.register_globalstep(function(dtime)
 	timer = timer + dtime
 	timer2 = timer2 + dtime
+	
 	-- NOTE: Set this to a higher value to remove some load from the server
-	if timer < 0 then
-		return
+	if timer > 0 then
+		for _,player in ipairs(minetest.get_connected_players()) do
+			stats.increase_stat(player, "played_time", timer)
+		end
+		timer = 0
 	end
-	for _,player in ipairs(minetest.get_connected_players()) do
-		stats.increase_stat(player, "played_time", timer)
-	end
-	timer = 0
+	
 	if timer2 > 30 then
+		timer2 = 0
 		save_stats()
 	end
 end)
